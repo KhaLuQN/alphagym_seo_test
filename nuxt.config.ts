@@ -1,0 +1,38 @@
+export default defineNuxtConfig({
+  compatibilityDate: "2025-05-15",
+  devtools: { enabled: true },
+  modules: ["@nuxtjs/tailwindcss"],
+  css: ["~/assets/css/main.css"],
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || "http://127.0.0.1:8000/api",
+    },
+  },
+  app: {
+    head: {
+      title: "FitPhysique - Gym & Fitness",
+      charset: "utf-8",
+      viewport: "width=device-width, initial-scale=1",
+
+      link: [
+        { rel: "preconnect", href: "https://fonts.googleapis.com" },
+        {
+          rel: "preconnect",
+          href: "https://fonts.gstatic.com",
+          crossorigin: "",
+        },
+
+        {
+          href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@700&display=swap",
+          rel: "stylesheet",
+        },
+        {
+          href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css",
+          rel: "stylesheet",
+        },
+      ],
+
+      script: [{}],
+    },
+  },
+});
