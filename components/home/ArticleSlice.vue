@@ -61,7 +61,7 @@
                 timeAgo(article.publishedDate)
               }}</span>
               <NuxtLink
-                :to="`/article/${article.slug}`"
+                :to="`/bai-viet/${article.slug}`"
                 class="text-red-400 hover:text-red-300 font-semibold"
               >
                 Đọc thêm
@@ -85,7 +85,7 @@
 </template>
 
 <script setup>
-const { data: response } = await useFetch("http://127.0.0.1:8000/api/articles");
+const { data: response } = await useApiFetch("/articles");
 const articles = computed(() => response.value?.data || []);
 
 const categories = computed(() => {
