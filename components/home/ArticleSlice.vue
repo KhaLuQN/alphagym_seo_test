@@ -50,7 +50,7 @@
               class="badge badge-sm mb-2"
               :class="badgeClass(article.category_name)"
             >
-              {{ article.category_name.toUpperCase() }}
+              {{ (article.category_name || "").toUpperCase() }}
             </div>
             <h3 class="card-title text-lg font-bold text-white">
               {{ article.title }}
@@ -113,6 +113,8 @@ const canLoadMore = computed(
 
 // Badge class theo category
 const badgeClass = (category) => {
+  if (typeof category !== "string") return "badge-neutral";
+
   if (category.includes("Fitness")) return "badge-error";
   if (category.includes("Dinh dưỡng")) return "badge-success";
   if (category.includes("Kiến thức") || category.includes("Tim mạch"))
