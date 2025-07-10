@@ -12,4 +12,7 @@
       người. Hãy cùng chúng tôi bắt đầu hành trình nâng cao sức khỏe và thể lực
       của bạn ngay hôm nay!
     </p>
+    <button class="bg-zinc-100 border font-semibold text-zinc-900 text-sm px-4 duration-200 py-2.5 transition-all hover:border-zinc-300 hover:bg-zinc-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 active:translate-y-[0.5px] ">
+  Tailwind Button
+</button>
 </template>

@@ -5,6 +5,8 @@
     <HomeArticleSlice />
     <HomePackageSlice />
     <HomeTrainerSlice :trainers="trainers" />
+
+  
   </div>
 </template>
 <script setup>
