@@ -1,9 +1,14 @@
 <template>
-  <nav class="navbar bg-black/95 fixed top-0 z-50 border-b border-red-600/30 py-3">
+  <nav
+    class="navbar bg-black/95 fixed top-0 z-50 border-b border-red-600/30 py-3"
+  >
     <div class="navbar-start flex items-center">
       <!-- Dropdown menu for mobile (hamburger icon) -->
       <div class="dropdown lg:hidden">
-        <label tabindex="0" class="btn btn-ghost text-red-500 hover:bg-red-600/20 rounded-lg p-2">
+        <label
+          tabindex="0"
+          class="btn btn-ghost text-red-500 hover:bg-red-600/20 rounded-lg p-2"
+        >
           <i class="fas fa-bars text-xl"></i>
         </label>
         <ul
@@ -12,9 +17,7 @@
         >
           <!-- Mobile navigation links -->
           <li>
-            <NuxtLink to="/" class="nav-link-mobile">
-              Trang chủ
-            </NuxtLink>
+            <NuxtLink to="/" class="nav-link-mobile"> Trang chủ </NuxtLink>
           </li>
           <li>
             <NuxtLink to="/bai-viet" class="nav-link-mobile">
@@ -22,23 +25,16 @@
             </NuxtLink>
           </li>
           <li>
-            <NuxtLink to="/goi-tap/goi-tap" class="nav-link-mobile">
-              Gói tập
-            </NuxtLink>
+            <NuxtLink to="/goi-tap" class="nav-link-mobile"> Gói tập </NuxtLink>
           </li>
           <li>
-            <NuxtLink
-              to="/huan-luyen-vien"
-              class="nav-link-mobile"
-            >
+            <NuxtLink to="/huan-luyen-vien" class="nav-link-mobile">
               Huấn luyện viên
             </NuxtLink>
           </li>
-         
+
           <li>
-            <NuxtLink to="/lien-he" class="nav-link-mobile">
-              Liên hệ
-            </NuxtLink>
+            <NuxtLink to="/lien-he" class="nav-link-mobile"> Liên hệ </NuxtLink>
           </li>
         </ul>
       </div>
@@ -58,58 +54,55 @@
         <!-- Trang chủ -->
         <li>
           <NuxtLink to="/" class="group nav-link-desktop">
-            <i class="fas fa-home mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+            <i
+              class="fas fa-home mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+            ></i>
             Trang chủ
           </NuxtLink>
         </li>
         <!-- Giới thiệu -->
         <li>
-          <NuxtLink
-            to="/gioi-thieu"
-            class="group nav-link-desktop"
-          >
-            <i class="fas fa-dumbbell  mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+          <NuxtLink to="/gioi-thieu" class="group nav-link-desktop">
+            <i
+              class="fas fa-dumbbell mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+            ></i>
             Giới thiệu
           </NuxtLink>
         </li>
         <!-- Gói tập -->
         <li>
-          <NuxtLink
-            to="/goi-tap"
-            class="group nav-link-desktop"
-          >
-            <i class="fas fa-dumbbell mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+          <NuxtLink to="/goi-tap" class="group nav-link-desktop">
+            <i
+              class="fas fa-dumbbell mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+            ></i>
             Gói tập
           </NuxtLink>
         </li>
         <!-- Huấn luyện viên -->
         <li>
-          <NuxtLink
-            to="/huan-luyen-vien"
-            class="group nav-link-desktop"
-          >
-            <i class="fas fa-users mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+          <NuxtLink to="/huan-luyen-vien" class="group nav-link-desktop">
+            <i
+              class="fas fa-users mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+            ></i>
             Huấn luyện viên
           </NuxtLink>
         </li>
-        
+
         <!-- Tin tức -->
         <li>
-          <NuxtLink
-            to="/bai-viet"
-            class="group nav-link-desktop"
-          >
-            <i class="fas fa-newspaper mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+          <NuxtLink to="/bai-viet" class="group nav-link-desktop">
+            <i
+              class="fas fa-newspaper mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+            ></i>
             Bài Viết
           </NuxtLink>
         </li>
         <!-- Liên hệ -->
         <li>
-          <NuxtLink
-            to="/lien-he"
-            class="group nav-link-desktop"
-          >
-            <i class="fas fa-envelope mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+          <NuxtLink to="/lien-he" class="group nav-link-desktop">
+            <i
+              class="fas fa-envelope mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+            ></i>
             Liên hệ
           </NuxtLink>
         </li>
@@ -118,7 +111,10 @@
 
     <!-- End section: Register button -->
     <div class="navbar-end">
-      <NuxtLink to="/dang-ky" class="btn btn-primary bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white font-bold text-lg px-6 py-2 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105">
+      <NuxtLink
+        to="/dang-ky"
+        class="btn btn-primary bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white font-bold text-lg px-6 py-2 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105"
+      >
         Đăng ký ngay
       </NuxtLink>
     </div>
