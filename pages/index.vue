@@ -4,7 +4,10 @@
     <UiStats />
     <HomeArticleSlice />
     <HomePackageSlice />
+    
     <HomeTrainerSlice :trainers="trainers" />
+    <HomeContact/>
+    
 
   
   </div>
