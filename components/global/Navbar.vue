@@ -12,31 +12,33 @@
         >
           <!-- Mobile navigation links -->
           <li>
-            <NuxtLink to="/" class="text-white hover:text-red-500 py-2 px-4 block rounded-md transition-colors duration-200"
-              >Trang chủ</NuxtLink
-            >
+            <NuxtLink to="/" class="nav-link-mobile">
+              Trang chủ
+            </NuxtLink>
           </li>
           <li>
-            <NuxtLink to="/goi-tap/goi-tap" class="text-white hover:text-red-500 py-2 px-4 block rounded-md transition-colors duration-200"
-              >Gói tập</NuxtLink
-            >
+            <NuxtLink to="/bai-viet" class="nav-link-mobile">
+              Bài viết
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink to="/goi-tap/goi-tap" class="nav-link-mobile">
+              Gói tập
+            </NuxtLink>
           </li>
           <li>
             <NuxtLink
               to="/huan-luyen-vien"
-              class="text-white hover:text-red-500 py-2 px-4 block rounded-md transition-colors duration-200"
-              >Huấn luyện viên</NuxtLink
+              class="nav-link-mobile"
             >
+              Huấn luyện viên
+            </NuxtLink>
           </li>
+         
           <li>
-            <NuxtLink to="/tin-tuc/tin-tuc" class="text-white hover:text-red-500 py-2 px-4 block rounded-md transition-colors duration-200"
-              >Tin tức</NuxtLink
-            >
-          </li>
-          <li>
-            <NuxtLink to="/lien-he" class="text-white hover:text-red-500 py-2 px-4 block rounded-md transition-colors duration-200"
-              >Liên hệ</NuxtLink
-            >
+            <NuxtLink to="/lien-he" class="nav-link-mobile">
+              Liên hệ
+            </NuxtLink>
           </li>
         </ul>
       </div>
@@ -53,45 +55,70 @@
     <!-- Center section: Desktop navigation menu -->
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1 space-x-4">
+        <!-- Trang chủ -->
         <li>
-          <NuxtLink to="/" class="text-white hover:text-red-500 font-semibold text-lg py-2 px-4 rounded-md transition-colors duration-200"
-            >Trang chủ</NuxtLink
-          >
+          <NuxtLink to="/" class="group nav-link-desktop">
+            <i class="fas fa-home mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+            Trang chủ
+          </NuxtLink>
         </li>
+        <!-- Giới thiệu -->
         <li>
           <NuxtLink
-            to="/goi-tap/goi-tap"
-            class="text-white hover:text-red-500 font-semibold text-lg py-2 px-4 rounded-md transition-colors duration-200"
-            >Gói tập</NuxtLink
+            to="/gioi-thieu"
+            class="group nav-link-desktop"
           >
+            <i class="fas fa-dumbbell  mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+            Giới thiệu
+          </NuxtLink>
         </li>
+        <!-- Gói tập -->
+        <li>
+          <NuxtLink
+            to="/goi-tap"
+            class="group nav-link-desktop"
+          >
+            <i class="fas fa-dumbbell mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+            Gói tập
+          </NuxtLink>
+        </li>
+        <!-- Huấn luyện viên -->
         <li>
           <NuxtLink
             to="/huan-luyen-vien"
-            class="text-white hover:text-red-500 font-semibold text-lg py-2 px-4 rounded-md transition-colors duration-200"
-            >Huấn luyện viên</NuxtLink
+            class="group nav-link-desktop"
           >
+            <i class="fas fa-users mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+            Huấn luyện viên
+          </NuxtLink>
         </li>
+        
+        <!-- Tin tức -->
         <li>
           <NuxtLink
-            to="/tin-tuc/tin-tuc"
-            class="text-white hover:text-red-500 font-semibold text-lg py-2 px-4 rounded-md transition-colors duration-200"
-            >Tin tức</NuxtLink
+            to="/bai-viet"
+            class="group nav-link-desktop"
           >
+            <i class="fas fa-newspaper mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+            Bài Viết
+          </NuxtLink>
         </li>
+        <!-- Liên hệ -->
         <li>
           <NuxtLink
             to="/lien-he"
-            class="text-white hover:text-red-500 font-semibold text-lg py-2 px-4 rounded-md transition-colors duration-200"
-            >Liên hệ</NuxtLink
+            class="group nav-link-desktop"
           >
+            <i class="fas fa-envelope mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+            Liên hệ
+          </NuxtLink>
         </li>
       </ul>
     </div>
 
     <!-- End section: Register button -->
     <div class="navbar-end">
-      <NuxtLink to="/dang-ky/dang-ky" class="btn btn-primary bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white font-bold text-lg px-6 py-2 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105">
+      <NuxtLink to="/dang-ky" class="btn btn-primary bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white font-bold text-lg px-6 py-2 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105">
         Đăng ký ngay
       </NuxtLink>
     </div>
@@ -104,5 +131,28 @@
   background: linear-gradient(to right, #ff0000, #ff7f00); /* Red to Orange */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Base styles for desktop navigation links */
+.nav-link-desktop {
+  @apply text-white font-semibold text-lg py-2 px-4 rounded-md transition-colors duration-200 flex items-center;
+}
+
+/* Base styles for mobile navigation links */
+.nav-link-mobile {
+  @apply text-white py-2 px-4 block rounded-md transition-colors duration-200;
+}
+
+/* Styles for active navigation links (both desktop and mobile) */
+.router-link-exact-active.nav-link-desktop,
+.router-link-exact-active.nav-link-mobile {
+  @apply text-red-500; /* Set text color to red for the active link */
+}
+
+/* Hover styles for non-active links */
+/* This ensures that when you hover over a link that is NOT the active page, it still turns red */
+.nav-link-desktop:not(.router-link-exact-active):hover,
+.nav-link-mobile:not(.router-link-exact-active):hover {
+  @apply text-red-500; /* Red color on hover for non-active links */
 }
 </style>

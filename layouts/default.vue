@@ -2,7 +2,7 @@
   <div>
     <Navbar />
     <slot />
-    <HomeContach />
+    
     <Footer />
     <Floating />
   </div>
