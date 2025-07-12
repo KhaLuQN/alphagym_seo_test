@@ -329,21 +329,3 @@ onMounted(() => {
   hasMore.value = trainers.value.length > displayCount.value;
 });
 </script>
-
-<style scoped>
-.btn-active {
-  @apply bg-red-700 border-red-700;
-}
-
-.rating input:checked {
-  @apply bg-red-500;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.badge {
-  @apply text-xs font-medium;
-}
-</style>
