@@ -10,7 +10,9 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE || "http://127.0.0.1:8000/api",
+      // THAY ĐỔI DÒNG NÀY: Thêm dấu gạch chéo vào cuối '/api/'
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || "http://127.0.0.1:8000/api/",
+      storageBase: process.env.NUXT_PUBLIC_STORAGE_BASE || "http://127.0.0.1:8000/storage",
     },
   },
   app: {
