@@ -1,9 +1,13 @@
 <template>
-  <section id="packages" class="py-20 pt-32 bg-gray-950 text-white">
-    <div class="container mx-auto px-6 lg:px-8">
+  <section id="packages" class="relative py-24 md:py-32 bg-gradient-to-br from-gray-950 via-red-950 to-black overflow-hidden text-white">
+    <div class="relative z-10 container mx-auto px-4">
       <div class="text-center mb-16">
-        <h2 class="text-5xl lg:text-6xl font-extrabold mb-4 text-red-500 custom-text-shadow">GÓI TẬP ALPHAGYM</h2>
-        <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 text-red-500 custom-hero-text-shadow leading-tight">
+          <i class="fas fa-dumbbell mr-4 text-red-600"></i>
+          <span class="text-white">Gói Tập</span>
+          <span class="text-red-500"> AlphaGym</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-xl mx-auto">
           Lựa chọn gói tập phù hợp với nhu cầu và mục tiêu của bạn
         </p>
       </div>
@@ -48,14 +52,14 @@
           :class="{ 'bg-gradient-to-br from-red-700 to-red-900 border-2 border-red-400': plan.is_popular }"
         >
           <!-- Popular Badge -->
-          <div v-if="plan.is_popular" class="absolute -top10 left-1/2 transform -translate-x-1/2 z-10">
+          <div v-if="plan.is_popular" class="absolute -top-0 left-1/2 transform -translate-x-1/2 z-10">
             <div class="bg-yellow-400 text-black font-bold text-sm px-4 py-2 rounded-full shadow-lg">
               ⭐ PHỔ BIẾN
             </div>
           </div>
 
           <!-- Discount Badge -->
-          <div v-else-if="plan.discount_percent > 0" class="absolute -top10 left-1/2 transform -translate-x-1/2 z-10">
+          <div v-else-if="plan.discount_percent > 0" class="absolute -top-0 left-1/2 transform -translate-x-1/2 z-10">
             <div class="bg-red-500 text-white font-bold text-sm px-4 py-2 rounded-full shadow-lg">
               🏷️ GIẢM {{ plan.discount_percent }}%
             </div>
@@ -350,6 +354,10 @@ useHead({
 <style scoped>
 .custom-text-shadow {
   text-shadow: 0 0 20px rgba(239, 68, 68, 0.8), 0 0 30px rgba(239, 68, 68, 0.6);
+}
+
+.custom-hero-text-shadow {
+  text-shadow: 0 0 25px rgba(239, 68, 68, 0.9), 0 0 40px rgba(239, 68, 68, 0.7);
 }
 
 /* Smooth animations */

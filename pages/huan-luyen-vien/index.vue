@@ -1,83 +1,56 @@
 <template>
   <div class="min-h-screen bg-black text-white">
-    <!-- Hero Section -->
-    <section
-      class="bg-gradient-to-br from-gray-950 via-red-950 to-black py-24 md:py-32 overflow-hidden"
-    >
-      <div class="container mx-auto px-6 relative z-10">
+    <section class="relative py-24 md:py-32 bg-gradient-to-br from-gray-950 via-red-950 to-black overflow-hidden">
+      <div class="relative z-10 container mx-auto px-4">
         <div class="text-center">
-          <h1
-            class="text-5xl md:text-7xl font-extrabold mb-4 text-red-500 custom-hero-text-shadow leading-tight"
-          >
+          <h1 class="text-5xl md:text-7xl font-extrabold mb-6 text-red-500 custom-hero-text-shadow leading-tight">
+            <i class="fas fa-users mr-4 text-red-600"></i>
             <span class="text-white">Đội Ngũ</span>
             <span class="text-red-500"> Huấn Luyện Viên</span>
           </h1>
-          <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto">
+          <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-xl mx-auto">
             Gặp gỡ đội ngũ huấn luyện viên chuyên nghiệp với kinh nghiệm nhiều
-            năm tại AlphaGym
+            năm
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Filters Section -->
-    <section
-      class="bg-gray-900 py-8 border-b border-red-700/50 shadow-inner shadow-red-900/20"
-    >
-      <div class="container mx-auto px-6">
+    <section class="py-8 bg-gray-900 border-b border-red-700/50 shadow-inner shadow-red-900/20">
+      <div class="container mx-auto px-4">
         <div class="flex flex-wrap gap-4 justify-center">
           <button
-            @click="selectedCategory = 'all'"
-            :class="[
-              'btn text-base font-medium px-6 py-3 rounded-full transition-all duration-300',
-              selectedCategory === 'all'
-                ? 'btn-error bg-red-600 text-white shadow-inner shadow-red-900/50'
-                : 'btn-outline border-red-600 text-red-400 hover:bg-red-600 hover:text-white',
-            ]"
+            @click="selectedSpecialty = 'all'"
+            :class="selectedSpecialty === 'all' ? 'bg-red-700 border-red-700' : ''"
+            class="btn bg-red-600 hover:bg-red-700 border-red-600 text-white font-bold text-lg px-6 py-3 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105"
           >
             Tất cả
           </button>
           <button
-            @click="selectedCategory = 'fitness'"
-            :class="[
-              'btn text-base font-medium px-6 py-3 rounded-full transition-all duration-300',
-              selectedCategory === 'fitness'
-                ? 'btn-error bg-red-600 text-white shadow-inner shadow-red-900/50'
-                : 'btn-outline border-red-600 text-red-400 hover:bg-red-600 hover:text-white',
-            ]"
+            @click="selectedSpecialty = 'Fitness'"
+            :class="selectedSpecialty === 'Fitness' ? 'bg-red-700 border-red-700' : ''"
+            class="btn bg-red-600 hover:bg-red-700 border-red-600 text-white font-bold text-lg px-6 py-3 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105"
           >
             Fitness
           </button>
           <button
-            @click="selectedCategory = 'yoga'"
-            :class="[
-              'btn text-base font-medium px-6 py-3 rounded-full transition-all duration-300',
-              selectedCategory === 'yoga'
-                ? 'btn-error bg-red-600 text-white shadow-inner shadow-red-900/50'
-                : 'btn-outline border-red-600 text-red-400 hover:bg-red-600 hover:text-white',
-            ]"
+            @click="selectedSpecialty = 'Yoga'"
+            :class="selectedSpecialty === 'Yoga' ? 'bg-red-700 border-red-700' : ''"
+            class="btn bg-red-600 hover:bg-red-700 border-red-600 text-white font-bold text-lg px-6 py-3 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105"
           >
             Yoga
           </button>
           <button
-            @click="selectedCategory = 'boxing'"
-            :class="[
-              'btn text-base font-medium px-6 py-3 rounded-full transition-all duration-300',
-              selectedCategory === 'boxing'
-                ? 'btn-error bg-red-600 text-white shadow-inner shadow-red-900/50'
-                : 'btn-outline border-red-600 text-red-400 hover:bg-red-600 hover:text-white',
-            ]"
+            @click="selectedSpecialty = 'Boxing'"
+            :class="selectedSpecialty === 'Boxing' ? 'bg-red-700 border-red-700' : ''"
+            class="btn bg-red-600 hover:bg-red-700 border-red-600 text-white font-bold text-lg px-6 py-3 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105"
           >
             Boxing
           </button>
           <button
-            @click="selectedCategory = 'cardio'"
-            :class="[
-              'btn text-base font-medium px-6 py-3 rounded-full transition-all duration-300',
-              selectedCategory === 'cardio'
-                ? 'btn-error bg-red-600 text-white shadow-inner shadow-red-900/50'
-                : 'btn-outline border-red-600 text-red-400 hover:bg-red-600 hover:text-white',
-            ]"
+            @click="selectedSpecialty = 'Cardio'"
+            :class="selectedSpecialty === 'Cardio' ? 'bg-red-700 border-red-700' : ''"
+            class="btn bg-red-600 hover:bg-red-700 border-red-600 text-white font-bold text-lg px-6 py-3 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105"
           >
             Cardio
           </button>
@@ -85,124 +58,117 @@
       </div>
     </section>
 
-    <!-- Trainers Grid -->
     <section class="py-16">
-      <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="container mx-auto px-4">
+        <!-- No Data State -->
+        <div v-if="!filteredTrainers || filteredTrainers.length === 0" class="text-center py-12">
+          <div class="text-7xl mb-4 text-red-500">
+            📦
+          </div>
+          <h3 class="text-3xl font-bold text-gray-200 mb-3">
+            Không tìm thấy huấn luyện viên nào
+          </h3>
+          <p class="text-gray-400 text-lg">Hiện tại chưa có huấn luyện viên nào được cung cấp hoặc không khớp với bộ lọc.</p>
+        </div>
+
+        <!-- Trainers Grid -->
+        <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div
-            v-for="trainer in filteredTrainers"
+            v-for="trainer in displayedTrainers"
             :key="trainer.id"
-            class="card bg-gray-900 rounded-xl shadow-lg border border-red-800/30 overflow-hidden transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-red-900/50 group"
+            class="card bg-gray-900 rounded-xl shadow-xl border border-red-800/30 p-8 text-center transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-red-900/50"
           >
-            <figure class="relative overflow-hidden h-64">
+            <figure class="relative overflow-hidden">
               <img
-                :src="
-                  trainer.image ||
-                  'https://placehold.co/400x300/333333/EFEFEF?text=No+Image'
-                "
-                :alt="trainer.name"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                :src="getImageUrl(trainer.photo_url)"
+                :alt="trainer.member?.full_name || 'Huấn luyện viên'"
+                class="w-full h-64 object-cover transition-transform duration-300 hover:scale-105"
+                @error="handleImageError"
               />
               <div class="absolute top-4 right-4">
-                <div
-                  class="badge bg-red-600 text-white border-red-600 font-bold text-sm px-3 py-2 rounded-full shadow-md"
-                >
-                  {{ trainer.category.toUpperCase() }}
+                <div class="badge bg-red-600 text-white border-red-600">
+                  {{ trainer.specialty?.toUpperCase() || 'CHUNG' }}
                 </div>
               </div>
             </figure>
 
-            <div class="card-body p-6 flex flex-col">
-              <h3
-                class="card-title text-white text-2xl font-bold mb-1 group-hover:text-red-400 transition-colors duration-300"
-              >
-                {{ trainer.name }}
-              </h3>
-              <p class="text-red-500 font-semibold text-lg mb-2">
-                {{ trainer.specialization }}
+            <div class="card-body p-6">
+              <h3 class="card-title text-2xl font-extrabold text-white mb-2">{{ trainer.member?.full_name || 'Đang cập nhật' }}</h3>
+              <p class="text-red-500 font-semibold text-lg">
+                {{ trainer.specialty || 'Chuyên môn' }}
               </p>
-              <p class="text-gray-400 text-sm mb-4">{{ trainer.experience }}</p>
+              <p class="text-gray-400 text-base mb-4">{{ trainer.experience_years ? `${trainer.experience_years} năm kinh nghiệm` : 'Chưa cập nhật kinh nghiệm' }}</p>
 
-              <!-- Rating -->
               <div class="flex items-center gap-2 mb-4">
-                <div class="rating rating-sm">
+                <div class="rating rating-md">
                   <input
                     v-for="star in 5"
                     :key="star"
                     type="radio"
-                    :checked="star <= trainer.rating"
+                    :checked="star <= trainer.average_rating"
                     class="mask mask-star-2 bg-red-500"
                     disabled
                   />
                 </div>
-                <span class="text-gray-400 text-sm"
-                  >({{ trainer.rating }}/5)</span
+                <span class="text-gray-400 text-base"
+                  >({{ trainer.average_rating || 0 }}/5)</span
                 >
               </div>
 
-              <!-- Achievements -->
               <div class="mb-4">
                 <div class="flex flex-wrap gap-2">
                   <span
-                    v-for="achievement in trainer.achievements"
-                    :key="achievement"
-                    class="badge badge-outline border-red-500 text-red-500 text-xs px-3 py-2 rounded-full"
+                    v-for="certification in getCertificationsArray(trainer.certifications)"
+                    :key="certification"
+                    class="badge badge-outline border-red-500 text-red-500 text-sm px-4 py-2 rounded-full shadow-sm"
                   >
-                    {{ achievement }}
+                    {{ certification }}
                   </span>
                 </div>
+                <p v-if="!trainer.certifications" class="text-gray-400 text-xs">Chưa có chứng chỉ.</p>
               </div>
 
-              <div
-                class="card-actions justify-between items-center mt-auto pt-4 border-t border-gray-700/50"
-              >
-                <div class="text-red-500 font-bold text-xl">
-                  {{ trainer.price }}
+              <div class="card-actions justify-between items-center">
+                <div class="text-red-500 font-bold text-2xl">
+                  {{ trainer.price_per_session ? formatCurrency(trainer.price_per_session) : 'Liên hệ để biết giá' }}
                 </div>
-                <NuxtLink
-                  :to="`/huan-luyen-vien/${trainer.id}`"
-                  class="btn bg-red-600 hover:bg-red-700 text-white border-red-600 font-bold text-base px-6 py-3 rounded-full shadow-md transition-all duration-300 hover:scale-105"
-                >
-                  Xem Chi Tiết <i class="fas fa-arrow-right ml-2"></i>
+                <NuxtLink :to="`/huan-luyen-vien/${trainer.id}`" class="btn btn-error text-white font-bold px-6 py-3 rounded-full shadow-lg hover:bg-red-700 transform transition-transform duration-200 hover:scale-105">
+                  Xem Chi Tiết
                 </NuxtLink>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Load More Button -->
         <div class="text-center mt-12" v-if="hasMore">
           <button
             @click="loadMore"
-            class="btn btn-outline border-red-600 text-red-400 hover:bg-red-600 hover:text-white text-base font-semibold px-8 py-3 rounded-full shadow-md transition-all duration-300"
+            class="btn btn-primary bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105 pulse-red"
           >
-            Xem Thêm Huấn Luyện Viên <i class="fas fa-chevron-down ml-2"></i>
+            Xem Thêm Huấn Luyện Viên
           </button>
         </div>
       </div>
     </section>
 
-    <!-- Stats Section (Already designed in previous requests, keeping consistent) -->
-    <section
-      class="bg-gray-900 py-16 border-t border-red-700/50 shadow-inner shadow-red-900/20"
-    >
-      <div class="container mx-auto px-6">
+    <section class="py-16 bg-gray-900 border-t border-red-700/50 shadow-inner shadow-red-900/20">
+      <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div class="text-center">
-            <div class="text-4xl font-bold text-red-500 mb-2">50+</div>
-            <div class="text-gray-400">Huấn Luyện Viên</div>
+            <div class="text-5xl font-extrabold text-red-500 mb-3">50+</div>
+            <div class="text-gray-300 text-lg">Huấn Luyện Viên</div>
           </div>
           <div class="text-center">
-            <div class="text-4xl font-bold text-red-500 mb-2">1000+</div>
-            <div class="text-gray-400">Học Viên</div>
+            <div class="text-5xl font-extrabold text-red-500 mb-3">1000+</div>
+            <div class="text-gray-300 text-lg">Học Viên</div>
           </div>
           <div class="text-center">
-            <div class="text-4xl font-bold text-red-500 mb-2">5+</div>
-            <div class="text-gray-400">Năm Kinh Nghiệm</div>
+            <div class="text-5xl font-extrabold text-red-500 mb-3">5+</div>
+            <div class="text-gray-300 text-lg">Năm Kinh Nghiệm</div>
           </div>
           <div class="text-center">
-            <div class="text-4xl font-bold text-red-500 mb-2">24/7</div>
-            <div class="text-gray-400">Hỗ Trợ</div>
+            <div class="text-5xl font-extrabold text-red-500 mb-3">24/7</div>
+            <div class="text-gray-300 text-lg">Hỗ Trợ</div>
           </div>
         </div>
       </div>
@@ -211,11 +177,12 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, watch } from "vue";
+import { useHead } from '#app';
 
 // Meta
 useHead({
-  title: "Đội Ngũ Huấn Luyện Viên | AlphaGym",
+  title: "Đội Ngũ Huấn Luyện Viên | Gym & Fitness",
   meta: [
     {
       name: "description",
@@ -226,146 +193,229 @@ useHead({
 });
 
 // Reactive data
-const selectedCategory = ref("all");
+const selectedSpecialty = ref("all");
 const displayCount = ref(9);
 const hasMore = ref(true);
 
-// Sample trainers data (giữ nguyên)
-const trainers = ref([
+// Mock data for trainers
+const allTrainers = ref([
   {
     id: 1,
-    name: "Nguyễn Văn Anh",
-    specialization: "Fitness & Bodybuilding",
-    category: "fitness",
-    experience: "5 năm kinh nghiệm",
-    rating: 5,
-    price: "500,000 VNĐ/tháng",
-    image:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
-    achievements: ["Certified Personal Trainer", "Nutrition Specialist"],
+    member: { full_name: "Nguyễn Văn Anh" },
+    specialty: "Fitness",
+    experience_years: 5,
+    average_rating: 5,
+    price_per_session: 500000,
+    photo_url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+    certifications: "Certified Personal Trainer, Nutrition Specialist",
+    bio: "Huấn luyện viên chuyên về Fitness và Bodybuilding với nhiều năm kinh nghiệm giúp học viên đạt được mục tiêu thể hình.",
   },
   {
     id: 2,
-    name: "Trần Thị Bình",
-    specialization: "Yoga & Meditation",
-    category: "yoga",
-    experience: "7 năm kinh nghiệm",
-    rating: 5,
-    price: "400,000 VNĐ/tháng",
-    image:
-      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop",
-    achievements: ["Yoga Alliance Certified", "Meditation Expert"],
+    member: { full_name: "Trần Thị Bình" },
+    specialty: "Yoga",
+    experience_years: 7,
+    average_rating: 5,
+    price_per_session: 400000,
+    photo_url: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop",
+    certifications: "Yoga Alliance Certified, Meditation Expert",
+    bio: "Chuyên gia Yoga và Thiền định, hướng dẫn các lớp học giúp cải thiện sự linh hoạt, sức khỏe tinh thần và thể chất.",
   },
   {
     id: 3,
-    name: "Lê Hoàng Cường",
-    specialization: "Boxing & Kickboxing",
-    category: "boxing",
-    experience: "6 năm kinh nghiệm",
-    rating: 4,
-    price: "600,000 VNĐ/tháng",
-    image:
-      "https://images.unsplash.com/photo-1549476464-37392f717541?w=400&h=300&fit=crop",
-    achievements: ["Professional Boxing", "Combat Sports"],
+    member: { full_name: "Lê Hoàng Cường" },
+    specialty: "Boxing",
+    experience_years: 6,
+    average_rating: 4,
+    price_per_session: 600000,
+    photo_url: "https://images.unsplash.com/photo-1549476464-37392f717541?w=400&h=300&fit=crop",
+    certifications: "Professional Boxing Coach, Combat Sports",
+    bio: "Huấn luyện viên Boxing và Kickboxing chuyên nghiệp, giúp học viên phát triển kỹ năng tự vệ và sức bền.",
   },
   {
     id: 4,
-    name: "Phạm Thị Dương",
-    specialization: "Cardio & HIIT",
-    category: "cardio",
-    experience: "4 năm kinh nghiệm",
-    rating: 5,
-    price: "450,000 VNĐ/tháng",
-    image:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
-    achievements: ["HIIT Specialist", "Group Fitness"],
+    member: { full_name: "Phạm Thị Dương" },
+    specialty: "Cardio",
+    experience_years: 4,
+    average_rating: 5,
+    price_per_session: 450000,
+    photo_url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+    certifications: "HIIT Specialist, Group Fitness Certified",
+    bio: "Đào tạo các bài tập Cardio và HIIT cường độ cao, giúp đốt cháy calo hiệu quả và tăng cường sức khỏe tim mạch.",
   },
   {
     id: 5,
-    name: "Võ Minh Hoàng",
-    specialization: "Strength Training",
-    category: "fitness",
-    experience: "8 năm kinh nghiệm",
-    rating: 5,
-    price: "550,000 VNĐ/tháng",
-    image:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
-    achievements: ["Strength Coach", "Sports Performance"],
+    member: { full_name: "Võ Minh Hoàng" },
+    specialty: "Fitness",
+    experience_years: 8,
+    average_rating: 5,
+    price_per_session: 550000,
+    photo_url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+    certifications: "Strength Coach, Sports Performance",
+    bio: "Chuyên gia huấn luyện sức mạnh và hiệu suất thể thao, giúp vận động viên và người tập cải thiện sức bền.",
   },
   {
     id: 6,
-    name: "Đỗ Thị Lan",
-    specialization: "Pilates & Stretching",
-    category: "yoga",
-    experience: "3 năm kinh nghiệm",
-    rating: 4,
-    price: "350,000 VNĐ/tháng",
-    image:
-      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop",
-    achievements: ["Pilates Certified", "Flexibility Expert"],
+    member: { full_name: "Đỗ Thị Lan" },
+    specialty: "Yoga",
+    experience_years: 3,
+    average_rating: 4,
+    price_per_session: 350000,
+    photo_url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+    certifications: "Pilates Certified, Flexibility Expert",
+    bio: "Hướng dẫn Pilates và các bài tập kéo giãn, giúp tăng cường sự dẻo dai và săn chắc cơ thể.",
   },
   {
     id: 7,
-    name: "Bùi Quang Minh",
-    specialization: "Muay Thai",
-    category: "boxing",
-    experience: "5 năm kinh nghiệm",
-    rating: 5,
-    price: "580,000 VNĐ/tháng",
-    image:
-      "https://images.unsplash.com/photo-1549476464-37392f717541?w=400&h=300&fit=crop",
-    achievements: ["Muay Thai Champion", "Self Defense"],
+    member: { full_name: "Bùi Quang Minh" },
+    specialty: "Boxing",
+    experience_years: 5,
+    average_rating: 5,
+    price_per_session: 580000,
+    photo_url: "https://images.unsplash.com/photo-1549476464-37392f717541?w=400&h=300&fit=crop",
+    certifications: "Muay Thai Champion, Self Defense",
+    bio: "Huấn luyện viên Muay Thai chuyên nghiệp, giúp học viên rèn luyện kỹ năng chiến đấu và tự vệ.",
   },
   {
     id: 8,
-    name: "Ngô Thị Ngọc",
-    specialization: "Zumba & Dance",
-    category: "cardio",
-    experience: "4 năm kinh nghiệm",
-    rating: 4,
-    price: "400,000 VNĐ/tháng",
-    image:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
-    achievements: ["Zumba Certified", "Dance Instructor"],
+    member: { full_name: "Ngô Thị Ngọc" },
+    specialty: "Cardio",
+    experience_years: 4,
+    average_rating: 4,
+    price_per_session: 400000,
+    photo_url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+    certifications: "Zumba Certified, Dance Instructor",
+    bio: "Giáo viên Zumba và Dance, mang đến những buổi tập sôi động, giúp cải thiện thể lực và tâm trạng.",
   },
   {
     id: 9,
-    name: "Hoàng Văn Phú",
-    specialization: "Powerlifting",
-    category: "fitness",
-    experience: "6 năm kinh nghiệm",
-    rating: 5,
-    price: "650,000 VNĐ/tháng",
-    image:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
-    achievements: ["Powerlifting Coach", "Strength Training"],
+    member: { full_name: "Hoàng Văn Phú" },
+    specialty: "Fitness",
+    experience_years: 6,
+    average_rating: 5,
+    price_per_session: 650000,
+    photo_url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+    certifications: "Powerlifting Coach, Strength Training",
+    bio: "Chuyên gia Powerlifting, giúp học viên đạt được sức mạnh tối đa và kỹ thuật nâng tạ chuẩn xác.",
+  },
+  {
+    id: 10,
+    member: { full_name: "Vũ Thị Quỳnh" },
+    specialty: "Yoga",
+    experience_years: 5,
+    average_rating: 4,
+    price_per_session: 420000,
+    photo_url: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop",
+    certifications: "Vinyasa Yoga Instructor, Mindfulness",
+    bio: "Huấn luyện viên Vinyasa Yoga, tập trung vào sự kết nối giữa hơi thở và chuyển động.",
+  },
+  {
+    id: 11,
+    member: { full_name: "Trần Duy Khoa" },
+    specialty: "Boxing",
+    experience_years: 7,
+    average_rating: 5,
+    price_per_session: 620000,
+    photo_url: "https://images.unsplash.com/photo-1549476464-37392f717541?w=400&h=300&fit=crop",
+    certifications: "Kickboxing Certified, Self Defense Instructor",
+    bio: "Giảng viên Kickboxing, chuyên đào tạo các kỹ thuật phòng thủ và tấn công hiệu quả.",
   },
 ]);
 
 // Computed properties
 const filteredTrainers = computed(() => {
-  let filtered = trainers.value;
+  let filtered = allTrainers.value;
 
-  if (selectedCategory.value !== "all") {
+  if (selectedSpecialty.value !== "all") {
     filtered = filtered.filter(
-      (trainer) => trainer.category === selectedCategory.value
+      (trainer) => trainer.specialty?.toLowerCase() === selectedSpecialty.value.toLowerCase()
     );
   }
-
-  return filtered.slice(0, displayCount.value);
+  return filtered;
 });
+
+const displayedTrainers = computed(() => {
+  return filteredTrainers.value.slice(0, displayCount.value);
+});
+
+// Watch for changes in filteredTrainers or displayCount to update hasMore
+watch([filteredTrainers, displayCount], () => {
+  hasMore.value = filteredTrainers.value.length > displayCount.value;
+}, { immediate: true });
 
 // Methods
 const loadMore = () => {
   displayCount.value += 6;
-  if (displayCount.value >= trainers.value.length) {
-    hasMore.value = false;
-  }
 };
 
-// Lifecycle
-onMounted(() => {
-  // Initial setup
-  hasMore.value = trainers.value.length > displayCount.value;
-});
+// Helper function to format currency
+const formatCurrency = (value) => {
+  if (!value || isNaN(value)) return '0 ₫';
+  return new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(value);
+};
+
+// Helper function to get image URL (now directly returns the URL from mock data)
+const getImageUrl = (imageUrl) => {
+  if (!imageUrl) {
+    return '/placeholder.svg?height=800&width=600'; // Placeholder for vertical images
+  }
+  return imageUrl;
+};
+
+// Handle image loading errors
+const handleImageError = (event) => {
+  event.target.src = '/placeholder.svg?height=800&width=600';
+};
+
+const getCertificationsArray = (certificationsString) => {
+  if (!certificationsString) return [];
+  return certificationsString.split(',').map(s => s.trim()).filter(s => s !== '');
+};
 </script>
+
+<style scoped>
+.btn-active {
+  @apply bg-red-700 border-red-700;
+}
+
+.rating input:checked {
+  @apply bg-red-500;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.badge {
+  @apply text-xs font-medium;
+}
+
+.custom-hero-text-shadow {
+  text-shadow: 0 0 25px rgba(239, 68, 68, 0.9), 0 0 40px rgba(239, 68, 68, 0.7);
+}
+
+.pulse-red {
+  animation: pulse-red-effect 2s infinite;
+}
+
+@keyframes pulse-red-effect {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+.custom-text-shadow {
+  text-shadow: 0 0 20px rgba(239, 68, 68, 0.8), 0 0 30px rgba(239, 68, 68, 0.6);
+}
+</style>

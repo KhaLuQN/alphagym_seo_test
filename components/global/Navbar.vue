@@ -1,7 +1,8 @@
 <template>
-  <nav
-    class="navbar bg-black/95 fixed top-0 z-50 border-b border-red-600/30 py-3"
-  >
+<nav
+  class="navbar bg-black/95 fixed top-0 z-50 border-b border-red-600/30 py-3"
+>
+  <div class="container mx-auto px-4 flex justify-between items-center w-full">
     <div class="navbar-start flex items-center">
       <!-- Dropdown menu for mobile (hamburger icon) -->
       <div class="dropdown lg:hidden">
@@ -49,7 +50,7 @@
     </div>
 
     <!-- Center section: Desktop navigation menu -->
-    <div class="navbar-center hidden lg:flex">
+    <div class="navbar-center hidden lg:flex flex-grow">
       <ul class="menu menu-horizontal px-1 space-x-4">
         <!-- Trang chủ -->
 
@@ -70,6 +71,8 @@
             Giới thiệu
           </NuxtLink>
         </li>
+        
+      
         <!-- Gói tập -->
         <li>
           <NuxtLink to="/goi-tap" class="group nav-link-desktop">
@@ -113,7 +116,7 @@
     </div>
 
     <!-- End section: Register button -->
-    <div class="navbar-end">
+    <div class="navbar-end ml-auto">
       <NuxtLink
         to="/dang-ky"
         class="btn btn-primary bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white font-bold text-lg px-6 py-2 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105"
@@ -121,37 +124,38 @@
         Đăng ký ngay
       </NuxtLink>
     </div>
-  </nav>
+  </div>
+</nav>
 </template>
 
 <style scoped>
-  /* Gradient text for the logo */
-  .text-gradient {
-    background: linear-gradient(to right, #ff0000, #ff7f00); /* Red to Orange */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+/* Gradient text for the logo */
+.text-gradient {
+  background: linear-gradient(to right, #ff0000, #ff7f00); /* Red to Orange */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-  /* Base styles for desktop navigation links */
-  .nav-link-desktop {
-    @apply text-white font-semibold text-lg py-2 px-4 rounded-md transition-colors duration-200 flex items-center;
-  }
+/* Base styles for desktop navigation links */
+.nav-link-desktop {
+  @apply text-white font-semibold text-lg py-2 px-4 rounded-md transition-colors duration-200 flex items-center;
+}
 
-  /* Base styles for mobile navigation links */
-  .nav-link-mobile {
-    @apply text-white py-2 px-4 block rounded-md transition-colors duration-200;
-  }
+/* Base styles for mobile navigation links */
+.nav-link-mobile {
+  @apply text-white py-2 px-4 block rounded-md transition-colors duration-200;
+}
 
-  /* Styles for active navigation links (both desktop and mobile) */
-  .router-link-exact-active.nav-link-desktop,
-  .router-link-exact-active.nav-link-mobile {
-    @apply text-red-500; /* Set text color to red for the active link */
-  }
+/* Styles for active navigation links (both desktop and mobile) */
+.router-link-exact-active.nav-link-desktop,
+.router-link-exact-active.nav-link-mobile {
+  @apply text-red-500; /* Set text color to red for the active link */
+}
 
-  /* Hover styles for non-active links */
-  /* This ensures that when you hover over a link that is NOT the active page, it still turns red */
-  .nav-link-desktop:not(.router-link-exact-active):hover,
-  .nav-link-mobile:not(.router-link-exact-active):hover {
-    @apply text-red-500; /* Red color on hover for non-active links */
-  }
+/* Hover styles for non-active links */
+/* This ensures that when you hover over a link that is NOT the active page, it still turns red */
+.nav-link-desktop:not(.router-link-exact-active):hover,
+.nav-link-mobile:not(.router-link-exact-active):hover {
+  @apply text-red-500; /* Red color on hover for non-active links */
+}
 </style>
