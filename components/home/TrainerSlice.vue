@@ -114,11 +114,11 @@ const props = defineProps({
                 </div>
 
                 <div class="mt-auto">
-                  <button
+                  <nuxt-link
+                    :to="`/huan-luyen-vien/${trainer.id}`"
                     class="btn w-full bg-red-600 hover:bg-red-700 text-white border-none"
+                    >Xem chi tiết</nuxt-link
                   >
-                    Đặt lịch tập
-                  </button>
                 </div>
               </div>
             </div>

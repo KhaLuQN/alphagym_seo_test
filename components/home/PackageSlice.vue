@@ -45,7 +45,7 @@
             <div
               class="card rounded-2xl shadow-xl border overflow-hidden transform transition-all duration-300 h-full flex flex-col"
               :class="
-                plan.is_popular
+                isPopularPlan(plan)
                   ? 'bg-gradient-to-br from-red-700 to-red-900 border-2 border-red-400 shadow-red-500/30'
                   : 'bg-gray-900 border-red-800/30 hover:scale-[1.02] hover:shadow-2xl hover:shadow-red-900/50'
               "
@@ -53,15 +53,17 @@
               <div
                 class="card-body p-8 text-center flex flex-col items-center flex-grow"
               >
-                <!-- Badge -->
+                <!-- Badge cho gói miễn phí hoặc khuyến mãi -->
                 <div
-                  v-if="plan.badge_text"
+                  v-if="getBadgeText(plan)"
                   class="badge text-white font-bold text-base px-4 py-3 rounded-full mb-6 shadow-md"
                   :class="
-                    plan.is_popular ? 'badge-warning text-black' : 'badge-error'
+                    isPopularPlan(plan)
+                      ? 'badge-warning text-black'
+                      : 'badge-error'
                   "
                 >
-                  {{ plan.badge_text }}
+                  {{ getBadgeText(plan) }}
                 </div>
 
                 <h3
@@ -70,41 +72,47 @@
                   {{ plan.name }}
                 </h3>
 
+                <!-- Hiển thị thời hạn -->
                 <div class="text-center mb-6">
                   <span
                     class="text-5xl font-black block"
-                    :class="plan.is_popular ? 'text-white' : 'text-red-500'"
+                    :class="isPopularPlan(plan) ? 'text-white' : 'text-red-500'"
                   >
-                    {{ plan.duration_text }}
+                    {{ getDurationText(plan) }}
                   </span>
                 </div>
 
+                <!-- Hiển thị giá -->
                 <div class="mb-8 w-full">
                   <div
-                    v-if="plan.discount_percent > 0"
+                    v-if="parseFloat(plan.discount_percent) > 0"
                     class="text-lg line-through mb-1"
-                    :class="plan.is_popular ? 'text-red-200' : 'text-gray-400'"
+                    :class="
+                      isPopularPlan(plan) ? 'text-red-200' : 'text-gray-400'
+                    "
                   >
-                    {{ formatCurrency(plan.price) }}
+                    {{ formatCurrency(parseFloat(plan.price)) }}
                   </div>
                   <div class="text-4xl font-black text-white">
                     {{ formatCurrency(getActualPrice(plan)) }}
                   </div>
                   <div
-                    v-if="plan.discount_percent > 0"
+                    v-if="parseFloat(plan.discount_percent) > 0"
                     class="text-sm font-semibold mt-1"
                     :class="
-                      plan.is_popular ? 'text-yellow-300' : 'text-red-400'
+                      isPopularPlan(plan) ? 'text-yellow-300' : 'text-red-400'
                     "
                   >
-                    Tiết kiệm
-                    {{ formatCurrency(plan.price - getActualPrice(plan)) }}
+                    Tiết kiệm {{ parseFloat(plan.discount_percent) }}%
                   </div>
                 </div>
 
+                <!-- Danh sách tính năng -->
                 <ul
                   class="text-left space-y-3 mb-8 w-full flex-grow"
-                  :class="plan.is_popular ? 'text-red-100' : 'text-gray-300'"
+                  :class="
+                    isPopularPlan(plan) ? 'text-red-100' : 'text-gray-300'
+                  "
                 >
                   <li
                     v-for="(feature, index) in plan.features"
@@ -113,28 +121,38 @@
                   >
                     <span
                       class="text-lg mr-3"
-                      :class="plan.is_popular ? 'text-white' : 'text-red-500'"
+                      :class="
+                        isPopularPlan(plan) ? 'text-white' : 'text-red-500'
+                      "
                     >
                       <i class="fas fa-check text-green-500 mr-3 text-lg"></i>
                     </span>
-                    <span
-                      >{{ feature.name }}
-                      <strong v-if="feature.value" class="text-white"
-                        >({{ feature.value }})</strong
-                      ></span
-                    >
+                    <span class="flex-1">
+                      {{ feature.name }}
+                      <strong v-if="feature.value" class="text-white ml-2">
+                        ({{ feature.value }})
+                      </strong>
+                    </span>
                   </li>
                 </ul>
-
+                <!-- Mô tả gói -->
+                <p
+                  class="text-sm mb-6 opacity-90"
+                  :class="
+                    isPopularPlan(plan) ? 'text-red-100' : 'text-gray-300'
+                  "
+                >
+                  {{ plan.description }}
+                </p>
                 <button
                   class="btn btn-block font-bold text-lg py-3 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105 mt-auto"
                   :class="
-                    plan.is_popular
+                    isPopularPlan(plan)
                       ? 'btn-warning text-black'
                       : 'btn-error text-white'
                   "
                 >
-                  ĐĂNG KÝ NGAY
+                  {{ getButtonText(plan) }}
                 </button>
               </div>
             </div>
@@ -172,6 +190,7 @@ const props = defineProps({
 
 // --- CÁC HÀM HELPER ---
 const formatCurrency = (value) => {
+  if (value === 0) return "Miễn phí";
   return new Intl.NumberFormat("vi-VN", {
     style: "currency",
     currency: "VND",
@@ -179,7 +198,40 @@ const formatCurrency = (value) => {
 };
 
 const getActualPrice = (plan) => {
-  return plan.price * (1 - plan.discount_percent / 100);
+  const price = parseFloat(plan.price);
+  const discount = parseFloat(plan.discount_percent);
+  return price * (1 - discount / 100);
+};
+
+const getDurationText = (plan) => {
+  const days = parseInt(plan.duration_days);
+  if (days === 7) return "1 TUẦN";
+  if (days === 30) return "1 THÁNG";
+  if (days === 90) return "3 THÁNG";
+  if (days === 180) return "6 THÁNG";
+  if (days === 365) return "1 NĂM";
+  return `${days} NGÀY`;
+};
+
+const getBadgeText = (plan) => {
+  const price = parseFloat(plan.price);
+  const discount = parseFloat(plan.discount_percent);
+
+  if (price === 0 || discount === 100) return "MIỄN PHÍ";
+  if (discount > 0) return `GIẢM ${discount}%`;
+  if (isPopularPlan(plan)) return "PHỔ BIẾN";
+  return null;
+};
+
+const isPopularPlan = (plan) => {
+  const days = parseInt(plan.duration_days);
+  return days === 30 || days === 90;
+};
+
+const getButtonText = (plan) => {
+  const price = parseFloat(plan.price);
+  if (price === 0) return "TẬP THỬ NGAY";
+  return "ĐĂNG KÝ NGAY";
 };
 </script>
 
@@ -188,6 +240,7 @@ const getActualPrice = (plan) => {
 .custom-text-shadow {
   text-shadow: 0 0 20px rgba(239, 68, 68, 0.8), 0 0 30px rgba(239, 68, 68, 0.6);
 }
+
 /* Style cho các nút điều hướng của Swiper */
 .swiper-button-custom {
   position: absolute;
@@ -206,15 +259,19 @@ const getActualPrice = (plan) => {
   z-index: 10;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
 .swiper-button-custom:hover {
   background-color: #dc2626;
 }
+
 .plan-swiper-button-prev {
   left: 0px;
 }
+
 .plan-swiper-button-next {
   right: 0px;
 }
+
 /* Ẩn nút trên mobile */
 @media (max-width: 768px) {
   .swiper-button-custom {
