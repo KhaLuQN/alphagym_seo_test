@@ -3,13 +3,10 @@
     <HomeHeroSlice />
     <UiStats />
     <HomeArticleSlice />
-    <HomePackageSlice />
-    
-    <HomeTrainerSlice :trainers="trainers" />
-    <HomeContact/>
-    
+    <HomePackageSlice :plans="plans" />
 
-  
+    <HomeTrainerSlice :trainers="trainers" />
+    <HomeContact />
   </div>
 </template>
 <script setup>

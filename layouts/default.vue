@@ -2,8 +2,7 @@
   <div>
     <Navbar />
     <slot />
-    
-    <Footer />
+
     <Floating />
   </div>
 </template>

@@ -2,127 +2,223 @@
   <section id="packages" class="py-20 bg-gray-950 text-white">
     <div class="container mx-auto px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-5xl lg:text-6xl font-extrabold mb-4 text-red-500 custom-text-shadow">GÓI TẬP ALPHAGYM</h2>
+        <h2
+          class="text-5xl lg:text-6xl font-extrabold mb-4 text-red-500 custom-text-shadow"
+        >
+          GÓI TẬP ALPHAGYM
+        </h2>
         <p class="text-xl text-gray-300 max-w-2xl mx-auto">
           Lựa chọn gói tập phù hợp với nhu cầu và mục tiêu của bạn
         </p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        <!-- Package 1: GÓI 1 THÁNG (KHUYẾN MÃI) -->
-        <div class="card bg-gray-900 rounded-2xl shadow-xl border border-red-800/30 overflow-hidden transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-red-900/50">
-          <div class="card-body p-8 text-center flex flex-col items-center">
-            <div class="badge badge-error text-white font-bold text-base px-4 py-2 rounded-full mb-6 shadow-md">KHUYẾN MÃI</div>
-            <h3 class="card-title text-3xl font-extrabold text-white mb-4 justify-center">
-              GÓI 1 THÁNG
-            </h3>
-            <div class="text-center mb-6">
-              <span class="text-5xl font-black text-red-500 block">30 NGÀY</span>
-            </div>
-            <div class="mb-8 w-full">
-              <div class="text-lg text-gray-400 line-through mb-1">1.000.000đ</div>
-              <div class="text-4xl font-black text-white">900.000đ</div>
-              <div class="text-sm text-red-400 font-semibold mt-1">Giảm 10%</div>
-            </div>
-            <ul class="text-left space-y-3 mb-8 w-full text-gray-300">
-              <li class="flex items-center">
-                <i class="fas fa-check text-red-500 mr-3 text-lg"></i>Tập không giới hạn
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-check text-red-500 mr-3 text-lg"></i>Tư vấn chế độ dinh dưỡng
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-check text-red-500 mr-3 text-lg"></i>Sử dụng tất cả thiết bị
-              </li>
-            </ul>
-            <button class="btn btn-error btn-block text-white font-bold text-lg py-3 rounded-full shadow-lg hover:bg-red-700 transform transition-transform duration-200 hover:scale-105">
-              ĐĂNG KÝ NGAY
-            </button>
-          </div>
-        </div>
 
-        <!-- Package 2: GÓI 3 THÁNG (PHỔ BIẾN) -->
-        <div class="card bg-gradient-to-br from-red-700 to-red-900 rounded-2xl shadow-2xl border-2 border-red-400 overflow-hidden transform transition-all duration-300 hover:scale-[1.03] hover:shadow-red-500/50 relative">
-          <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 z-10">
-            <div class="badge badge-warning text-black font-bold text-base px-5 py-2 rounded-full shadow-lg border border-yellow-400">PHỔ BIẾN</div>
-          </div>
-          <div class="card-body p-8 text-center flex flex-col items-center pt-10">
-            <h3 class="card-title text-3xl font-extrabold text-white mb-4 justify-center">
-              GÓI 3 THÁNG
-            </h3>
-            <div class="text-center mb-6">
-              <span class="text-5xl font-black text-white block">90 NGÀY</span>
-            </div>
-            <div class="mb-8 w-full">
-              <div class="text-lg text-red-200 line-through mb-1">2.700.000đ</div>
-              <div class="text-4xl font-black text-white">2.400.000đ</div>
-              <div class="text-sm text-yellow-300 font-semibold mt-1">
-                Tiết kiệm 300.000đ
+      <!-- Wrapper cho Swiper Slider -->
+      <div class="relative">
+        <swiper
+          :modules="[Navigation, Autoplay]"
+          :slides-per-view="1"
+          :space-between="40"
+          :loop="true"
+          :centered-slides="true"
+          :autoplay="{
+            delay: 5000,
+            disableOnInteraction: false,
+          }"
+          :navigation="{
+            nextEl: '.plan-swiper-button-next',
+            prevEl: '.plan-swiper-button-prev',
+          }"
+          :breakpoints="{
+            '768': {
+              slidesPerView: 2,
+              centeredSlides: false,
+            },
+            '1024': {
+              slidesPerView: 3,
+              centeredSlides: false,
+            },
+          }"
+          class="pb-16"
+        >
+          <!-- Lặp qua danh sách Gói tập được truyền vào -->
+          <swiper-slide v-for="plan in plans" :key="plan.id" class="h-full">
+            <div
+              class="card rounded-2xl shadow-xl border overflow-hidden transform transition-all duration-300 h-full flex flex-col"
+              :class="
+                plan.is_popular
+                  ? 'bg-gradient-to-br from-red-700 to-red-900 border-2 border-red-400 shadow-red-500/30'
+                  : 'bg-gray-900 border-red-800/30 hover:scale-[1.02] hover:shadow-2xl hover:shadow-red-900/50'
+              "
+            >
+              <div
+                class="card-body p-8 text-center flex flex-col items-center flex-grow"
+              >
+                <!-- Badge -->
+                <div
+                  v-if="plan.badge_text"
+                  class="badge text-white font-bold text-base px-4 py-3 rounded-full mb-6 shadow-md"
+                  :class="
+                    plan.is_popular ? 'badge-warning text-black' : 'badge-error'
+                  "
+                >
+                  {{ plan.badge_text }}
+                </div>
+
+                <h3
+                  class="card-title text-3xl font-extrabold text-white mb-4 justify-center"
+                >
+                  {{ plan.name }}
+                </h3>
+
+                <div class="text-center mb-6">
+                  <span
+                    class="text-5xl font-black block"
+                    :class="plan.is_popular ? 'text-white' : 'text-red-500'"
+                  >
+                    {{ plan.duration_text }}
+                  </span>
+                </div>
+
+                <div class="mb-8 w-full">
+                  <div
+                    v-if="plan.discount_percent > 0"
+                    class="text-lg line-through mb-1"
+                    :class="plan.is_popular ? 'text-red-200' : 'text-gray-400'"
+                  >
+                    {{ formatCurrency(plan.price) }}
+                  </div>
+                  <div class="text-4xl font-black text-white">
+                    {{ formatCurrency(getActualPrice(plan)) }}
+                  </div>
+                  <div
+                    v-if="plan.discount_percent > 0"
+                    class="text-sm font-semibold mt-1"
+                    :class="
+                      plan.is_popular ? 'text-yellow-300' : 'text-red-400'
+                    "
+                  >
+                    Tiết kiệm
+                    {{ formatCurrency(plan.price - getActualPrice(plan)) }}
+                  </div>
+                </div>
+
+                <ul
+                  class="text-left space-y-3 mb-8 w-full flex-grow"
+                  :class="plan.is_popular ? 'text-red-100' : 'text-gray-300'"
+                >
+                  <li
+                    v-for="(feature, index) in plan.features"
+                    :key="index"
+                    class="flex items-center"
+                  >
+                    <span
+                      class="text-lg mr-3"
+                      :class="plan.is_popular ? 'text-white' : 'text-red-500'"
+                    >
+                      <i class="fas fa-check text-green-500 mr-3 text-lg"></i>
+                    </span>
+                    <span
+                      >{{ feature.name }}
+                      <strong v-if="feature.value" class="text-white"
+                        >({{ feature.value }})</strong
+                      ></span
+                    >
+                  </li>
+                </ul>
+
+                <button
+                  class="btn btn-block font-bold text-lg py-3 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105 mt-auto"
+                  :class="
+                    plan.is_popular
+                      ? 'btn-warning text-black'
+                      : 'btn-error text-white'
+                  "
+                >
+                  ĐĂNG KÝ NGAY
+                </button>
               </div>
             </div>
-            <ul class="text-left space-y-3 mb-8 w-full text-red-100">
-              <li class="flex items-center">
-                <i class="fas fa-check text-white mr-3 text-lg"></i>Tập không giới hạn
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-check text-white mr-3 text-lg"></i>PT cá nhân 4 buổi
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-check text-white mr-3 text-lg"></i>Chế độ dinh dưỡng chi tiết
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-check text-white mr-3 text-lg"></i>Đánh giá thể trạng
-              </li>
-            </ul>
-            <button class="btn btn-warning btn-block text-black font-bold text-lg py-3 rounded-full shadow-lg hover:bg-yellow-400 transform transition-transform duration-200 hover:scale-105">
-              ĐĂNG KÝ NGAY
-            </button>
-          </div>
-        </div>
+          </swiper-slide>
+        </swiper>
 
-        <!-- Package 3: GÓI 6 THÁNG (TIẾT KIỆM) -->
-        <div class="card bg-gray-900 rounded-2xl shadow-xl border border-red-800/30 overflow-hidden transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-red-900/50">
-          <div class="card-body p-8 text-center flex flex-col items-center">
-            <div class="badge badge-success text-white font-bold text-base px-4 py-2 rounded-full mb-6 shadow-md">TIẾT KIỆM</div>
-            <h3 class="card-title text-3xl font-extrabold text-white mb-4 justify-center">
-              GÓI 6 THÁNG
-            </h3>
-            <div class="text-center mb-6">
-              <span class="text-5xl font-black text-red-500 block">180 NGÀY</span>
-            </div>
-            <div class="mb-8 w-full">
-              <div class="text-lg text-gray-400 line-through mb-1">5.400.000đ</div>
-              <div class="text-4xl font-black text-white">4.500.000đ</div>
-              <div class="text-sm text-green-400 font-semibold mt-1">
-                Tiết kiệm 900.000đ
-              </div>
-            </div>
-            <ul class="text-left space-y-3 mb-8 w-full text-gray-300">
-              <li class="flex items-center">
-                <i class="fas fa-check text-red-500 mr-3 text-lg"></i>Tập không giới hạn
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-check text-red-500 mr-3 text-lg"></i>PT cá nhân 12 buổi
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-check text-red-500 mr-3 text-lg"></i>Massage thư giãn
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-check text-red-500 mr-3 text-lg"></i>Tặng áo gym
-              </li>
-            </ul>
-            <button class="btn btn-error btn-block text-white font-bold text-lg py-3 rounded-full shadow-lg hover:bg-red-700 transform transition-transform duration-200 hover:scale-105">
-              ĐĂNG KÝ NGAY
-            </button>
-          </div>
+        <!-- Nút điều hướng tùy chỉnh -->
+        <div class="plan-swiper-button-prev swiper-button-custom">
+          <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="plan-swiper-button-next swiper-button-custom">
+          <i class="fas fa-chevron-right"></i>
         </div>
       </div>
     </div>
   </section>
 </template>
 
+<script setup>
+// Import các thành phần cần thiết từ Swiper
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Navigation, Autoplay } from "swiper/modules";
+import { ref, computed } from "vue";
+
+// Import CSS của Swiper
+import "swiper/css";
+import "swiper/css/navigation";
+
+const props = defineProps({
+  plans: {
+    type: Array,
+    required: true,
+  },
+});
+
+// --- CÁC HÀM HELPER ---
+const formatCurrency = (value) => {
+  return new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  }).format(value);
+};
+
+const getActualPrice = (plan) => {
+  return plan.price * (1 - plan.discount_percent / 100);
+};
+</script>
+
 <style scoped>
 /* Custom text shadow for heading */
 .custom-text-shadow {
   text-shadow: 0 0 20px rgba(239, 68, 68, 0.8), 0 0 30px rgba(239, 68, 68, 0.6);
+}
+/* Style cho các nút điều hướng của Swiper */
+.swiper-button-custom {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.swiper-button-custom:hover {
+  background-color: #dc2626;
+}
+.plan-swiper-button-prev {
+  left: 0px;
+}
+.plan-swiper-button-next {
+  right: 0px;
+}
+/* Ẩn nút trên mobile */
+@media (max-width: 768px) {
+  .swiper-button-custom {
+    display: none;
+  }
 }
 </style>
