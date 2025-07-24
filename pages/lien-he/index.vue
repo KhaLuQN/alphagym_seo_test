@@ -2,7 +2,7 @@
 
 <div>
     
-    <HomeContact/>
+    <ContactFrom/>
     
   </div>
 </template>

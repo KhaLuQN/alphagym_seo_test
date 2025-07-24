@@ -1,10 +1,14 @@
 <template>
   <div class="min-h-screen bg-black text-white">
     <!-- Hero Section -->
-    <div class="relative py-24 md:py-32 bg-gradient-to-br from-gray-950 via-red-950 to-black overflow-hidden">
+    <div
+      class="relative py-24 md:py-32 bg-gradient-to-br from-gray-950 via-red-950 to-black overflow-hidden"
+    >
       <div class="container mx-auto px-6 relative z-10">
         <div class="max-w-4xl mx-auto text-center">
-          <h1 class="text-5xl md:text-7xl font-extrabold mb-6 text-red-500 custom-hero-text-shadow leading-tight">
+          <h1
+            class="text-5xl md:text-7xl font-extrabold mb-6 text-red-500 custom-hero-text-shadow leading-tight"
+          >
             <i class="fas fa-newspaper mr-4 text-red-600"></i>Tin Tức & Bài Viết
           </h1>
           <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-xl mx-auto">
@@ -16,9 +20,13 @@
     </div>
 
     <!-- Main Content Area: Categories Sidebar + Articles Section -->
-    <div class="container mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-4 gap-8">
+    <div
+      class="container mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-4 gap-8"
+    >
       <!-- Left Column: Categories Sidebar -->
-      <aside class="lg:col-span-1 bg-gray-900/50 rounded-xl p-6 border border-red-600/30 h-fit lg:sticky lg:top-28">
+      <aside
+        class="lg:col-span-1 bg-gray-900/50 rounded-xl p-6 border border-red-600/30 h-fit lg:sticky lg:top-28"
+      >
         <h3 class="text-xl font-bold text-red-400 mb-4">Danh mục bài viết</h3>
         <div class="flex flex-col gap-2">
           <button
@@ -135,14 +143,19 @@
           </div>
 
           <!-- Empty State -->
-          <div v-else-if="currentArticles.length === 0" class="text-center py-20">
+          <div
+            v-else-if="currentArticles.length === 0"
+            class="text-center py-20"
+          >
             <div class="text-6xl mb-4">
               <i class="fas fa-search text-red-400"></i>
             </div>
             <h3 class="text-2xl font-bold text-gray-300 mb-2">
               Không tìm thấy bài viết
             </h3>
-            <p class="text-gray-500">Thử thay đổi từ khóa tìm kiếm hoặc bộ lọc</p>
+            <p class="text-gray-500">
+              Thử thay đổi từ khóa tìm kiếm hoặc bộ lọc
+            </p>
           </div>
 
           <!-- Grid View -->
@@ -169,7 +182,10 @@
                     {{ getCategoryLabel(article) }}
                   </div>
                 </div>
-                <div v-if="article.type === 'event'" class="absolute top-4 right-4">
+                <div
+                  v-if="article.type === 'event'"
+                  class="absolute top-4 right-4"
+                >
                   <div class="badge badge-warning text-black font-bold">
                     <i class="fas fa-calendar mr-1"></i>Sự kiện
                   </div>
@@ -327,293 +343,313 @@
         </div>
       </main>
     </div>
-<!-- Newsletter Subscription -->
+    <!-- Newsletter Subscription -->
     <Newsletter />
-
-    
-    
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
 
-import { navigateTo } from '#app'; // Import navigateTo
-import Newsletter from '~/components/articles/Newsletter.vue';
+import { navigateTo } from "#app"; // Import navigateTo
+import Newsletter from "~/components/articles/Newsletter.vue";
 
 // Unified Mock Data
 const unifiedMockArticles = [
   {
     article_id: 1,
-    title: 'Giới thiệu trung tâm Gym mới',
-    slug: 'gioi-thieu-trung-tam-gym-moi',
-    content: '<p>Nội dung bài viết chi tiết về trung tâm gym...</p><p>Đây là đoạn văn thứ hai của bài viết, mô tả thêm về các tiện ích và dịch vụ.</p><ul><li>Thiết bị hiện đại</li><li>Huấn luyện viên chuyên nghiệp</li><li>Không gian rộng rãi</li></ul><p>Hãy đến và trải nghiệm ngay!</p>',
-    excerpt: 'Trung tâm gym hiện đại...',
-    featured_image_url: 'https://images.unsplash.com/photo-1534438327276-14873cb4eafb?w=1200&h=800&fit=crop',
+    title: "Giới thiệu trung tâm Gym mới",
+    slug: "gioi-thieu-trung-tam-gym-moi",
+    content:
+      "<p>Nội dung bài viết chi tiết về trung tâm gym...</p><p>Đây là đoạn văn thứ hai của bài viết, mô tả thêm về các tiện ích và dịch vụ.</p><ul><li>Thiết bị hiện đại</li><li>Huấn luyện viên chuyên nghiệp</li><li>Không gian rộng rãi</li></ul><p>Hãy đến và trải nghiệm ngay!</p>",
+    excerpt: "Trung tâm gym hiện đại...",
+    featured_image_url:
+      "https://images.unsplash.com/photo-1534438327276-14873cb4eafb?w=1200&h=800&fit=crop",
     user_id: 1,
     article_category_id: 3, // Tin tức
-    type: 'news',
-    status: 'published',
-    published_at: '2024-06-01 08:00:00',
+    type: "news",
+    status: "published",
+    published_at: "2024-06-01 08:00:00",
     event_start_time: null,
     event_end_time: null,
     event_location: null,
-    meta_keywords: 'gym, giới thiệu, trung tâm gym',
-    meta_description: 'Giới thiệu trung tâm gym mới với trang thiết bị hiện đại và không gian tập luyện lý tưởng.',
+    meta_keywords: "gym, giới thiệu, trung tâm gym",
+    meta_description:
+      "Giới thiệu trung tâm gym mới với trang thiết bị hiện đại và không gian tập luyện lý tưởng.",
     view_count: 150,
-    created_at: '2025-06-27 12:58:32',
-    updated_at: '2025-07-05 18:29:00',
+    created_at: "2025-06-27 12:58:32",
+    updated_at: "2025-07-05 18:29:00",
     deleted_at: null,
-    category: { name: 'Tin tức', slug: 'tin-tuc' },
-    user: { full_name: 'Nguyễn Văn A' }
+    category: { name: "Tin tức", slug: "tin-tuc" },
+    user: { full_name: "Nguyễn Văn A" },
   },
   {
     article_id: 2,
-    title: 'Sự kiện tập thử miễn phí',
-    slug: 'su-kien-tap-thu-mien-phi',
-    content: '<p>Chi tiết sự kiện tập thử...</p><p>Đăng ký ngay để nhận ưu đãi!</p>',
-    excerpt: 'Tập thử miễn phí...',
-    featured_image_url: 'https://images.unsplash.com/photo-1552674605-db6ffd4ed524?w=1200&h=800&fit=crop',
+    title: "Sự kiện tập thử miễn phí",
+    slug: "su-kien-tap-thu-mien-phi",
+    content:
+      "<p>Chi tiết sự kiện tập thử...</p><p>Đăng ký ngay để nhận ưu đãi!</p>",
+    excerpt: "Tập thử miễn phí...",
+    featured_image_url:
+      "https://images.unsplash.com/photo-1552674605-db6ffd4ed524?w=1200&h=800&fit=crop",
     user_id: 1,
     article_category_id: 2, // Sự kiện
-    type: 'event',
-    status: 'published',
-    published_at: '2024-06-10 08:00:00',
-    event_start_time: '2024-06-15 09:00:00',
-    event_end_time: '2024-06-16 17:00:00',
-    event_location: 'Trung tâm AlphaGym',
-    meta_keywords: 'sự kiện, tập thử, miễn phí',
-    meta_description: 'Tham gia tập thử miễn phí tại AlphaGym và trải nghiệm các lớp học đa dạng.',
+    type: "event",
+    status: "published",
+    published_at: "2024-06-10 08:00:00",
+    event_start_time: "2024-06-15 09:00:00",
+    event_end_time: "2024-06-16 17:00:00",
+    event_location: "Trung tâm AlphaGym",
+    meta_keywords: "sự kiện, tập thử, miễn phí",
+    meta_description:
+      "Tham gia tập thử miễn phí tại AlphaGym và trải nghiệm các lớp học đa dạng.",
     view_count: 200,
-    created_at: '2025-06-27 12:58:32',
-    updated_at: '2025-07-05 03:31:09',
+    created_at: "2025-06-27 12:58:32",
+    updated_at: "2025-07-05 03:31:09",
     deleted_at: null,
-    category: { name: 'Sự kiện', slug: 'su-kien' },
-    user: { full_name: 'Trần Thị B' }
+    category: { name: "Sự kiện", slug: "su-kien" },
+    user: { full_name: "Trần Thị B" },
   },
   {
     article_id: 3,
-    title: 'Cách giảm cân hiệu quả',
-    slug: 'cach-giam-can-hieu-qua',
-    content: '<p>Bài viết chia sẻ kinh nghiệm giảm cân...</p><p>Áp dụng ngay để có vóc dáng mơ ước!</p>',
-    excerpt: 'Giảm cân lành mạnh...',
-    featured_image_url: 'https://images.unsplash.com/photo-1512621776951-a5739dfd84f1?w=1200&h=800&fit=crop',
+    title: "Cách giảm cân hiệu quả",
+    slug: "cach-giam-can-hieu-qua",
+    content:
+      "<p>Bài viết chia sẻ kinh nghiệm giảm cân...</p><p>Áp dụng ngay để có vóc dáng mơ ước!</p>",
+    excerpt: "Giảm cân lành mạnh...",
+    featured_image_url:
+      "https://images.unsplash.com/photo-1512621776951-a5739dfd84f1?w=1200&h=800&fit=crop",
     user_id: 1,
     article_category_id: 4, // Blog
-    type: 'blog',
-    status: 'published',
-    published_at: '2024-06-05 08:00:00',
+    type: "blog",
+    status: "published",
+    published_at: "2024-06-05 08:00:00",
     event_start_time: null,
     event_end_time: null,
     event_location: null,
-    meta_keywords: 'giảm cân, sức khoẻ, dinh dưỡng',
-    meta_description: 'Bí quyết giảm cân hiệu quả và an toàn với các phương pháp khoa học.',
+    meta_keywords: "giảm cân, sức khoẻ, dinh dưỡng",
+    meta_description:
+      "Bí quyết giảm cân hiệu quả và an toàn với các phương pháp khoa học.",
     view_count: 320,
-    created_at: '2025-06-27 12:58:32',
-    updated_at: '2025-07-05 03:31:19',
+    created_at: "2025-06-27 12:58:32",
+    updated_at: "2025-07-05 03:31:19",
     deleted_at: null,
-    category: { name: 'Blog', slug: 'blog' },
-    user: { full_name: 'Lê Văn C' }
+    category: { name: "Blog", slug: "blog" },
+    user: { full_name: "Lê Văn C" },
   },
   {
     article_id: 4,
-    title: 'Khuyến mãi tháng 7',
-    slug: 'khuyen-mai-thang-7',
-    content: '<p>Chi tiết chương trình khuyến mãi...</p><p>Đừng bỏ lỡ cơ hội này!</p>',
-    excerpt: 'Giảm giá tới 30%...',
-    featured_image_url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=800&fit=crop',
+    title: "Khuyến mãi tháng 7",
+    slug: "khuyen-mai-thang-7",
+    content:
+      "<p>Chi tiết chương trình khuyến mãi...</p><p>Đừng bỏ lỡ cơ hội này!</p>",
+    excerpt: "Giảm giá tới 30%...",
+    featured_image_url:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=800&fit=crop",
     user_id: 1,
     article_category_id: 1, // Khuyến mãi
-    type: 'promotion',
-    status: 'published',
-    published_at: '2025-07-07 15:48:00',
+    type: "promotion",
+    status: "published",
+    published_at: "2025-07-07 15:48:00",
     event_start_time: null,
     event_end_time: null,
     event_location: null,
-    meta_keywords: 'khuyến mãi, giảm giá, ưu đãi',
-    meta_description: 'Ưu đãi đặc biệt tháng 7 với nhiều chương trình giảm giá hấp dẫn.',
+    meta_keywords: "khuyến mãi, giảm giá, ưu đãi",
+    meta_description:
+      "Ưu đãi đặc biệt tháng 7 với nhiều chương trình giảm giá hấp dẫn.",
     view_count: 50,
-    created_at: '2025-06-27 12:58:32',
-    updated_at: '2025-07-08 08:48:13',
+    created_at: "2025-06-27 12:58:32",
+    updated_at: "2025-07-08 08:48:13",
     deleted_at: null,
-    category: { name: 'Khuyến mãi', slug: 'khuyen-mai' },
-    user: { full_name: 'Phạm Thị D' }
+    category: { name: "Khuyến mãi", slug: "khuyen-mai" },
+    user: { full_name: "Phạm Thị D" },
   },
   {
     article_id: 7,
-    title: 'Giảm giá cho hội viên mới',
-    slug: 'giam-gia-cho-hoi-vien-moi',
-    content: '<p>Ưu đãi hấp dẫn cho người đăng ký mới...</p><p>Đăng ký ngay để nhận ưu đãi!</p>',
-    excerpt: 'Hội viên mới nhận ưu đãi...',
-    featured_image_url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=800&fit=crop',
+    title: "Giảm giá cho hội viên mới",
+    slug: "giam-gia-cho-hoi-vien-moi",
+    content:
+      "<p>Ưu đãi hấp dẫn cho người đăng ký mới...</p><p>Đăng ký ngay để nhận ưu đãi!</p>",
+    excerpt: "Hội viên mới nhận ưu đãi...",
+    featured_image_url:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=800&fit=crop",
     user_id: 1,
     article_category_id: 1, // Khuyến mãi
-    type: 'promotion',
-    status: 'published',
-    published_at: '2024-06-18 08:00:00',
+    type: "promotion",
+    status: "published",
+    published_at: "2024-06-18 08:00:00",
     event_start_time: null,
     event_end_time: null,
     event_location: null,
-    meta_keywords: 'khuyến mãi, hội viên mới, ưu đãi',
-    meta_description: 'Ưu đãi đặc biệt khi đăng ký lần đầu tại AlphaGym.',
+    meta_keywords: "khuyến mãi, hội viên mới, ưu đãi",
+    meta_description: "Ưu đãi đặc biệt khi đăng ký lần đầu tại AlphaGym.",
     view_count: 95,
-    created_at: '2025-06-27 12:58:32',
-    updated_at: '2025-07-08 08:32:00',
+    created_at: "2025-06-27 12:58:32",
+    updated_at: "2025-07-08 08:32:00",
     deleted_at: null,
-    category: { name: 'Khuyến mãi', slug: 'khuyen-mai' },
-    user: { full_name: 'Nguyễn Văn E' }
+    category: { name: "Khuyến mãi", slug: "khuyen-mai" },
+    user: { full_name: "Nguyễn Văn E" },
   },
   {
     article_id: 8,
-    title: 'Sự kiện thi đấu thể hình',
-    slug: 'su-kien-thi-dau-the-hinh',
-    content: '<p>Cuộc thi thể hình toàn thành phố...</p><p>Đăng ký tham gia ngay!</p>',
-    excerpt: 'Tham gia thi đấu...',
-    featured_image_url: 'https://images.unsplash.com/photo-1552674605-db6ffd4ed524?w=1200&h=800&fit=crop',
+    title: "Sự kiện thi đấu thể hình",
+    slug: "su-kien-thi-dau-the-hinh",
+    content:
+      "<p>Cuộc thi thể hình toàn thành phố...</p><p>Đăng ký tham gia ngay!</p>",
+    excerpt: "Tham gia thi đấu...",
+    featured_image_url:
+      "https://images.unsplash.com/photo-1552674605-db6ffd4ed524?w=1200&h=800&fit=crop",
     user_id: 1,
     article_category_id: 2, // Sự kiện
-    type: 'event',
-    status: 'published',
-    published_at: '2024-05-15 08:00:00',
-    event_start_time: '2024-05-20 08:00:00',
-    event_end_time: '2024-05-20 18:00:00',
-    event_location: 'Sân vận động A',
-    meta_keywords: 'thể hình, thi đấu, sự kiện',
-    meta_description: 'Sự kiện thể hình lớn nhất năm 2024, quy tụ các vận động viên hàng đầu.',
+    type: "event",
+    status: "published",
+    published_at: "2024-05-15 08:00:00",
+    event_start_time: "2024-05-20 08:00:00",
+    event_end_time: "2024-05-20 18:00:00",
+    event_location: "Sân vận động A",
+    meta_keywords: "thể hình, thi đấu, sự kiện",
+    meta_description:
+      "Sự kiện thể hình lớn nhất năm 2024, quy tụ các vận động viên hàng đầu.",
     view_count: 500,
-    created_at: '2025-06-27 12:58:32',
-    updated_at: '2025-07-08 08:45:57',
+    created_at: "2025-06-27 12:58:32",
+    updated_at: "2025-07-08 08:45:57",
     deleted_at: null,
-    category: { name: 'Sự kiện', slug: 'su-kien' },
-    user: { full_name: 'Trần Văn F' }
+    category: { name: "Sự kiện", slug: "su-kien" },
+    user: { full_name: "Trần Văn F" },
   },
   {
     article_id: 11,
-    title: 'mới',
-    slug: 'moi-io',
-    content: '<p>dâdadddâdadddâdadddâdadddâdadddâdadddâdadddâdadd</p>',
-    excerpt: 'dâdadddâdadd',
-    featured_image_url: 'https://images.unsplash.com/photo-1594381837591-82977329611a?w=1200&h=800&fit=crop',
+    title: "mới",
+    slug: "moi-io",
+    content: "<p>dâdadddâdadddâdadddâdadddâdadddâdadddâdadddâdadd</p>",
+    excerpt: "dâdadddâdadd",
+    featured_image_url:
+      "https://images.unsplash.com/photo-1594381837591-82977329611a?w=1200&h=800&fit=crop",
     user_id: 1,
     article_category_id: 4, // Blog
-    type: 'blog',
-    status: 'published',
-    published_at: '2025-07-03 10:01:00',
+    type: "blog",
+    status: "published",
+    published_at: "2025-07-03 10:01:00",
     event_start_time: null,
     event_end_time: null,
     event_location: null,
-    meta_keywords: 'mới, blog',
-    meta_description: 'Bài viết mới nhất về các chủ đề sức khỏe và tập luyện.',
+    meta_keywords: "mới, blog",
+    meta_description: "Bài viết mới nhất về các chủ đề sức khỏe và tập luyện.",
     view_count: 0,
-    created_at: '2025-07-04 03:01:54',
-    updated_at: '2025-07-08 08:46:36',
+    created_at: "2025-07-04 03:01:54",
+    updated_at: "2025-07-08 08:46:36",
     deleted_at: null,
-    category: { name: 'Blog', slug: 'blog' },
-    user: { full_name: 'Lê Thị G' }
+    category: { name: "Blog", slug: "blog" },
+    user: { full_name: "Lê Thị G" },
   },
   {
     article_id: 15,
-    title: 'bài viết mmoiws',
-    slug: 'bai-viet-mmoiws',
-    content: '<p>dâdadad</p>',
-    excerpt: 'dâdada',
-    featured_image_url: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&h=800&fit=crop',
+    title: "bài viết mmoiws",
+    slug: "bai-viet-mmoiws",
+    content: "<p>dâdadad</p>",
+    excerpt: "dâdada",
+    featured_image_url:
+      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&h=800&fit=crop",
     user_id: 1,
     article_category_id: 3, // Tin tức
-    type: 'event',
-    status: 'published',
-    published_at: '2025-07-06 01:23:00',
+    type: "event",
+    status: "published",
+    published_at: "2025-07-06 01:23:00",
     event_start_time: null,
     event_end_time: null,
     event_location: null,
-    meta_keywords: 'adad, tin tức',
-    meta_description: 'Bài viết mới nhất về các sự kiện sắp tới.',
+    meta_keywords: "adad, tin tức",
+    meta_description: "Bài viết mới nhất về các sự kiện sắp tới.",
     view_count: 0,
-    created_at: '2025-07-05 18:23:49',
-    updated_at: '2025-07-05 18:28:00',
+    created_at: "2025-07-05 18:23:49",
+    updated_at: "2025-07-05 18:28:00",
     deleted_at: null,
-    category: { name: 'Tin tức', slug: 'tin-tuc' },
-    user: { full_name: 'Phạm Văn H' }
+    category: { name: "Tin tức", slug: "tin-tuc" },
+    user: { full_name: "Phạm Văn H" },
   },
   {
     article_id: 17,
-    title: 'bài viết mới',
-    slug: 'bai-viet-moi',
-    content: '<p>dâdawdaadaddâdawdaadaddâdawdaadaddâdawdaadaddâdawdaadaddâdawdaadad</p>',
-    excerpt: 'dâdawdaadad',
-    featured_image_url: 'https://images.unsplash.com/photo-1594381837591-82977329611a?w=1200&h=800&fit=crop',
+    title: "bài viết mới",
+    slug: "bai-viet-moi",
+    content:
+      "<p>dâdawdaadaddâdawdaadaddâdawdaadaddâdawdaadaddâdawdaadaddâdawdaadad</p>",
+    excerpt: "dâdawdaadad",
+    featured_image_url:
+      "https://images.unsplash.com/photo-1594381837591-82977329611a?w=1200&h=800&fit=crop",
     user_id: 1,
     article_category_id: 2, // Sự kiện
-    type: 'event',
-    status: 'published',
-    published_at: '2025-07-06 11:18:00',
+    type: "event",
+    status: "published",
+    published_at: "2025-07-06 11:18:00",
     event_start_time: null,
     event_end_time: null,
     event_location: null,
-    meta_keywords: 'dâdawdaadaddâdawdaadad, sự kiện',
-    meta_description: 'Cập nhật các sự kiện mới nhất tại AlphaGym.',
+    meta_keywords: "dâdawdaadaddâdawdaadad, sự kiện",
+    meta_description: "Cập nhật các sự kiện mới nhất tại AlphaGym.",
     view_count: 0,
-    created_at: '2025-07-06 04:19:06',
-    updated_at: '2025-07-06 04:19:23',
+    created_at: "2025-07-06 04:19:06",
+    updated_at: "2025-07-06 04:19:23",
     deleted_at: null,
-    category: { name: 'Sự kiện', slug: 'su-kien' },
-    user: { full_name: 'Nguyễn Thị I' }
+    category: { name: "Sự kiện", slug: "su-kien" },
+    user: { full_name: "Nguyễn Thị I" },
   },
   {
     article_id: 18,
-    title: 'test2',
-    slug: 'test2',
-    content: '<p>dâdadadadadad</p>',
-    excerpt: 'dâdadadad',
-    featured_image_url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=800&fit=crop',
+    title: "test2",
+    slug: "test2",
+    content: "<p>dâdadadadadad</p>",
+    excerpt: "dâdadadad",
+    featured_image_url:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=800&fit=crop",
     user_id: 1,
     article_category_id: 3, // Tin tức
-    type: 'news',
-    status: 'published',
-    published_at: '2025-07-07 15:48:00',
+    type: "news",
+    status: "published",
+    published_at: "2025-07-07 15:48:00",
     event_start_time: null,
     event_end_time: null,
     event_location: null,
-    meta_keywords: 'adad, tin tức',
-    meta_description: 'Bài viết thử nghiệm 2.',
+    meta_keywords: "adad, tin tức",
+    meta_description: "Bài viết thử nghiệm 2.",
     view_count: 0,
-    created_at: '2025-07-07 10:11:32',
-    updated_at: '2025-07-08 08:48:27',
+    created_at: "2025-07-07 10:11:32",
+    updated_at: "2025-07-08 08:48:27",
     deleted_at: null,
-    category: { name: 'Tin tức', slug: 'tin-tuc' },
-    user: { full_name: 'Trần Văn K' }
+    category: { name: "Tin tức", slug: "tin-tuc" },
+    user: { full_name: "Trần Văn K" },
   },
   {
     article_id: 20,
-    title: 'dâdada',
-    slug: 'dadadad',
-    content: '<p>dâda</p>',
-    excerpt: 'dâda',
-    featured_image_url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=800&fit=crop',
+    title: "dâdada",
+    slug: "dadadad",
+    content: "<p>dâda</p>",
+    excerpt: "dâda",
+    featured_image_url:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=800&fit=crop",
     user_id: 1,
     article_category_id: 2, // Sự kiện
-    type: 'event',
-    status: 'published',
-    published_at: '2025-07-09 13:31:00',
+    type: "event",
+    status: "published",
+    published_at: "2025-07-09 13:31:00",
     event_start_time: null,
     event_end_time: null,
     event_location: null,
-    meta_keywords: 'dâda, sự kiện',
-    meta_description: 'Bài viết sự kiện mới nhất.',
+    meta_keywords: "dâda, sự kiện",
+    meta_description: "Bài viết sự kiện mới nhất.",
     view_count: 0,
-    created_at: '2025-07-09 06:31:38',
-    updated_at: '2025-07-09 06:31:38',
+    created_at: "2025-07-09 06:31:38",
+    updated_at: "2025-07-09 06:31:38",
     deleted_at: null,
-    category: { name: 'Sự kiện', slug: 'su-kien' },
-    user: { full_name: 'Lê Thị L' }
-  }
+    category: { name: "Sự kiện", slug: "su-kien" },
+    user: { full_name: "Lê Thị L" },
+  },
 ];
 
 const unifiedMockCategories = [
-  { category_id: 1, name: 'Khuyến mãi', slug: 'khuyen-mai', articles_count: 2 },
-  { category_id: 2, name: 'Sự kiện', slug: 'su-kien', articles_count: 5 },
-  { category_id: 3, name: 'Tin tức', slug: 'tin-tuc', articles_count: 2 },
-  { category_id: 4, name: 'Blog', slug: 'blog', articles_count: 3 },
+  { category_id: 1, name: "Khuyến mãi", slug: "khuyen-mai", articles_count: 2 },
+  { category_id: 2, name: "Sự kiện", slug: "su-kien", articles_count: 5 },
+  { category_id: 3, name: "Tin tức", slug: "tin-tuc", articles_count: 2 },
+  { category_id: 4, name: "Blog", slug: "blog", articles_count: 3 },
 ];
 
 // Reactive data
@@ -628,13 +664,18 @@ const articlesPerPage = 9;
 
 // Categories
 const categories = computed(() => {
-  const allCategories = [{ category_id: 'all', name: 'Tất cả', slug: 'all' }, ...unifiedMockCategories];
+  const allCategories = [
+    { category_id: "all", name: "Tất cả", slug: "all" },
+    ...unifiedMockCategories,
+  ];
   return allCategories;
 });
 
 // Computed properties
 const filteredArticles = computed(() => {
-  let filtered = articles.value.filter(article => article.status === 'published'); // Only show published articles
+  let filtered = articles.value.filter(
+    (article) => article.status === "published"
+  ); // Only show published articles
 
   // Filter by search term
   if (searchTerm.value) {
@@ -648,7 +689,9 @@ const filteredArticles = computed(() => {
   // Filter by category
   if (selectedCategory.value !== "all") {
     filtered = filtered.filter(
-      (article) => article.category?.slug === selectedCategory.value || article.type === selectedCategory.value
+      (article) =>
+        article.category?.slug === selectedCategory.value ||
+        article.type === selectedCategory.value
     );
   }
 
@@ -796,7 +839,9 @@ const getCategoryLabel = (article) => {
 
   // Fallback to finding category by ID
   if (article.article_category_id) {
-    const category = unifiedMockCategories.find(cat => cat.category_id === article.article_category_id);
+    const category = unifiedMockCategories.find(
+      (cat) => cat.category_id === article.article_category_id
+    );
     if (category) {
       return category.name;
     }
@@ -804,10 +849,10 @@ const getCategoryLabel = (article) => {
 
   // Map type to Vietnamese
   const typeMap = {
-    'news': 'Tin tức',
-    'event': 'Sự kiện', 
-    'blog': 'Blog',
-    'promotion': 'Khuyến mãi'
+    news: "Tin tức",
+    event: "Sự kiện",
+    blog: "Blog",
+    promotion: "Khuyến mãi",
   };
 
   return typeMap[article.type] || "Khác";
@@ -822,16 +867,16 @@ const getAuthorName = (article) => {
 
 const getImageUrl = (imageUrl) => {
   if (!imageUrl) {
-    return '/placeholder.svg?height=300&width=500'; // Placeholder for landscape images
+    return "/placeholder.svg?height=300&width=500"; // Placeholder for landscape images
   }
-  if (!imageUrl.startsWith('http')) {
-    return '/placeholder.svg?height=300&width=500'; // Fallback for relative paths in mock
+  if (!imageUrl.startsWith("http")) {
+    return "/placeholder.svg?height=300&width=500"; // Fallback for relative paths in mock
   }
   return imageUrl;
 };
 
 const handleImageError = (event) => {
-  event.target.src = '/placeholder.svg?height=300&width=500';
+  event.target.src = "/placeholder.svg?height=300&width=500";
 };
 
 // Lifecycle

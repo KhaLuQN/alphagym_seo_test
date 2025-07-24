@@ -2,9 +2,10 @@
   <div>
     <Navbar />
     <slot />
-    
-    <Footer />
+
     <Floating />
+    <ContactFrom />
+    <Footer />
   </div>
 </template>
 <script setup>
