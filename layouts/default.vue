@@ -4,7 +4,7 @@
     <slot />
 
     <Floating />
-    <ContactFrom />
+
     <Footer />
   </div>
 </template>
