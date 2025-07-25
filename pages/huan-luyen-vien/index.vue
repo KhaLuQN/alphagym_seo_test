@@ -243,30 +243,26 @@
 <script setup>
 import { ref, computed, watch } from "vue";
 import { useHead } from "#app";
+import { useCustomSeoMeta } from "~/composables/useCustomSeoMeta";
 
-// --- 1. SEO & META ---
-useHead({
-  title: "Đội Ngũ Huấn Luyện Viên | AlphaGym",
-  meta: [
-    {
-      name: "description",
-      content:
-        "Gặp gỡ đội ngũ huấn luyện viên chuyên nghiệp với kinh nghiệm nhiều năm trong lĩnh vực fitness, yoga, và thể hình tại AlphaGym.",
-    },
-  ],
+useCustomSeoMeta({
+  title: "Huấn Luyện Viên | AlphaGym",
+  description:
+    "Gặp gỡ đội ngũ huấn luyện viên chuyên nghiệp tại AlphaGym – những người đồng hành trong hành trình thay đổi của bạn.",
+  image: "https://alphagym.vn/images/trainers.jpg",
+  url: "https://alphagym.vn/huan-luyen-vien",
+  keywords:
+    "huấn luyện viên gym, PT cá nhân, AlphaGym trainer, huấn luyện viên thể hình",
 });
 
-// --- 2. DATA FETCHING (LẤY DỮ LIỆU ĐÚNG CHUẨN NUXT 3) ---
 const {
   data: trainersResponse,
   pending,
   error,
 } = await useApiFetch("/trainers");
 
-// Tạo một ref rỗng để chứa dữ liệu đã được xử lý
 const allTrainers = ref([]);
 
-// --- SỬA LỖI Ở ĐÂY: Dùng watch để xử lý dữ liệu sau khi API trả về ---
 watch(
   trainersResponse,
   (newResponseData) => {
