@@ -330,6 +330,8 @@
 </template>
 
 <script setup>
+import { useCustomSeoMeta } from "~/composables/useCustomSeoMeta";
+
 import { ref, computed, onMounted } from "vue";
 import { navigateTo } from "#app"; // Import navigateTo
 import Newsletter from "~/components/articles/Newsletter.vue";
@@ -587,21 +589,13 @@ onMounted(() => {
   fetchCategories(); // Fetch categories when the component mounts
 });
 
-// SEO
-useHead({
-  title: "Tin tức & Bài viết | PowerGym",
-  meta: [
-    {
-      name: "description",
-      content:
-        "Cập nhật những thông tin mới nhất về thể hình, dinh dưỡng và sức khỏe tại PowerGym. Khám phá các bài viết hữu ích từ đội ngũ chuyên gia.",
-    },
-    {
-      name: "keywords",
-      content:
-        "tin tức gym, bài viết thể hình, hướng dẫn tập gym, dinh dưỡng thể thao, sức khỏe, PowerGym",
-    },
-  ],
+useCustomSeoMeta({
+  title: "Blog - Chia Sẻ Kinh Nghiệm Tập Luyện",
+  description:
+    "Tổng hợp bài viết, mẹo tập luyện, dinh dưỡng, và kiến thức thể hình từ chuyên gia AlphaGym.",
+  image: "https://alphagym.vn/images/blog.jpg",
+  url: "https://alphagym.vn/bai-viet",
+  keywords: "blog gym, kiến thức thể hình, mẹo tập luyện, dinh dưỡng gym",
 });
 </script>
 

@@ -1,15 +1,22 @@
 <template>
-  <div class="bg-gray-950 py-16 border-t border-red-700/50 shadow-inner shadow-red-900/20">
+  <div
+    class="bg-gray-950 py-16 border-t border-red-700/50 shadow-inner shadow-red-900/20"
+  >
     <div class="container mx-auto px-6">
       <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12 text-red-400 custom-text-shadow">
+        <h2
+          class="text-3xl md:text-4xl font-extrabold text-center mb-12 text-red-400 custom-text-shadow"
+        >
           <i class="fas fa-newspaper mr-3"></i>Bài viết liên quan
         </h2>
 
         <div v-if="articles.length === 0" class="text-center py-10">
           <p class="text-gray-400">Không có bài viết liên quan.</p>
         </div>
-        <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          v-else
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           <div
             v-for="relatedArticle in articles"
             :key="relatedArticle.slug"
@@ -18,20 +25,24 @@
           >
             <figure class="relative overflow-hidden h-48">
               <img
-                :src="getImageUrl(relatedArticle.featured_image_url)"
+                :src="getImageUrl(relatedArticle.image)"
                 :alt="relatedArticle.title"
                 class="w-full h-48 object-cover group-hover:opacity-80 transition-opacity"
                 @error="handleImageError"
               />
             </figure>
             <div class="card-body p-6">
-              <h3 class="card-title text-white text-xl font-bold mb-2 line-clamp-2 group-hover:text-red-400 transition-colors duration-300">
+              <h3
+                class="card-title text-white text-xl font-bold mb-2 line-clamp-2 group-hover:text-red-400 transition-colors duration-300"
+              >
                 {{ relatedArticle.title }}
               </h3>
               <p class="text-gray-400 text-sm line-clamp-3 mb-4">
-                {{ relatedArticle.excerpt || 'Không có mô tả' }}
+                {{ relatedArticle.excerpt || "Không có mô tả" }}
               </p>
-              <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-700/50">
+              <div
+                class="flex items-center justify-between mt-auto pt-4 border-t border-gray-700/50"
+              >
                 <div class="flex items-center text-gray-500 text-xs">
                   <i class="fas fa-calendar mr-1 text-red-400"></i>
                   <span>{{ formatDate(relatedArticle.published_at) }}</span>
@@ -59,26 +70,26 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
-import { navigateTo } from '#app'; // Import navigateTo for internal navigation
+import { defineProps } from "vue";
+import { navigateTo } from "#app"; // Import navigateTo for internal navigation
 
 const props = defineProps({
   articles: {
     type: Array,
-    default: () => []
+    default: () => [],
   },
   formatDate: {
     type: Function,
-    required: true
+    required: true,
   },
   getImageUrl: {
     type: Function,
-    required: true
+    required: true,
   },
   handleImageError: {
     type: Function,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const navigateToArticle = (slug) => {

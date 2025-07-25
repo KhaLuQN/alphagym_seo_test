@@ -4,9 +4,8 @@
     <slot />
 
     <Floating />
-
-    <Footer />
   </div>
+  <Footer />
 </template>
 <script setup>
 import Navbar from "~/components/global/Navbar.vue";
