@@ -153,7 +153,7 @@
                       : 'btn-error text-white'
                   "
                 >
-                  ĐĂNG KÝ NGAY
+                  ĐĂNG KÝ
                 </NuxtLink>
               </div>
             </div>

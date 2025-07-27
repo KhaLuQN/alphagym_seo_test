@@ -126,7 +126,7 @@
           to="/dang-ky"
           class="btn btn-primary bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white font-bold text-lg px-6 py-2 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105"
         >
-          Đăng ký ngay
+          Đăng ký
         </NuxtLink>
       </div>
     </div>
