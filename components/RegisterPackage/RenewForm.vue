@@ -10,12 +10,13 @@
         </h3>
 
         <div class="form-control">
-          <label class="label">
+          <label class="label mb-4">
             <span class="label-text text-gray-300 font-medium">
               <i class="fas fa-phone mr-2 text-red-400"></i>
-              Số điện thoại đã đăng ký
+              Số điện thoại đã đăng ký:
             </span>
           </label>
+
           <div class="relative">
             <input
               type="tel"
@@ -25,9 +26,6 @@
               class="input input-bordered bg-gray-700 border-gray-600 text-white focus:border-red-500 focus:ring-red-500 pl-12"
               placeholder="Nhập số điện thoại của bạn"
             />
-            <i
-              class="fas fa-mobile-alt absolute left-4 top-1/2 transform -translate-y-1/2 text-red-400"
-            ></i>
           </div>
           <label class="label">
             <span class="label-text-alt text-gray-400">
