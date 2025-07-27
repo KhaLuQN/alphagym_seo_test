@@ -78,16 +78,6 @@
             </NuxtLink>
           </li>
 
-          <!-- Gói tập -->
-          <li>
-            <NuxtLink to="/goi-tap" class="group nav-link-desktop">
-              <i
-                class="fas fa-dumbbell mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-              ></i>
-
-              Gói tập
-            </NuxtLink>
-          </li>
           <!-- gói tập -->
           <li>
             <NuxtLink to="/dang-ky-goi-tap" class="group nav-link-desktop">
