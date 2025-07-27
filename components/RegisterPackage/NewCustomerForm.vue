@@ -1,75 +1,211 @@
+//components/RegisterPackage/NewCustomerForm.vue
 <template>
   <form @submit.prevent="submitForm" class="space-y-6">
-    <div>
-      <label for="name" class="block text-sm font-medium text-gray-700"
-        >Họ và tên</label
-      >
-      <input
-        type="text"
-        id="name"
-        v-model="formData.customer_name"
-        required
-        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-      />
+    <!-- Personal Information Section -->
+    <div class="card bg-gray-800 border border-red-900/30">
+      <div class="card-body">
+        <h3 class="text-lg font-bold text-white mb-4 flex items-center">
+          <i class="fas fa-user text-red-500 mr-2"></i>
+          Thông Tin Cá Nhân
+        </h3>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <!-- Name Field -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text text-gray-300 font-medium">
+                <i class="fas fa-user mr-2 text-red-400"></i>
+                Họ và tên
+              </span>
+            </label>
+            <input
+              type="text"
+              id="name"
+              v-model="formData.customer_name"
+              required
+              class="input input-bordered bg-gray-700 border-gray-600 text-white focus:border-red-500 focus:ring-red-500"
+              placeholder="Nhập họ và tên của bạn"
+            />
+          </div>
+
+          <!-- Phone Field -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text text-gray-300 font-medium">
+                <i class="fas fa-phone mr-2 text-red-400"></i>
+                Số điện thoại
+              </span>
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              v-model="formData.customer_phone"
+              required
+              class="input input-bordered bg-gray-700 border-gray-600 text-white focus:border-red-500 focus:ring-red-500"
+              placeholder="Nhập số điện thoại"
+            />
+          </div>
+        </div>
+
+        <!-- Email Field -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text text-gray-300 font-medium">
+              <i class="fas fa-envelope mr-2 text-red-400"></i>
+              Email
+            </span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            v-model="formData.customer_email"
+            required
+            class="input input-bordered bg-gray-700 border-gray-600 text-white focus:border-red-500 focus:ring-red-500"
+            placeholder="Nhập địa chỉ email"
+          />
+        </div>
+      </div>
     </div>
-    <div>
-      <label for="phone" class="block text-sm font-medium text-gray-700"
-        >Số điện thoại</label
-      >
-      <input
-        type="tel"
-        id="phone"
-        v-model="formData.customer_phone"
-        required
-        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-      />
+
+    <!-- Package Selection Section -->
+    <div class="card bg-gray-800 border border-red-900/30">
+      <div class="card-body">
+        <h3 class="text-lg font-bold text-white mb-4 flex items-center">
+          <i class="fas fa-dumbbell text-red-500 mr-2"></i>
+          Chọn Gói Tập
+        </h3>
+
+        <div class="grid gap-4">
+          <div v-for="pkg in packages" :key="pkg.id" class="package-option">
+            <label
+              class="cursor-pointer"
+              :class="{ selected: formData.membership_plan_id == pkg.id }"
+            >
+              <input
+                type="radio"
+                :value="pkg.id"
+                v-model="formData.membership_plan_id"
+                class="sr-only"
+                required
+              />
+              <div
+                class="card bg-gray-700 border-2 transition-all duration-300 hover:border-red-500 hover:shadow-lg"
+                :class="{
+                  'border-red-500 bg-red-900/20 shadow-lg':
+                    formData.membership_plan_id == pkg.id,
+                  'border-gray-600': formData.membership_plan_id != pkg.id,
+                }"
+              >
+                <div class="card-body p-4">
+                  <div class="flex items-center justify-between">
+                    <div class="flex-1">
+                      <div class="flex items-center mb-2">
+                        <h4 class="text-white font-bold text-lg">
+                          {{ pkg.name }}
+                        </h4>
+                        <div
+                          v-if="pkg.discount_percent > 0"
+                          class="badge badge-error ml-2 animate-pulse"
+                        >
+                          -{{ pkg.discount_percent }}%
+                        </div>
+                      </div>
+
+                      <div class="flex items-center mb-2">
+                        <span class="text-2xl font-bold text-red-500">
+                          {{ formatPrice(pkg.price) }}đ
+                        </span>
+                        <span class="text-gray-400 ml-2"
+                          >/ {{ pkg.duration_days }} ngày</span
+                        >
+                      </div>
+
+                      <p class="text-gray-300 text-sm mb-3">
+                        {{ pkg.description }}
+                      </p>
+
+                      <!-- Features -->
+                      <div
+                        v-if="pkg.features && pkg.features.length > 0"
+                        class="space-y-1"
+                      >
+                        <div
+                          v-for="feature in pkg.features"
+                          :key="feature.name"
+                          class="flex items-center text-sm text-gray-300"
+                        >
+                          <i class="fas fa-check text-green-400 mr-2"></i>
+                          {{ feature.name }}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="ml-4">
+                      <div
+                        class="w-6 h-6 rounded-full border-2 flex items-center justify-center"
+                        :class="{
+                          'border-red-500 bg-red-500':
+                            formData.membership_plan_id == pkg.id,
+                          'border-gray-400':
+                            formData.membership_plan_id != pkg.id,
+                        }"
+                      >
+                        <i
+                          v-if="formData.membership_plan_id == pkg.id"
+                          class="fas fa-check text-white text-xs"
+                        ></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
     </div>
-    <div>
-      <label for="email" class="block text-sm font-medium text-gray-700"
-        >Email</label
-      >
-      <input
-        type="email"
-        id="email"
-        v-model="formData.customer_email"
-        required
-        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-      />
+
+    <!-- Message Section -->
+    <div class="card bg-gray-800 border border-red-900/30">
+      <div class="card-body">
+        <h3 class="text-lg font-bold text-white mb-4 flex items-center">
+          <i class="fas fa-comment text-red-500 mr-2"></i>
+          Lời Nhắn
+        </h3>
+
+        <div class="form-control">
+          <textarea
+            id="message"
+            v-model="formData.message"
+            rows="4"
+            class="textarea textarea-bordered bg-gray-700 border-gray-600 text-white focus:border-red-500 focus:ring-red-500"
+            placeholder="Nhập lời nhắn hoặc yêu cầu đặc biệt (tùy chọn)..."
+          ></textarea>
+        </div>
+      </div>
     </div>
-    <div>
-      <label for="package" class="block text-sm font-medium text-gray-700"
-        >Chọn gói tập</label
-      >
-      <select
-        id="package"
-        v-model="formData.membership_plan_id"
-        required
-        class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-      >
-        <option disabled value="">Vui lòng chọn một gói</option>
-        <option v-for="pkg in packages" :key="pkg.id" :value="pkg.id">
-          {{ pkg.name }} - {{ pkg.price }}đ
-        </option>
-      </select>
-    </div>
-    <div>
-      <label for="message" class="block text-sm font-medium text-gray-700"
-        >Lời nhắn (tùy chọn)</label
-      >
-      <textarea
-        id="message"
-        v-model="formData.message"
-        rows="4"
-        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-      ></textarea>
-    </div>
-    <div>
+
+    <!-- Submit Button -->
+    <div class="text-center pt-4">
       <button
         type="submit"
-        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        :disabled="isSubmitting"
+        class="btn btn-lg bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 border-none text-white font-bold px-12 py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
       >
-        Đăng Ký
+        <span v-if="!isSubmitting" class="flex items-center">
+          <i class="fas fa-rocket mr-2"></i>
+          ĐĂNG KÝ NGAY
+        </span>
+        <span v-else class="flex items-center">
+          <i class="fas fa-spinner fa-spin mr-2"></i>
+          Đang xử lý...
+        </span>
       </button>
+
+      <p class="text-gray-400 text-sm mt-4">
+        <i class="fas fa-shield-alt mr-1"></i>
+        Thông tin của bạn được bảo mật tuyệt đối
+      </p>
     </div>
   </form>
 </template>
@@ -87,13 +223,20 @@ const formData = ref({
 });
 
 const packages = ref([]);
+const isSubmitting = ref(false);
 
 const { data, error } = await useApiFetch("membership-plans");
 if (data.value) {
   packages.value = data.value.data;
 }
 
+const formatPrice = (price) => {
+  return new Intl.NumberFormat("vi-VN").format(price);
+};
+
 const submitForm = async () => {
+  isSubmitting.value = true;
+
   const payload = {
     customer_type: "new",
     customer_name: formData.value.customer_name,
@@ -118,9 +261,15 @@ const submitForm = async () => {
       alert("Đăng ký thành công nhưng không nhận được URL thanh toán.");
     } else if (responseError.value) {
       let errorMessage = "Lỗi khi đăng ký: ";
-      if (responseError.value.statusCode === 422 && responseError.value.data && responseError.value.data.errors) {
+      if (
+        responseError.value.statusCode === 422 &&
+        responseError.value.data &&
+        responseError.value.data.errors
+      ) {
         for (const key in responseError.value.data.errors) {
-          errorMessage += `\n- ${responseError.value.data.errors[key].join(', ')}`;
+          errorMessage += `\n- ${responseError.value.data.errors[key].join(
+            ", "
+          )}`;
         }
       } else {
         errorMessage += responseError.value.message;
@@ -131,6 +280,22 @@ const submitForm = async () => {
   } catch (e) {
     alert("Đã xảy ra lỗi không mong muốn.");
     console.error("Unexpected error:", e);
+  } finally {
+    isSubmitting.value = false;
   }
 };
 </script>
+
+<style scoped>
+.package-option .card {
+  transition: all 0.3s ease;
+}
+
+.package-option:hover .card {
+  transform: translateY(-2px);
+}
+
+.package-option.selected .card {
+  box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
+}
+</style>
