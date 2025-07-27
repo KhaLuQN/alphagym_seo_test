@@ -6,6 +6,7 @@ const config: Config = {
     "./layouts/**/*.{vue,js,ts}",
     "./pages/**/*.{vue,js,ts}",
     "./app.vue",
+  "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {
@@ -16,6 +17,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [
+    require("daisyui"),
+    require('flowbite/plugin')
+  ],
 };
 export default config;

@@ -88,13 +88,13 @@
               Gói tập
             </NuxtLink>
           </li>
-          <!-- Huấn luyện viên -->
+          <!-- gói tập -->
           <li>
-            <NuxtLink to="/huan-luyen-vien" class="group nav-link-desktop">
+            <NuxtLink to="/dang-ky-goi-tap" class="group nav-link-desktop">
               <i
                 class="fas fa-users mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
               ></i>
-              Huấn luyện viên
+              Đăng ký gói tập
             </NuxtLink>
           </li>
 

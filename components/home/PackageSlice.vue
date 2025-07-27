@@ -144,7 +144,8 @@
                 >
                   {{ plan.description }}
                 </p>
-                <button
+                <NuxtLink
+                  to="/dang-ky-goi-tap"
                   class="btn btn-block font-bold text-lg py-3 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105 mt-auto"
                   :class="
                     isPopularPlan(plan)
@@ -152,8 +153,8 @@
                       : 'btn-error text-white'
                   "
                 >
-                  {{ getButtonText(plan) }}
-                </button>
+                  ĐĂNG KÝ NGAY
+                </NuxtLink>
               </div>
             </div>
           </swiper-slide>
@@ -226,12 +227,6 @@ const getBadgeText = (plan) => {
 const isPopularPlan = (plan) => {
   const days = parseInt(plan.duration_days);
   return days === 30 || days === 90;
-};
-
-const getButtonText = (plan) => {
-  const price = parseFloat(plan.price);
-  if (price === 0) return "TẬP THỬ NGAY";
-  return "ĐĂNG KÝ NGAY";
 };
 </script>
 
