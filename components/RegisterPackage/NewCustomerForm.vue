@@ -235,6 +235,7 @@ const submitForm = async () => {
     membership_plan_id: formData.value.membership_plan_id,
     payment_method: "vnpay",
   };
+  console.log(" Form Data:", payload);
 
   try {
     const { data: responseData, error: responseError } = await useApiFetch(
