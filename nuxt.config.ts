@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     "swiper/css/pagination",
   ],
   runtimeConfig: {
+    GEMINI_API_KEY: process.env.GEMINI_API_KEY,
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE || "http://127.0.0.1:8000/api/",
       storageBase:

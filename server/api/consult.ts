@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+const config = useRuntimeConfig();
+const genAI = new GoogleGenerativeAI(config.GEMINI_API_KEY);
 const packageList = `
 1. Gói Slim Fit (Giảm cân): 3 buổi/tuần, 1 tháng, 1.500.000đ
 2. Gói Muscle Up (Tăng cơ): 5 buổi/tuần, 3 tháng, 4.000.000đ
