@@ -7,27 +7,25 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useRoute, useRouter } from "vue-router";
 import { onMounted } from "vue";
 import { useToast } from "vue-toastification";
 
+const toast = useToast();
 const route = useRoute();
 const router = useRouter();
-const toast = useToast();
 
 onMounted(() => {
-  const status = route.query.status;
-  const message = decodeURIComponent(route.query.message || "");
+  const status = route.query.status as string;
+  const message = decodeURIComponent((route.query.message as string) || "");
 
-  // Hiển thị toast tương ứng
   if (status === "success") {
     toast.success(message || "Thanh toán thành công!");
   } else {
     toast.error(message || "Thanh toán thất bại!");
   }
 
-  // Redirect về trang chủ sau 2 giây
   setTimeout(() => {
     router.push("/");
   }, 2000);
