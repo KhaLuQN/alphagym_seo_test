@@ -23,6 +23,17 @@
               <NuxtLink to="/" class="nav-link-mobile"> Trang chủ </NuxtLink>
             </li>
             <li>
+              <NuxtLink to="/gioi-thieu" class="nav-link-mobile">
+                Giới thiệu
+              </NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/dang-ky-goi-tap" class="nav-link-mobile">
+                Đăng ký gói tập
+              </NuxtLink>
+            </li>
+
+            <li>
               <NuxtLink to="/bai-viet" class="nav-link-mobile">
                 Bài viết
               </NuxtLink>
@@ -35,6 +46,11 @@
             <li>
               <NuxtLink to="/huan-luyen-vien" class="nav-link-mobile">
                 Huấn luyện viên
+              </NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/tu-van" class="nav-link-mobile">
+                Tư vấn AI
               </NuxtLink>
             </li>
 
@@ -97,6 +113,15 @@
               Bài Viết
             </NuxtLink>
           </li>
+          <li>
+            <NuxtLink to="/tu-van" class="group nav-link-desktop">
+              <i
+                class="fas fa-robot mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+              ></i>
+              Tư vấn AI
+            </NuxtLink>
+          </li>
+
           <!-- Liên hệ -->
           <li>
             <NuxtLink to="/lien-he" class="group nav-link-desktop">

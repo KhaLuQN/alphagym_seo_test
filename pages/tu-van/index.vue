@@ -238,151 +238,114 @@
 </template>
 
 <script>
-document
-  .getElementById("consultForm")
-  .addEventListener("submit", async function (e) {
-    e.preventDefault();
+export default {
+  mounted() {
+    const form = document.getElementById("consultForm");
+    if (!form) return;
 
-    // Show loading state
-    const buttonText = document.getElementById("buttonText");
-    const loadingSpinner = document.getElementById("loadingSpinner");
-    const submitButton = e.target.querySelector('button[type="submit"]');
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
 
-    buttonText.classList.add("hidden");
-    loadingSpinner.classList.remove("hidden");
-    submitButton.disabled = true;
+      const buttonText = document.getElementById("buttonText");
+      const loadingSpinner = document.getElementById("loadingSpinner");
+      const submitButton = e.target.querySelector('button[type="submit"]');
 
-    // Hide previous results
-    document.getElementById("resultsSection").classList.add("hidden");
+      buttonText.classList.add("hidden");
+      loadingSpinner.classList.remove("hidden");
+      submitButton.disabled = true;
 
-    // Collect form data
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
+      document.getElementById("resultsSection").classList.add("hidden");
 
-    try {
-      // Simulate API call (replace with actual API endpoint)
-      const response = await fetch("/api/consult", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
 
-      const result = await response.json();
-      displayResults(result.message);
-    } catch (error) {
-      console.error("Error:", error);
-      // Display mock result for demo
-      const mockResult = `**📊 1. ĐÁNH GIÁ THỂ TRẠNG HIỆN TẠI:**
-BMI của bạn: 22.5 (Bình thường)
-Thể trạng hiện tại ở mức trung bình, phù hợp để bắt đầu chương trình tập luyện.
+      try {
+        const response = await fetch("/api/consult", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
 
-**🎯 2. PHÂN TÍCH MỤC TIÊU:**
-Với 3 buổi tập/tuần, bạn có thể đạt mục tiêu giảm 5kg trong 3-4 tháng.
-Mục tiêu này hoàn toàn khả thi với kế hoạch phù hợp.
-
-**💪 3. LỊCH TẬP ĐỀ XUẤT:**
-- Thứ 2: Cardio + Bài tập toàn thân
-- Thứ 4: Tập tạ + Yoga
-- Thứ 6: HIIT + Stretching
-
-**🥗 4. CHỂ ĐỘ DINH DƯỠNG:**
-- Ăn nhiều: Protein, rau xanh, trái cây
-- Hạn chế: Đồ chiên rán, đồ ngọt
-- Uống đủ 2-3 lít nước/ngày
-
-**🌟 5. LỜI KHUYÊN:**
-Kiên trì là chìa khóa thành công! Hãy bắt đầu từ từ và tăng cường độ dần dần.
-
-**🎁 GỢI Ý GÓI TẬP:**
-Gói Slim Fit - 3 buổi/tuần, phù hợp với mục tiêu giảm cân của bạn.
-
-**👨‍🏫 HUẤN LUYỆN VIÊN ĐỀ XUẤT:**
-PT Linh - Chuyên về giảm cân, hỗ trợ tâm lý tốt, phù hợp với người mới bắt đầu.`;
-
-      displayResults(mockResult);
-    } finally {
-      // Reset button state
-      buttonText.classList.remove("hidden");
-      loadingSpinner.classList.add("hidden");
-      submitButton.disabled = false;
-    }
-  });
-
-function displayResults(resultText) {
-  const resultsContent = document.getElementById("resultsContent");
-  const resultsSection = document.getElementById("resultsSection");
-
-  // Parse and format the result
-  const sections = parseResultSections(resultText);
-
-  resultsContent.innerHTML = sections
-    .map(
-      (section, index) => `
-                <div class="result-card rounded-lg p-6 mb-6">
-                    <div class="flex items-start gap-4">
-                        <div class="section-icon w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
-                            <i class="fas ${getSectionIcon(
-                              index
-                            )} text-white text-lg"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-xl font-bold mb-3 text-white">${
-                              section.title
-                            }</h3>
-                            <div class="text-gray-300 leading-relaxed">${
-                              section.content
-                            }</div>
-                        </div>
-                    </div>
-                </div>
-            `
-    )
-    .join("");
-
-  resultsSection.classList.remove("hidden");
-  resultsSection.scrollIntoView({ behavior: "smooth" });
-}
-
-function parseResultSections(text) {
-  const sections = [];
-  const lines = text.split("\n");
-  let currentSection = null;
-
-  for (const line of lines) {
-    if (line.includes("**") && line.includes(":")) {
-      if (currentSection) {
-        sections.push(currentSection);
+        const result = await response.json();
+        displayResults(result.message);
+      } catch (error) {
+        console.error("Error:", error);
+        const mockResult = `**📊 1. ĐÁNH GIÁ THỂ TRẠNG HIỆN TẠI:**\nBMI của bạn: 22.5 (Bình thường)...`;
+        displayResults(mockResult);
+      } finally {
+        buttonText.classList.remove("hidden");
+        loadingSpinner.classList.add("hidden");
+        submitButton.disabled = false;
       }
-      currentSection = {
-        title: line.replace(/\*\*/g, "").trim(),
-        content: "",
-      };
-    } else if (currentSection && line.trim()) {
-      currentSection.content += line + "<br>";
+    });
+
+    function displayResults(resultText) {
+      const resultsContent = document.getElementById("resultsContent");
+      const resultsSection = document.getElementById("resultsSection");
+      const sections = parseResultSections(resultText);
+
+      resultsContent.innerHTML = sections
+        .map(
+          (section, index) => `
+        <div class="result-card rounded-lg p-6 mb-6">
+          <div class="flex items-start gap-4">
+            <div class="section-icon w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+              <i class="fas ${getSectionIcon(index)} text-white text-lg"></i>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-xl font-bold mb-3 text-white">${
+                section.title
+              }</h3>
+              <div class="text-gray-300 leading-relaxed">${
+                section.content
+              }</div>
+            </div>
+          </div>
+        </div>`
+        )
+        .join("");
+
+      resultsSection.classList.remove("hidden");
+      resultsSection.scrollIntoView({ behavior: "smooth" });
     }
-  }
 
-  if (currentSection) {
-    sections.push(currentSection);
-  }
+    function parseResultSections(text) {
+      const sections = [];
+      const lines = text.split("\n");
+      let currentSection = null;
 
-  return sections;
-}
+      for (const line of lines) {
+        if (line.includes("**") && line.includes(":")) {
+          if (currentSection) sections.push(currentSection);
+          currentSection = {
+            title: line.replace(/\*\*/g, "").trim(),
+            content: "",
+          };
+        } else if (currentSection && line.trim()) {
+          currentSection.content += line + "<br>";
+        }
+      }
+      if (currentSection) sections.push(currentSection);
+      return sections;
+    }
 
-function getSectionIcon(index) {
-  const icons = [
-    "fa-heartbeat", // Đánh giá thể trạng
-    "fa-bullseye", // Phân tích mục tiêu
-    "fa-calendar-alt", // Lịch tập
-    "fa-apple-alt", // Dinh dưỡng
-    "fa-star", // Lời khuyên
-    "fa-gift", // Gói tập
-  ];
-  return icons[index] || "fa-info-circle";
-}
+    function getSectionIcon(index) {
+      const icons = [
+        "fa-heartbeat",
+        "fa-bullseye",
+        "fa-calendar-alt",
+        "fa-apple-alt",
+        "fa-star",
+        "fa-gift",
+      ];
+      return icons[index] || "fa-info-circle";
+    }
+  },
+};
 </script>
+
 <style scoped>
 .hero-gradient {
   background: linear-gradient(
