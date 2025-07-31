@@ -297,7 +297,7 @@
           mục tiêu sức khỏe của bạn.
         </p>
         <NuxtLink
-          to="/dang-ky"
+          to="/dang-ky-goi-tap"
           class="btn btn-primary bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105 pulse-red"
         >
           Đăng ký ngay

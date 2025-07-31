@@ -78,7 +78,7 @@
                     class="text-5xl font-black block"
                     :class="isPopularPlan(plan) ? 'text-white' : 'text-red-500'"
                   >
-                    {{ getDurationText(plan) }}
+                    {{ plan.duration_days }}
                   </span>
                 </div>
 
@@ -153,7 +153,7 @@
                       : 'btn-error text-white'
                   "
                 >
-                  ĐĂNG KÝ NGAY
+                  ĐĂNG KÝ
                 </NuxtLink>
               </div>
             </div>
@@ -204,16 +204,6 @@ const getActualPrice = (plan) => {
   return price * (1 - discount / 100);
 };
 
-const getDurationText = (plan) => {
-  const days = parseInt(plan.duration_days);
-  if (days === 7) return "1 TUẦN";
-  if (days === 30) return "1 THÁNG";
-  if (days === 90) return "3 THÁNG";
-  if (days === 180) return "6 THÁNG";
-  if (days === 365) return "1 NĂM";
-  return `${days} NGÀY`;
-};
-
 const getBadgeText = (plan) => {
   const price = parseFloat(plan.price);
   const discount = parseFloat(plan.discount_percent);
@@ -225,8 +215,7 @@ const getBadgeText = (plan) => {
 };
 
 const isPopularPlan = (plan) => {
-  const days = parseInt(plan.duration_days);
-  return days === 30 || days === 90;
+  return plan.name.trim().toLowerCase().endsWith("plus");
 };
 </script>
 

@@ -23,6 +23,17 @@
               <NuxtLink to="/" class="nav-link-mobile"> Trang chủ </NuxtLink>
             </li>
             <li>
+              <NuxtLink to="/gioi-thieu" class="nav-link-mobile">
+                Giới thiệu
+              </NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/dang-ky-goi-tap" class="nav-link-mobile">
+                Đăng ký gói tập
+              </NuxtLink>
+            </li>
+
+            <li>
               <NuxtLink to="/bai-viet" class="nav-link-mobile">
                 Bài viết
               </NuxtLink>
@@ -35,6 +46,11 @@
             <li>
               <NuxtLink to="/huan-luyen-vien" class="nav-link-mobile">
                 Huấn luyện viên
+              </NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/tu-van" class="nav-link-mobile">
+                Tư vấn AI
               </NuxtLink>
             </li>
 
@@ -78,16 +94,6 @@
             </NuxtLink>
           </li>
 
-          <!-- Gói tập -->
-          <li>
-            <NuxtLink to="/goi-tap" class="group nav-link-desktop">
-              <i
-                class="fas fa-dumbbell mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-              ></i>
-
-              Gói tập
-            </NuxtLink>
-          </li>
           <!-- gói tập -->
           <li>
             <NuxtLink to="/dang-ky-goi-tap" class="group nav-link-desktop">
@@ -107,26 +113,26 @@
               Bài Viết
             </NuxtLink>
           </li>
-          <!-- Liên hệ -->
           <li>
-            <NuxtLink to="/lien-he" class="group nav-link-desktop">
+            <NuxtLink to="/tu-van" class="group nav-link-desktop">
               <i
-                class="fas fa-envelope mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                class="fas fa-robot mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
               ></i>
-
-              Liên hệ
+              Tư vấn AI
             </NuxtLink>
           </li>
+
+          <!-- Liên hệ -->
         </ul>
       </div>
 
       <!-- End section: Register button -->
       <div class="navbar-end ml-auto">
         <NuxtLink
-          to="/dang-ky"
+          to="/lien-he"
           class="btn btn-primary bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white font-bold text-lg px-6 py-2 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105"
         >
-          Đăng ký ngay
+          Liên hệ
         </NuxtLink>
       </div>
     </div>

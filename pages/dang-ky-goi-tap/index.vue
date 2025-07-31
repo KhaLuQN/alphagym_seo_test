@@ -1,7 +1,7 @@
 //pages/dang-ky-goi-tap/index.vue
 <template>
   <div
-    class="min-h-screen bg-gradient-to-br from-black via-gray-900 to-red-900"
+    class="relative py-24 md:py-32 bg-gradient-to-br from-gray-950 via-red-950 to-black overflow-hidden"
   >
     <!-- Hero Section -->
     <div class="relative overflow-hidden">

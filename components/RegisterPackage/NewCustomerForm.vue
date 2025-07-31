@@ -4,65 +4,53 @@
     <!-- Personal Information Section -->
     <div class="card bg-gray-800 border border-red-900/30">
       <div class="card-body">
-        <h3 class="text-lg font-bold text-white mb-4 flex items-center">
+        <h3 class="text-lg font-bold text-white mb-6 flex items-center">
           <i class="fas fa-user text-red-500 mr-2"></i>
           Thông Tin Cá Nhân
         </h3>
 
-        <div class="grid md:grid-cols-2 gap-4">
+        <div class="grid md:grid-cols-2 gap-6">
           <!-- Name Field -->
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text text-gray-300 font-medium">
-                <i class="fas fa-user mr-2 text-red-400"></i>
-                Họ và tên
-              </span>
+          <div>
+            <label class="block text-sm text-gray-300 font-medium mb-1">
+              <i class="fas fa-user mr-2 text-red-400"></i> Họ và tên
             </label>
             <input
               type="text"
-              id="name"
               v-model="formData.customer_name"
               required
-              class="input input-bordered bg-gray-700 border-gray-600 text-white focus:border-red-500 focus:ring-red-500"
+              class="w-full input input-bordered bg-gray-700 border-gray-600 text-white focus:border-red-500 focus:ring-red-500"
               placeholder="Nhập họ và tên của bạn"
             />
           </div>
 
           <!-- Phone Field -->
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text text-gray-300 font-medium">
-                <i class="fas fa-phone mr-2 text-red-400"></i>
-                Số điện thoại
-              </span>
+          <div>
+            <label class="block text-sm text-gray-300 font-medium mb-1">
+              <i class="fas fa-phone mr-2 text-red-400"></i> Số điện thoại
             </label>
             <input
               type="tel"
-              id="phone"
               v-model="formData.customer_phone"
               required
-              class="input input-bordered bg-gray-700 border-gray-600 text-white focus:border-red-500 focus:ring-red-500"
+              class="w-full input input-bordered bg-gray-700 border-gray-600 text-white focus:border-red-500 focus:ring-red-500"
               placeholder="Nhập số điện thoại"
             />
           </div>
-        </div>
 
-        <!-- Email Field -->
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text text-gray-300 font-medium">
-              <i class="fas fa-envelope mr-2 text-red-400"></i>
-              Email
-            </span>
-          </label>
-          <input
-            type="email"
-            id="email"
-            v-model="formData.customer_email"
-            required
-            class="input input-bordered bg-gray-700 border-gray-600 text-white focus:border-red-500 focus:ring-red-500"
-            placeholder="Nhập địa chỉ email"
-          />
+          <!-- Email Field -->
+          <div class="md:col-span-2">
+            <label class="block text-sm text-gray-300 font-medium mb-1">
+              <i class="fas fa-envelope mr-2 text-red-400"></i> Email
+            </label>
+            <input
+              type="email"
+              v-model="formData.customer_email"
+              required
+              class="w-full input input-bordered bg-gray-700 border-gray-600 text-white focus:border-red-500 focus:ring-red-500"
+              placeholder="Nhập địa chỉ email"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -213,6 +201,8 @@
 <script setup>
 import { ref } from "vue";
 import { useApiFetch } from "@/composables/useApiFetch";
+import { useToast } from "vue-toastification";
+const toast = useToast();
 
 const formData = ref({
   customer_name: "",
@@ -245,6 +235,7 @@ const submitForm = async () => {
     membership_plan_id: formData.value.membership_plan_id,
     payment_method: "vnpay",
   };
+  console.log(" Form Data:", payload);
 
   try {
     const { data: responseData, error: responseError } = await useApiFetch(
@@ -258,7 +249,7 @@ const submitForm = async () => {
     if (responseData.value && responseData.value.payment_url) {
       window.location.href = responseData.value.payment_url;
     } else if (responseData.value) {
-      alert("Đăng ký thành công nhưng không nhận được URL thanh toán.");
+      toast.success("Đăng ký thành công nhưng không nhận được URL thanh toán.");
     } else if (responseError.value) {
       let errorMessage = "Lỗi khi đăng ký: ";
       if (
@@ -274,11 +265,13 @@ const submitForm = async () => {
       } else {
         errorMessage += responseError.value.message;
       }
-      alert(errorMessage);
+      toast.error(errorMessage);
+
       console.error("Registration error:", responseError.value);
     }
   } catch (e) {
-    alert("Đã xảy ra lỗi không mong muốn.");
+    toast.error("Đã xảy ra lỗi không mong muốn.");
+
     console.error("Unexpected error:", e);
   } finally {
     isSubmitting.value = false;

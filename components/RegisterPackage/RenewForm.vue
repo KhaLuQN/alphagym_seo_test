@@ -10,7 +10,7 @@
         </h3>
 
         <div class="form-control">
-          <label class="label">
+          <label class="label mb-4">
             <span class="label-text text-gray-300 font-medium">
               <i class="fas fa-phone mr-2 text-red-400"></i>
               Số điện thoại đã đăng ký
@@ -25,9 +25,6 @@
               class="input input-bordered bg-gray-700 border-gray-600 text-white focus:border-red-500 focus:ring-red-500 pl-12"
               placeholder="Nhập số điện thoại của bạn"
             />
-            <i
-              class="fas fa-mobile-alt absolute left-4 top-1/2 transform -translate-y-1/2 text-red-400"
-            ></i>
           </div>
           <label class="label">
             <span class="label-text-alt text-gray-400">
@@ -196,6 +193,9 @@
 <script setup>
 import { ref } from "vue";
 import { useApiFetch } from "@/composables/useApiFetch";
+import { useToast } from "vue-toastification"; // 👈 Thêm nếu bạn dùng vue-toastification
+
+const toast = useToast(); // 👈 Khởi tạo
 
 const formData = ref({
   member_identifier: "",
@@ -223,9 +223,7 @@ const submitForm = async () => {
     membership_plan_id: formData.value.membership_plan_id,
     payment_method: "vnpay",
   };
-
   console.log("Renew Form Data:", payload);
-
   try {
     const { data: responseData, error: responseError } = await useApiFetch(
       "/subscription/initiate",
@@ -235,30 +233,36 @@ const submitForm = async () => {
       }
     );
 
-    if (responseData.value && responseData.value.payment_url) {
+    if (responseData.value?.payment_url) {
       window.location.href = responseData.value.payment_url;
     } else if (responseData.value) {
-      alert("Gia hạn thành công nhưng không nhận được URL thanh toán.");
+      toast.success("Gia hạn thành công nhưng không nhận được URL thanh toán.");
     } else if (responseError.value) {
-      let errorMessage = "Lỗi khi gia hạn: ";
+      // Xử lý lỗi có cấu trúc rõ
       if (
         responseError.value.statusCode === 422 &&
-        responseError.value.data &&
-        responseError.value.data.errors
+        responseError.value.data?.errors
       ) {
-        for (const key in responseError.value.data.errors) {
-          errorMessage += `\n- ${responseError.value.data.errors[key].join(
-            ", "
-          )}`;
-        }
+        const messages = Object.values(responseError.value.data.errors)
+          .flat()
+          .join(", ");
+        toast.error(`Lỗi xác thực: ${messages}`);
+      } else if (responseError.value.statusCode === 400) {
+        toast.error(
+          responseError.value.data?.message || "Yêu cầu không hợp lệ."
+        );
+      } else if (responseError.value.statusCode === 404) {
+        toast.error("Không tìm thấy hội viên với thông tin đã cung cấp.");
       } else {
-        errorMessage += responseError.value.message;
+        toast.error(
+          "Lỗi khi gia hạn: " + (responseError.value.message || "Không rõ lỗi.")
+        );
       }
-      alert(errorMessage);
+
       console.error("Renewal error:", responseError.value);
     }
   } catch (e) {
-    alert("Đã xảy ra lỗi không mong muốn.");
+    toast.error("Đã xảy ra lỗi không mong muốn.");
     console.error("Unexpected error:", e);
   } finally {
     isSubmitting.value = false;
