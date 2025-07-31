@@ -8,18 +8,21 @@
 <script setup>
 import LoadingSpinner from "~/components/global/LoadingSpinner.vue";
 import { usePageLoading } from "~/composables/usePageLoading";
+import { useRouter } from "#app"; // ✅ Đúng cho Nuxt 3
 
 const { isPageLoading } = usePageLoading();
 
-const router = useRouter();
+if (process.client) {
+  const router = useRouter();
 
-router.beforeEach(() => {
-  isPageLoading.value = true;
-});
+  router.beforeEach(() => {
+    isPageLoading.value = true;
+  });
 
-router.afterEach(() => {
-  setTimeout(() => {
-    isPageLoading.value = false;
-  }, 300);
-});
+  router.afterEach(() => {
+    setTimeout(() => {
+      isPageLoading.value = false;
+    }, 300);
+  });
+}
 </script>

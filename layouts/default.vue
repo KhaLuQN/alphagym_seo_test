@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Navbar />
+    <client-only>
+      <Navbar />
+    </client-only>
+
     <slot />
 
     <Floating />

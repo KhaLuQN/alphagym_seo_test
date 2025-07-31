@@ -4,7 +4,7 @@
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <div>
           <h3 class="text-2xl font-bold text-gradient mb-4">
-            <i class="fas fa-dumbbell mr-2"></i>PowerGym
+            <i class="fas fa-dumbbell mr-2"></i>Alpha Gym
           </h3>
           <p class="text-gray-300 mb-4">
             Phòng tập gym hàng đầu với thiết bị hiện đại và đội ngũ huấn luyện
@@ -40,11 +40,29 @@
         <div>
           <h4 class="text-lg font-bold text-white mb-4">Thông tin</h4>
           <ul class="space-y-2 text-gray-300">
-            <li><a href="#" class="hover:text-red-400">Về chúng tôi</a></li>
-            <li><a href="#" class="hover:text-red-400">Điều khoản</a></li>
-            <li><a href="#" class="hover:text-red-400">Chính sách</a></li>
-            <li><a href="#" class="hover:text-red-400">Liên hệ</a></li>
-            <li><a href="#" class="hover:text-red-400">Tuyển dụng</a></li>
+            <li>
+              <nuxt-link class="hover:text-red-400" to="/gioi-thieu"
+                >Về chúng tôi</nuxt-link
+              >
+            </li>
+            <li>
+              <nuxt-link to="dieu-khoan-su-dung" class="hover:text-red-400"
+                >Điều khoản</nuxt-link
+              >
+            </li>
+            <li>
+              <nuxt-link to="chinh-sach-bao-mat" class="hover:text-red-400"
+                >Chính sách bảo mật</nuxt-link
+              >
+            </li>
+            <li>
+              <nuxt-link to="lien-he" class="hover:text-red-400"
+                >Liên hệ</nuxt-link
+              >
+            </li>
+            <li>
+              <nuxt-link class="hover:text-red-400">Tuyển dụng</nuxt-link>
+            </li>
           </ul>
         </div>
         <div>
