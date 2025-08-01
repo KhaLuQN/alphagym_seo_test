@@ -16,7 +16,7 @@ const props = defineProps({
   <section id="trainers" class="py-20 bg-gray-900">
     <div class="container mx-auto px-4">
       <div class="text-center mb-12">
-        <h2 class="text-5xl font-black mb-4 text-gradient">HUẤN LUYỆN VIÊN</h2>
+        <h2 class="text-5xl font-black p-4 text-gradient">HUẤN LUYỆN VIÊN</h2>
         <p class="text-xl text-gray-300">
           Đội ngũ HLV chuyên nghiệp với nhiều năm kinh nghiệm
         </p>

@@ -333,7 +333,7 @@
 import { useCustomSeoMeta } from "~/composables/useCustomSeoMeta";
 
 import { ref, computed, onMounted } from "vue";
-import { navigateTo } from "#app"; // Import navigateTo
+import { navigateTo } from "#app";
 import Newsletter from "~/components/articles/Newsletter.vue";
 
 const articles = ref([]);
