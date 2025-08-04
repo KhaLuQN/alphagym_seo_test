@@ -20,6 +20,9 @@ export default defineNuxtConfig({
     head: {
       title: "FitPhysique - Gym & Fitness",
       charset: "utf-8",
+      htmlAttrs: {
+        lang: "vn",
+      },
       viewport: "width=device-width, initial-scale=1",
 
       link: [

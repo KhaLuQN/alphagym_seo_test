@@ -321,14 +321,14 @@ const getKeywords = (metaKeywords) => {
 
 const getImageUrl = (imageUrl) => {
   if (!imageUrl) {
-    return "/placeholder.svg?height=800&width=1200"; // Placeholder for landscape images
+    return "/images/placeholder.svg"; // Placeholder for landscape images
   }
   // For mock data, directly return the URL as they are full URLs
   return imageUrl;
 };
 
 const handleImageError = (event) => {
-  event.target.src = "/placeholder.svg?height=800&width=1200";
+  event.target.src = "/images/placeholder.svg";
 };
 
 const submitComment = async () => {
