@@ -176,8 +176,8 @@
     <RelatedArticles
       :articles="relatedArticles"
       :formatDate="(date) => new Date(date).toLocaleDateString('vi-VN')"
-      :getImageUrl="(url) => url || '/images/default.jpg'"
-      :handleImageError="(e) => (e.target.src = '/images/default.jpg')"
+      :getImageUrl="(url) => url || '/images/default.png'"
+      :handleImageError="(e) => (e.target.src = '/images/default.png')"
     />
   </div>
 </template>
@@ -321,14 +321,14 @@ const getKeywords = (metaKeywords) => {
 
 const getImageUrl = (imageUrl) => {
   if (!imageUrl) {
-    return "/images/placeholder.svg"; // Placeholder for landscape images
+    return "/placeholder.svg"; // Placeholder for landscape images
   }
   // For mock data, directly return the URL as they are full URLs
   return imageUrl;
 };
 
 const handleImageError = (event) => {
-  event.target.src = "/images/placeholder.svg";
+  event.target.src = "/placeholder.svg";
 };
 
 const submitComment = async () => {

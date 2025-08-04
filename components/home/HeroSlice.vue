@@ -1,7 +1,7 @@
 <template>
   <section id="home" class="hero min-h-screen relative overflow-hidden">
     <div
-      class="absolute inset-0 from-gray-900 via-black to-gray-800 opacity-80 z-10"
+      class="absolute inset-0 from-gray-900 via-black to-gray-800 opacity-80"
     ></div>
 
     <!-- Video nền (tùy chọn, làm tăng tính chuyên nghiệp) -->
