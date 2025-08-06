@@ -319,8 +319,8 @@ const getCertificationsArray = (certificationsString) => {
 useHead({
   title: computed(() =>
     trainer.value
-      ? `HLV ${trainer.value.member?.full_name} | AlphaGym`
-      : "Chi tiết Huấn luyện viên | AlphaGym"
+      ? `HLV ${trainer.value.member?.full_name} | GymTech`
+      : "Chi tiết Huấn luyện viên | GymTech"
   ),
   meta: [
     {
@@ -330,7 +330,7 @@ useHead({
           trainer.value?.bio ||
           `Thông tin chi tiết về huấn luyện viên ${
             trainer.value?.member?.full_name || ""
-          } chuyên về ${trainer.value?.specialty || ""} tại AlphaGym.`
+          } chuyên về ${trainer.value?.specialty || ""} tại GymTech.`
       ),
     },
   ],

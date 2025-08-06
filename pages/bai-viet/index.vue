@@ -545,7 +545,7 @@ const getCategoryLabel = (article) => {
 };
 
 const getAuthorName = (article) => {
-  return article?.user?.full_name || "AlphaGym Team";
+  return article?.user?.full_name || "GymTech Team";
 };
 
 const getImageUrl = (imageUrl) => {
@@ -567,9 +567,9 @@ const handleImageError = (event) => {
 useCustomSeoMeta({
   title: "Blog - Chia Sẻ Kinh Nghiệm Tập Luyện",
   description:
-    "Tổng hợp bài viết, mẹo tập luyện, dinh dưỡng, và kiến thức thể hình từ chuyên gia AlphaGym.",
-  image: "https://alphagym.vn/images/blog.jpg",
-  url: "https://alphagym.vn/bai-viet",
+    "Tổng hợp bài viết, mẹo tập luyện, dinh dưỡng, và kiến thức thể hình từ chuyên gia GymTech.",
+  image: "https://gymtech.vn/images/blog.jpg",
+  url: "https://gymtech.vn/bai-viet",
   keywords: "blog gym, kiến thức thể hình, mẹo tập luyện, dinh dưỡng gym",
 });
 </script>

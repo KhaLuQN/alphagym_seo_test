@@ -67,7 +67,7 @@
           to="/"
           class="btn btn-ghost normal-case text-3xl font-extrabold text-gradient ml-2 lg:ml-0"
         >
-          <i class="fas fa-dumbbell mr-2 text-red-500"></i>AlphaGym
+          <i class="fas fa-dumbbell mr-2 text-red-500"></i>GymTech
         </NuxtLink>
       </div>
 

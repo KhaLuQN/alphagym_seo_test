@@ -106,7 +106,7 @@ import "swiper/css/navigation";
 // Dữ liệu giả cho các slide
 const slides = ref([
   {
-    title: "AlphaGym",
+    title: "GymTech",
     subtitle: "NÂNG TẦM SỨC MẠNH - VƯỢT QUA GIỚI HẠN",
     description:
       "Phòng tập gym hàng đầu với thiết bị hiện đại, huấn luyện viên chuyên nghiệp và chương trình tập luyện cá nhân hóa.",

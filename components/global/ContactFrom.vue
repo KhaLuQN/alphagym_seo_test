@@ -51,7 +51,7 @@
             </div>
             <div>
               <h3 class="font-bold text-white text-xl mb-1">Email</h3>
-              <p class="text-red-100 text-lg">info@alphagym.vn</p>
+              <p class="text-red-100 text-lg">info@gymtech.vn</p>
             </div>
           </div>
         </div>

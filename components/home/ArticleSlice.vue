@@ -12,7 +12,7 @@
         </h2>
         <p class="text-xl text-gray-300 max-w-2xl mx-auto">
           Cập nhật thông tin mới nhất về fitness, dinh dưỡng và sức khỏe từ
-          AlphaGym
+          GymTech
         </p>
       </div>
 

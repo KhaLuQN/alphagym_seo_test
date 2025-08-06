@@ -10,7 +10,7 @@
         >
           <i class="fas fa-dumbbell mr-4 text-red-600"></i>
           <span class="text-white">Gói Tập</span>
-          <span class="text-red-500"> AlphaGym</span>
+          <span class="text-red-500"> GymTech</span>
         </h1>
         <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-xl mx-auto">
           Lựa chọn gói tập phù hợp với nhu cầu và mục tiêu của bạn
@@ -266,12 +266,12 @@ onMounted(() => {
 
 // SEO
 useHead({
-  title: "Gói tập gym - Bảng giá ưu đãi | AlphaGym",
+  title: "Gói tập gym - Bảng giá ưu đãi | GymTech",
   meta: [
     {
       name: "description",
       content:
-        "Khám phá các gói tập gym với mức giá ưu đãi tại AlphaGym. Đa dạng gói tập phù hợp với mọi nhu cầu và ngân sách.",
+        "Khám phá các gói tập gym với mức giá ưu đãi tại GymTech. Đa dạng gói tập phù hợp với mọi nhu cầu và ngân sách.",
     },
     {
       name: "keywords",

@@ -246,13 +246,13 @@ import { useHead } from "#app";
 import { useCustomSeoMeta } from "~/composables/useCustomSeoMeta";
 
 useCustomSeoMeta({
-  title: "Huấn Luyện Viên | AlphaGym",
+  title: "Huấn Luyện Viên | GymTech",
   description:
-    "Gặp gỡ đội ngũ huấn luyện viên chuyên nghiệp tại AlphaGym – những người đồng hành trong hành trình thay đổi của bạn.",
-  image: "https://alphagym.vn/images/trainers.jpg",
-  url: "https://alphagym.vn/huan-luyen-vien",
+    "Gặp gỡ đội ngũ huấn luyện viên chuyên nghiệp tại GymTech – những người đồng hành trong hành trình thay đổi của bạn.",
+  image: "https://gymtech.vn/images/trainers.jpg",
+  url: "https://gymtech.vn/huan-luyen-vien",
   keywords:
-    "huấn luyện viên gym, PT cá nhân, AlphaGym trainer, huấn luyện viên thể hình",
+    "huấn luyện viên gym, PT cá nhân, GymTech trainer, huấn luyện viên thể hình",
 });
 
 const {
@@ -405,11 +405,11 @@ const resetFilters = () => {
 };
 
 const handleImageError = (event) => {
-  event.target.src = "https://placehold.co/600x800/1f2937/FFF?text=AlphaGym";
+  event.target.src = "https://placehold.co/600x800/1f2937/FFF?text=GymTech";
 };
 
 const getImageUrl = (url) => {
-  return url || "https://placehold.co/600x800/1f2937/FFF?text=AlphaGym";
+  return url || "https://placehold.co/600x800/1f2937/FFF?text=GymTech";
 };
 
 const getCertificationsArray = (certificationsString) => {

@@ -22,11 +22,11 @@ const testimonials = ref(testimonialsResponse.value?.data || []);
 const trainers = ref(trainersResponse.value?.data || []);
 
 useCustomSeoMeta({
-  title: "AlphaGym - Trung tâm thể hình hiện đại",
+  title: "GymTech - Trung tâm thể hình hiện đại",
   description:
-    "Chào mừng bạn đến AlphaGym – phòng gym hàng đầu với huấn luyện viên chuyên nghiệp, máy móc hiện đại, dịch vụ tận tâm.",
-  image: "https://alphagym.vn/images/home-banner.jpg",
-  url: "https://alphagym.vn",
-  keywords: "gym, phòng gym, tập thể hình, huấn luyện viên, AlphaGym",
+    "Chào mừng bạn đến GymTech – phòng gym hàng đầu với huấn luyện viên chuyên nghiệp, máy móc hiện đại, dịch vụ tận tâm.",
+  image: "https://gymtech.vn/images/home-banner.jpg",
+  url: "https://gymtech.vn",
+  keywords: "gym, phòng gym, tập thể hình, huấn luyện viên, GymTech",
 });
 </script>

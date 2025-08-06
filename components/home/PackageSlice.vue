@@ -5,7 +5,7 @@
         <h2
           class="text-5xl lg:text-6xl font-extrabold mb-4 text-red-500 custom-text-shadow"
         >
-          GÓI TẬP ALPHAGYM
+          GÓI TẬP GYMTECH
         </h2>
         <p class="text-xl text-gray-300 max-w-2xl mx-auto">
           Lựa chọn gói tập phù hợp với nhu cầu và mục tiêu của bạn

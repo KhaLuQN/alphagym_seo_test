@@ -5,12 +5,12 @@
 </template>
 <script setup>
 useCustomSeoMeta({
-  title: "Liên Hệ AlphaGym",
+  title: "Liên Hệ GymTech",
   description:
     "Liên hệ chúng tôi để được tư vấn các gói tập, huấn luyện viên cá nhân, hoặc bất kỳ hỗ trợ nào.",
-  image: "https://alphagym.vn/images/contact.jpg",
-  url: "https://alphagym.vn/lien-he",
+  image: "https://gymtech.vn/images/contact.jpg",
+  url: "https://gymtech.vn/lien-he",
   keywords:
-    "liên hệ phòng gym, tư vấn gói tập, AlphaGym support, thông tin liên hệ",
+    "liên hệ phòng gym, tư vấn gói tập, GymTech support, thông tin liên hệ",
 });
 </script>

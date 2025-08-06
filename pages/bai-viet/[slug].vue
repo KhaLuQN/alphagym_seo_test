@@ -279,7 +279,7 @@ const getAuthorName = (article) => {
   if (article?.user?.full_name) {
     return article.user.full_name;
   }
-  return "AlphaGym Team"; // Default author
+  return "GymTech Team"; // Default author
 };
 
 const getCategoryLabel = (article) => {
@@ -408,8 +408,8 @@ const shareOnTwitter = () => {
 useHead({
   title: computed(() =>
     article.value
-      ? `${article.value.title} | AlphaGym`
-      : "Chi tiết bài viết | AlphaGym"
+      ? `${article.value.title} | GymTech`
+      : "Chi tiết bài viết | GymTech"
   ),
   meta: [
     {
@@ -418,7 +418,7 @@ useHead({
         () =>
           article.value?.meta_description ||
           article.value?.excerpt ||
-          "AlphaGym - Phòng tập gym hàng đầu Việt Nam"
+          "GymTech - Phòng tập gym hàng đầu Việt Nam"
       ),
     },
     {
@@ -431,14 +431,14 @@ useHead({
     {
       property: "og:title",
       content: computed(
-        () => article.value?.title || "Chi tiết bài viết | AlphaGym"
+        () => article.value?.title || "Chi tiết bài viết | GymTech"
       ),
     },
     {
       property: "og:description",
       content: computed(
         () =>
-          article.value?.excerpt || "AlphaGym - Phòng tập gym hàng đầu Việt Nam"
+          article.value?.excerpt || "GymTech - Phòng tập gym hàng đầu Việt Nam"
       ),
     },
     {
