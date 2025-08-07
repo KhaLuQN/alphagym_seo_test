@@ -181,7 +181,7 @@ const handleSubmit = async () => {
   try {
     // ✅ GỌI API THỰC TẾ
     const response = await $fetch(
-      `${config.public.apiBase}/api/magic-link/send`,
+      "https://admin.alphagym.site/api/magic-link/send",
       {
         method: "POST",
         body: { email: email.value },
