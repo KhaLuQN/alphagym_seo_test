@@ -30,10 +30,10 @@
             }
           "
           :class="[
-            'tab text-base font-medium px-4 py-2 rounded-md transition-all duration-300',
+            'tab text-white  font-medium px-4 py-2 rounded-md transition-all duration-300',
             activeCategory === cat
               ? 'tab-active bg-red-600 text-white shadow-inner shadow-red-900/50'
-              : 'text-gray-300 hover:text-red-400 hover:bg-gray-700/50',
+              : 'text-white  hover:text-red-400 hover:bg-gray-700/50',
           ]"
         >
           {{ cat }}

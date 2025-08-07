@@ -150,8 +150,8 @@
               {{ plan.description }}
             </div>
 
-            <button
-              @click="selectPlan(plan)"
+            <NuxtLink
+              to="/dang-ky-goi-tap"
               class="w-full font-bold text-lg py-3 rounded-full shadow-lg transform transition-all duration-200 hover:scale-105"
               :class="
                 plan.is_popular
@@ -160,7 +160,7 @@
               "
             >
               🏋️ ĐĂNG KÝ NGAY
-            </button>
+            </NuxtLink>
           </div>
         </div>
       </div>
@@ -169,6 +169,7 @@
 </template>
 
 <script setup>
+import { NuxtLink } from "#components";
 import { ref, computed, onMounted } from "vue";
 
 // Reactive data
@@ -234,17 +235,15 @@ const getSavingAmount = (plan) => {
   return (plan.price * plan.discount_percent) / 100;
 };
 
-const selectPlan = (plan) => {
-  alert(`Bạn đã chọn ${plan.plan_name}. Chúng tôi sẽ liên hệ với bạn sớm!`);
-};
-
 const loadPlans = async () => {
   try {
     isLoading.value = true;
     apiError.value = null;
 
     // Gọi API thật bằng useApiFetch
-    const { data, error } = await useApiFetch("/membership-plans");
+    const { data, error } = await useFetch(
+      "http://127.0.0.1:8000/api/membership-plans"
+    );
 
     if (error.value) {
       throw error.value;
