@@ -155,7 +155,7 @@ const showSuccess = ref(false);
 const showError = ref(false);
 const emailError = ref("");
 const errorMessage = ref("");
-
+const config = useRuntimeConfig();
 // Validate email
 const validateEmail = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -177,13 +177,16 @@ const handleSubmit = async () => {
 
   // Start loading
   isLoading.value = true;
-
+  const config = useRuntimeConfig();
   try {
     // ✅ GỌI API THỰC TẾ
-    const response = await $fetch("http://127.0.0.1:8000/api/magic-link/send", {
-      method: "POST",
-      body: { email: email.value },
-    });
+    const response = await $fetch(
+      `${config.public.apiBase}/api/magic-link/send`,
+      {
+        method: "POST",
+        body: { email: email.value },
+      }
+    );
 
     // ✅ Kiểm tra phản hồi
     if (response.success) {
