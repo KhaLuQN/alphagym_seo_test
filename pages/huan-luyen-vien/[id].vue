@@ -201,37 +201,36 @@
   </div>
 </template>
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { computed } from "vue";
 import { useRoute } from "vue-router";
-import { useHead, useFetch } from "#app";
+import { useHead, useFetch, useRuntimeConfig } from "#app";
 
 // Lấy route param
 const route = useRoute();
-const trainerId = computed(() => Number(route.params.id));
-
-// Trạng thái dữ liệu
-const trainer = ref(null);
-const error = ref(null);
-
-// Gọi API để lấy thông tin HLV
-onMounted(async () => {
-  if (!trainerId.value || isNaN(trainerId.value)) {
-    error.value = "ID không hợp lệ.";
-    return;
-  }
-
-  const { data, error: fetchError } = await useFetch(
-    `http://127.0.0.1:8000/api/trainers/${trainerId.value}`
-  );
-
-  if (fetchError.value) {
-    console.error("Lỗi khi gọi API HLV:", fetchError.value);
-    error.value = fetchError.value;
-  } else {
-    console.log("Dữ liệu trả về từ API:", data.value);
-    trainer.value = data.value?.data || null;
-  }
+const trainerId = computed(() => {
+  const id = Number(route.params.id);
+  return isNaN(id) ? null : id;
 });
+
+const config = useRuntimeConfig();
+
+// Trạng thái dữ liệu & gọi API
+const { data: trainerData, error } = await useFetch(
+  () => `trainers/${trainerId.value}`,
+  {
+    baseURL: config.public.apiBase,
+    // Sử dụng key để đảm bảo fetch lại dữ liệu khi id thay đổi
+    key: `trainer-${trainerId.value}`,
+    // Chỉ fetch khi trainerId có giá trị hợp lệ (không phải null)
+    disabled: computed(() => !trainerId.value),
+  }
+);
+
+const trainer = computed(() => trainerData.value?.data || null);
+
+if (error.value) {
+  console.error("Lỗi khi gọi API HLV:", error.value);
+}
 
 // -------- Helper functions -------- //
 

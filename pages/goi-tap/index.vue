@@ -170,43 +170,32 @@
 
 <script setup>
 import { NuxtLink } from "#components";
-import { ref, computed, onMounted } from "vue";
+import { ref, computed } from "vue";
+import { useFetch, useRuntimeConfig, useHead } from "#app";
 
-// Reactive data
-const plans = ref([]);
-const isLoading = ref(true);
-const apiError = ref(null);
-
-const loadPlans = async () => {
-  try {
-    isLoading.value = true;
-    apiError.value = null;
-
-    // Sử dụng runtimeConfig và useFetch đúng cách
-    const { data, error } = await useFetch("/membership-plans", {
-      baseURL: useRuntimeConfig().public.apiBase,
-    });
-
-    if (error.value) {
-      throw error.value;
-    }
-
-    plans.value = data.value?.data || [];
-  } catch (err) {
-    console.error("Error loading plans:", err);
-    apiError.value = err;
-  } finally {
-    isLoading.value = false;
+// Call API directly for SSR
+const config = useRuntimeConfig();
+const { 
+  data: plansData, 
+  pending: isLoading, 
+  error: apiError, 
+  refresh: refreshData 
+} = await useFetch(
+  () => "/membership-plans",
+  {
+    baseURL: config.public.apiBase,
+    key: 'membership-plans'
   }
-}; // Lifecycle
-onMounted(() => {
-  loadPlans();
-});
+);
+
+const plans = computed(() => plansData.value?.data || []);
+
 // Computed properties
 const sortedPlans = computed(() => {
+  if (!plans.value) return [];
   const processedPlans = plans.value.map((plan, index) => ({
     ...plan,
-    is_popular: index === 1,
+    is_popular: index === 1, // Mark the second plan as popular
   }));
 
   return [...processedPlans].sort((a, b) => {
