@@ -86,14 +86,6 @@
           </div>
         </div>
       </div>
-      <div class="border-t border-red-600/30 mt-8 pt-8 text-center">
-        <p class="text-gray-400">
-          &copy; 2024 PowerGym. Tất cả quyền được bảo lưu.
-        </p>
-        <p class="text-gray-500 text-sm mt-2">
-          Thiết kế tối ưu SEO cho phòng gym | Trang web chuyên nghiệp
-        </p>
-      </div>
     </div>
   </footer>
 </template>

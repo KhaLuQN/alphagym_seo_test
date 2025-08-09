@@ -177,6 +177,31 @@ const plans = ref([]);
 const isLoading = ref(true);
 const apiError = ref(null);
 
+const loadPlans = async () => {
+  try {
+    isLoading.value = true;
+    apiError.value = null;
+
+    // Sử dụng runtimeConfig và useFetch đúng cách
+    const { data, error } = await useFetch("/membership-plans", {
+      baseURL: useRuntimeConfig().public.apiBase,
+    });
+
+    if (error.value) {
+      throw error.value;
+    }
+
+    plans.value = data.value?.data || [];
+  } catch (err) {
+    console.error("Error loading plans:", err);
+    apiError.value = err;
+  } finally {
+    isLoading.value = false;
+  }
+}; // Lifecycle
+onMounted(() => {
+  loadPlans();
+});
 // Computed properties
 const sortedPlans = computed(() => {
   const processedPlans = plans.value.map((plan, index) => ({
@@ -234,35 +259,6 @@ const getSavingAmount = (plan) => {
   if (!plan || !plan.price || !plan.discount_percent) return 0;
   return (plan.price * plan.discount_percent) / 100;
 };
-
-const loadPlans = async () => {
-  try {
-    isLoading.value = true;
-    apiError.value = null;
-
-    // Gọi API thật bằng useApiFetch
-    const { data, error } = await useFetch(
-      "http://127.0.0.1:8000/api/membership-plans"
-    );
-
-    if (error.value) {
-      throw error.value;
-    }
-
-    plans.value = data.value?.data || [];
-  } catch (err) {
-    console.error("Error loading plans:", err);
-    apiError.value = err;
-  } finally {
-    isLoading.value = false;
-  }
-};
-
-// Lifecycle
-onMounted(() => {
-  loadPlans();
-});
-
 // SEO
 useHead({
   title: "Gói tập gym - Bảng giá ưu đãi | GymTech",

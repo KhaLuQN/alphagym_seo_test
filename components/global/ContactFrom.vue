@@ -91,7 +91,14 @@
                 />
               </div>
               <div class="form-control">
+                <label
+                  for="contact-type"
+                  class="block text-sm font-medium text-white mb-2"
+                >
+                  Mục đích liên hệ
+                </label>
                 <select
+                  id="contact-type"
                   name="type"
                   required
                   class="select select-bordered select-lg w-full bg-gray-800 text-white border-red-700 focus:border-red-500 focus:ring-2 focus:ring-red-500/50 transition-all duration-300"

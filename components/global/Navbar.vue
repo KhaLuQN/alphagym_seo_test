@@ -53,7 +53,11 @@
                 Tư vấn AI
               </NuxtLink>
             </li>
-
+            <li>
+              <NuxtLink to="/tra-cuu-hoi-vien" class="nav-link-mobile">
+                Tra cứu hội viên
+              </NuxtLink>
+            </li>
             <li>
               <NuxtLink to="/lien-he" class="nav-link-mobile">
                 Liên hệ
@@ -129,7 +133,7 @@
               Tra cúu Hội Viên
             </NuxtLink>
           </li>
-          <li style="margin-left: 150px">
+          <li>
             <NuxtLink
               to="/lien-he"
               class="group nav-link-desktop btn btn-primary bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white font-bold text-lg rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105"

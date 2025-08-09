@@ -66,7 +66,6 @@
                   class="input input-bordered w-full pr-10 border-gray-300 focus:border-red-500 focus:ring-red-500 transition-all duration-200"
                   :class="{ 'border-red-500 bg-red-50': emailError }"
                   :disabled="isLoading"
-                  required
                 />
                 <div class="absolute inset-y-0 right-0 flex items-center pr-3">
                   <i class="fas fa-at text-gray-400"></i>
@@ -164,22 +163,13 @@ const validateEmail = (email) => {
 
 // Handle form submission
 const handleSubmit = async () => {
-  // Reset states
   emailError.value = "";
   showError.value = false;
   showSuccess.value = false;
 
-  // Validate email
-  if (!validateEmail(email.value)) {
-    emailError.value = "Vui lòng nhập email hợp lệ";
-    return;
-  }
-
-  // Start loading
   isLoading.value = true;
-  const config = useRuntimeConfig();
+
   try {
-    // ✅ GỌI API THỰC TẾ
     const response = await $fetch(
       "https://admin.alphagym.site/api/magic-link/send",
       {
@@ -188,7 +178,6 @@ const handleSubmit = async () => {
       }
     );
 
-    // ✅ Kiểm tra phản hồi
     if (response.success) {
       showSuccess.value = true;
       setTimeout(() => {
@@ -204,7 +193,7 @@ const handleSubmit = async () => {
       }, 4000);
     }
   } catch (error) {
-    errorMessage.value = "Lỗi kết nối. Vui lòng thử lại sau.";
+    errorMessage.value = "Không tìm thấy thông tin với email này.";
     showError.value = true;
     setTimeout(() => {
       showError.value = false;
