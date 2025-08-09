@@ -53,7 +53,11 @@
                 Tư vấn AI
               </NuxtLink>
             </li>
-
+            <li>
+              <NuxtLink to="/tra-cuu-hoi-vien" class="nav-link-mobile">
+                Tra cứu hội viên
+              </NuxtLink>
+            </li>
             <li>
               <NuxtLink to="/lien-he" class="nav-link-mobile">
                 Liên hệ
@@ -67,7 +71,7 @@
           to="/"
           class="btn btn-ghost normal-case text-3xl font-extrabold text-gradient ml-2 lg:ml-0"
         >
-          <i class="fas fa-dumbbell mr-2 text-red-500"></i>AlphaGym
+          <i class="fas fa-dumbbell mr-2 text-red-500"></i>GymTech
         </NuxtLink>
       </div>
 
@@ -121,20 +125,28 @@
               Tư vấn AI
             </NuxtLink>
           </li>
-
+          <li>
+            <NuxtLink to="/tra-cuu-hoi-vien" class="group nav-link-desktop">
+              <i
+                class="fas fa-search mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+              ></i>
+              Tra cúu Hội Viên
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              to="/lien-he"
+              class="group nav-link-desktop btn btn-primary bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white font-bold text-lg rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105"
+            >
+              Liên hệ
+            </NuxtLink>
+          </li>
           <!-- Liên hệ -->
         </ul>
       </div>
 
       <!-- End section: Register button -->
-      <div class="navbar-end ml-auto">
-        <NuxtLink
-          to="/lien-he"
-          class="btn btn-primary bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white font-bold text-lg px-6 py-2 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105"
-        >
-          Liên hệ
-        </NuxtLink>
-      </div>
+      <div class="navbar-end ml-auto"></div>
     </div>
   </nav>
 </template>

@@ -5,19 +5,19 @@ export const useCustomSeoMeta = (options: {
   url?: string;
   keywords?: string;
 }) => {
-  const siteName = "AlphaGym";
-  const siteUrl = "https://alphagym.vn";
-  const defaultTitle = "Trung tâm thể hình hiện đại | AlphaGym";
+  const siteName = "GymTech";
+  const siteUrl = "https://gymtech.vn";
+  const defaultTitle = "Trung tâm thể hình hiện đại | GymTech";
   const defaultDescription =
     "Phòng tập Gym chuyên nghiệp với thiết bị hiện đại, huấn luyện viên tận tâm.";
-  const defaultImage = "https://alphagym.vn/images/default-og.jpg";
+  const defaultImage = "https://gymtech.vn/images/default-og.jpg";
 
   useSeoMeta({
     title: options.title || defaultTitle,
     description: options.description || defaultDescription,
     keywords:
       options.keywords ||
-      "gym, huấn luyện viên, thiết bị tập luyện, thể hình, AlphaGym",
+      "gym, huấn luyện viên, thiết bị tập luyện, thể hình, GymTech",
 
     ogTitle: options.title || defaultTitle,
     ogDescription: options.description || defaultDescription,

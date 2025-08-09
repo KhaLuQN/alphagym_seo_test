@@ -10,7 +10,7 @@
             <span class="text-red-500"> Tập Luyện</span>
           </h1>
           <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-xl mx-auto">
-            Khám phá hệ thống máy móc và dụng cụ tập luyện hiện đại nhất tại AlphaGym
+            Khám phá hệ thống máy móc và dụng cụ tập luyện hiện đại nhất tại GymTech
           </p>
         </div>
       </div>
@@ -564,17 +564,17 @@ onMounted(() => {
 
 // SEO
 useHead({
-  title: "Thiết Bị Tập Luyện | AlphaGym",
+  title: "Thiết Bị Tập Luyện | GymTech",
   meta: [
     {
       name: "description",
       content:
-        "Khám phá hệ thống máy móc và dụng cụ tập luyện hiện đại nhất tại AlphaGym. Đảm bảo trải nghiệm tập luyện tốt nhất cho mọi hội viên.",
+        "Khám phá hệ thống máy móc và dụng cụ tập luyện hiện đại nhất tại GymTech. Đảm bảo trải nghiệm tập luyện tốt nhất cho mọi hội viên.",
     },
     {
       name: "keywords",
       content:
-        "thiết bị gym, máy tập gym, dụng cụ tập luyện, thiết bị hiện đại, phòng gym, AlphaGym",
+        "thiết bị gym, máy tập gym, dụng cụ tập luyện, thiết bị hiện đại, phòng gym, GymTech",
     },
   ],
 });

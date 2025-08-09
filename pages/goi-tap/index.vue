@@ -10,7 +10,7 @@
         >
           <i class="fas fa-dumbbell mr-4 text-red-600"></i>
           <span class="text-white">Gói Tập</span>
-          <span class="text-red-500"> AlphaGym</span>
+          <span class="text-red-500"> GymTech</span>
         </h1>
         <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-xl mx-auto">
           Lựa chọn gói tập phù hợp với nhu cầu và mục tiêu của bạn
@@ -150,8 +150,8 @@
               {{ plan.description }}
             </div>
 
-            <button
-              @click="selectPlan(plan)"
+            <NuxtLink
+              to="/dang-ky-goi-tap"
               class="w-full font-bold text-lg py-3 rounded-full shadow-lg transform transition-all duration-200 hover:scale-105"
               :class="
                 plan.is_popular
@@ -160,7 +160,7 @@
               "
             >
               🏋️ ĐĂNG KÝ NGAY
-            </button>
+            </NuxtLink>
           </div>
         </div>
       </div>
@@ -169,18 +169,33 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { NuxtLink } from "#components";
+import { ref, computed } from "vue";
+import { useFetch, useRuntimeConfig, useHead } from "#app";
 
-// Reactive data
-const plans = ref([]);
-const isLoading = ref(true);
-const apiError = ref(null);
+// Call API directly for SSR
+const config = useRuntimeConfig();
+const { 
+  data: plansData, 
+  pending: isLoading, 
+  error: apiError, 
+  refresh: refreshData 
+} = await useFetch(
+  () => "/membership-plans",
+  {
+    baseURL: config.public.apiBase,
+    key: 'membership-plans'
+  }
+);
+
+const plans = computed(() => plansData.value?.data || []);
 
 // Computed properties
 const sortedPlans = computed(() => {
+  if (!plans.value) return [];
   const processedPlans = plans.value.map((plan, index) => ({
     ...plan,
-    is_popular: index === 1,
+    is_popular: index === 1, // Mark the second plan as popular
   }));
 
   return [...processedPlans].sort((a, b) => {
@@ -233,45 +248,14 @@ const getSavingAmount = (plan) => {
   if (!plan || !plan.price || !plan.discount_percent) return 0;
   return (plan.price * plan.discount_percent) / 100;
 };
-
-const selectPlan = (plan) => {
-  alert(`Bạn đã chọn ${plan.plan_name}. Chúng tôi sẽ liên hệ với bạn sớm!`);
-};
-
-const loadPlans = async () => {
-  try {
-    isLoading.value = true;
-    apiError.value = null;
-
-    // Gọi API thật bằng useApiFetch
-    const { data, error } = await useApiFetch("/membership-plans");
-
-    if (error.value) {
-      throw error.value;
-    }
-
-    plans.value = data.value?.data || [];
-  } catch (err) {
-    console.error("Error loading plans:", err);
-    apiError.value = err;
-  } finally {
-    isLoading.value = false;
-  }
-};
-
-// Lifecycle
-onMounted(() => {
-  loadPlans();
-});
-
 // SEO
 useHead({
-  title: "Gói tập gym - Bảng giá ưu đãi | AlphaGym",
+  title: "Gói tập gym - Bảng giá ưu đãi | GymTech",
   meta: [
     {
       name: "description",
       content:
-        "Khám phá các gói tập gym với mức giá ưu đãi tại AlphaGym. Đa dạng gói tập phù hợp với mọi nhu cầu và ngân sách.",
+        "Khám phá các gói tập gym với mức giá ưu đãi tại GymTech. Đa dạng gói tập phù hợp với mọi nhu cầu và ngân sách.",
     },
     {
       name: "keywords",

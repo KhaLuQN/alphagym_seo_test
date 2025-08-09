@@ -9,7 +9,7 @@
           <h1
             class="text-5xl md:text-7xl font-extrabold mb-6 text-red-500 custom-hero-text-shadow leading-tight"
           >
-            <i class="fas fa-info-circle mr-4 text-red-600"></i>Về AlphaGym
+            <i class="fas fa-info-circle mr-4 text-red-600"></i>Về GymTech
           </h1>
           <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-xl mx-auto">
             Khám phá hành trình, sứ mệnh và giá trị cốt lõi của chúng tôi
@@ -31,21 +31,21 @@
               Chúng tôi là ai?
             </h2>
             <p class="text-lg text-gray-300 leading-relaxed mb-4">
-              AlphaGym không chỉ là một phòng gym, mà là một cộng đồng nơi mọi
+              GymTech không chỉ là một phòng gym, mà là một cộng đồng nơi mọi
               người đến để cải thiện bản thân, từ thể chất đến tinh thần. Chúng
               tôi tin rằng một cơ thể khỏe mạnh là nền tảng cho một cuộc sống
               hạnh phúc và trọn vẹn.
             </p>
             <p class="text-lg text-gray-300 leading-relaxed mb-4">
               Với trang thiết bị hiện đại, không gian tập luyện truyền cảm hứng
-              và đội ngũ huấn luyện viên chuyên nghiệp, tận tâm, AlphaGym cam
+              và đội ngũ huấn luyện viên chuyên nghiệp, tận tâm, GymTech cam
               kết mang đến trải nghiệm tập luyện tốt nhất cho mọi thành viên,
               bất kể mục tiêu hay trình độ.
             </p>
             <p class="text-lg text-gray-300 leading-relaxed">
               Chúng tôi tự hào là đối tác tin cậy trên hành trình chinh phục sức
               khỏe của bạn, với các chương trình tập luyện đa dạng, phù hợp với
-              mọi lứa tuổi và thể trạng. Tại AlphaGym, bạn sẽ tìm thấy sự hỗ trợ
+              mọi lứa tuổi và thể trạng. Tại GymTech, bạn sẽ tìm thấy sự hỗ trợ
               và động lực cần thiết để vượt qua mọi giới hạn.
             </p>
           </div>
@@ -54,7 +54,7 @@
           >
             <img
               src="https://placehold.co/800x600/333333/EFEFEF?text=About+Us+Image"
-              alt="About AlphaGym"
+              alt="About GymTech"
               class="w-full h-auto object-cover transform transition-transform duration-500 hover:scale-105"
             />
             <div class="absolute inset-0 bg-black opacity-30"></div>
@@ -94,7 +94,7 @@
               Tầm nhìn của chúng tôi
             </h3>
             <p class="text-lg text-gray-300 leading-relaxed mb-4">
-              Chúng tôi hình dung AlphaGym là trung tâm thể hình hàng đầu, được
+              Chúng tôi hình dung GymTech là trung tâm thể hình hàng đầu, được
               công nhận về sự xuất sắc trong việc cung cấp các chương trình tập
               luyện cá nhân hóa, đổi mới và tạo ra một tác động tích cực lâu dài
               đến sức khỏe cộng đồng.
@@ -117,7 +117,7 @@
         <h2
           class="text-4xl font-extrabold text-red-400 text-center mb-12 custom-text-shadow"
         >
-          Khám phá thêm về AlphaGym
+          Khám phá thêm về GymTech
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
           <!-- Card: Cơ sở vật chất hiện đại -->
@@ -145,7 +145,7 @@
               Đa dạng các lớp học
             </h3>
             <p class="text-lg text-gray-300 leading-relaxed">
-              Từ Yoga, Zumba, đến HIIT và Boxing, AlphaGym cung cấp hàng loạt
+              Từ Yoga, Zumba, đến HIIT và Boxing, GymTech cung cấp hàng loạt
               các lớp học nhóm sôi động, phù hợp với mọi sở thích và mục tiêu,
               được hướng dẫn bởi các huấn luyện viên giàu kinh nghiệm. Lịch học
               linh hoạt, phù hợp với mọi lịch trình bận rộn.
@@ -163,7 +163,7 @@
         <h2
           class="text-4xl font-extrabold text-red-400 text-center mb-12 custom-text-shadow"
         >
-          Tại sao chọn AlphaGym?
+          Tại sao chọn GymTech?
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           <!-- Card 1: Hỗ trợ cá nhân hóa -->
@@ -293,7 +293,7 @@
           Sẵn sàng bắt đầu hành trình của bạn?
         </h2>
         <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-          Tham gia AlphaGym ngay hôm nay để trải nghiệm sự khác biệt và đạt được
+          Tham gia GymTech ngay hôm nay để trải nghiệm sự khác biệt và đạt được
           mục tiêu sức khỏe của bạn.
         </p>
         <NuxtLink
@@ -312,13 +312,13 @@
 import { useCustomSeoMeta } from "~/composables/useCustomSeoMeta";
 
 useCustomSeoMeta({
-  title: "Giới Thiệu Về AlphaGym",
+  title: "Giới Thiệu Về GymTech",
   description:
-    "Tìm hiểu về sứ mệnh, đội ngũ và giá trị mà AlphaGym mang lại cho hội viên.",
-  image: "https://alphagym.vn/images/about.jpg",
-  url: "https://alphagym.vn/gioi-thieu",
+    "Tìm hiểu về sứ mệnh, đội ngũ và giá trị mà GymTech mang lại cho hội viên.",
+  image: "https://gymtech.vn/images/about.jpg",
+  url: "https://gymtech.vn/gioi-thieu",
   keywords:
-    "giới thiệu gym, phòng gym AlphaGym, trung tâm thể hình, giá trị cốt lõi",
+    "giới thiệu gym, phòng gym GymTech, trung tâm thể hình, giá trị cốt lõi",
 });
 </script>
 

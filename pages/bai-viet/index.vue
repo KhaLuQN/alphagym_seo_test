@@ -331,65 +331,74 @@
 
 <script setup>
 import { useCustomSeoMeta } from "~/composables/useCustomSeoMeta";
-
-import { ref, computed, onMounted } from "vue";
-import { navigateTo } from "#app"; // Import navigateTo
+import { ref, computed } from "vue";
+import { navigateTo, useAsyncData, useRuntimeConfig, createError } from "#app";
 import Newsletter from "~/components/articles/Newsletter.vue";
 
-const articles = ref([]);
-const categories = ref([]);
+// --- State Management ---
 const searchTerm = ref("");
 const selectedCategory = ref("all");
 const viewMode = ref("grid");
 const sortBy = ref("newest");
 const currentPage = ref(1);
-const isLoading = ref(true);
-const errorMessage = ref("");
 const articlesPerPage = 9;
+const errorMessage = ref("");
 
-const fetchArticles = async () => {
-  isLoading.value = true;
-
-  const { data, error } = await useApiFetch("articles");
-  if (error.value) {
-    console.error("Lỗi khi tải bài viết:", error.value);
-    errorMessage.value = "Không thể tải bài viết. Vui lòng thử lại sau.";
-  } else {
-    articles.value = data.value.data;
+// --- Data Fetching ---
+// Fetch articles and categories in parallel using useAsyncData
+const { data, pending: isLoading, error } = await useAsyncData(
+  'articles-page-data',
+  async () => {
+    const config = useRuntimeConfig();
+    try {
+      const [articlesRes, categoriesRes] = await Promise.all([
+        $fetch(`${config.public.apiBase}/articles`),
+        $fetch(`${config.public.apiBase}/article-categories`)
+      ]);
+      return {
+        articles: articlesRes?.data || [],
+        categories: categoriesRes?.data || []
+      };
+    } catch (e) {
+      console.error("Lỗi khi tải dữ liệu API:", e);
+      // This will be caught by the `error` ref from useAsyncData
+      throw createError({ statusCode: 500, statusMessage: 'Không thể tải dữ liệu từ máy chủ. Vui lòng thử lại sau.', fatal: true });
+    }
   }
+);
 
-  isLoading.value = false;
-};
+// Handle error state
+if (error.value) {
+  errorMessage.value = "Không thể tải bài viết. Vui lòng thử lại sau.";
+  console.error("Lỗi khi tải dữ liệu trang bài viết:", error.value);
+}
 
-const fetchCategories = async () => {
-  const { data, error } = await useApiFetch("article-categories");
+// --- Reactive Data Refs ---
+const articles = ref(data.value?.articles || []);
+const categories = ref([
+  { category_id: "all", name: "Tất cả", slug: "all" },
+  ...(data.value?.categories || [])
+]);
 
-  if (error.value) {
-    console.error("Lỗi khi tải danh mục:", error.value);
-  } else {
-    categories.value = [
-      { category_id: "all", name: "Tất cả", slug: "all" },
-      ...data.value.data,
-    ];
-  }
-};
 
-// Computed properties
+// --- Computed Properties ---
 const filteredArticles = computed(() => {
+  // Make sure we have articles to filter
+  if (!articles.value) return [];
+
   let filtered = articles.value.filter(
     (article) => article.status === "published"
-  ); // Only show published articles
+  );
 
-  // Filter by search term
   if (searchTerm.value) {
+    const lowerCaseSearch = searchTerm.value.toLowerCase();
     filtered = filtered.filter(
       (article) =>
-        article.title.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
-        article.excerpt.toLowerCase().includes(searchTerm.value.toLowerCase())
+        article.title.toLowerCase().includes(lowerCaseSearch) ||
+        (article.excerpt && article.excerpt.toLowerCase().includes(lowerCaseSearch))
     );
   }
 
-  // Filter by category
   if (selectedCategory.value !== "all") {
     filtered = filtered.filter(
       (article) =>
@@ -398,27 +407,26 @@ const filteredArticles = computed(() => {
     );
   }
 
+  // Create a new array for sorting to avoid mutating the original computed ref source
+  const sorted = [...filtered];
+
   // Sort articles
   switch (sortBy.value) {
     case "newest":
-      filtered.sort(
-        (a, b) => new Date(b.published_at) - new Date(a.published_at)
-      );
+      sorted.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
       break;
     case "oldest":
-      filtered.sort(
-        (a, b) => new Date(a.published_at) - new Date(b.published_at)
-      );
+      sorted.sort((a, b) => new Date(a.published_at) - new Date(b.published_at));
       break;
     case "popular":
-      filtered.sort((a, b) => b.view_count - a.view_count);
+      sorted.sort((a, b) => b.view_count - a.view_count);
       break;
     case "title":
-      filtered.sort((a, b) => a.title.localeCompare(b.title));
+      sorted.sort((a, b) => a.title.localeCompare(b.title));
       break;
   }
 
-  return filtered;
+  return sorted;
 });
 
 const totalPages = computed(() =>
@@ -437,71 +445,62 @@ const visiblePages = computed(() => {
   const current = currentPage.value;
 
   if (total <= 7) {
-    for (let i = 1; i <= total; i++) {
-      pages.push(i);
-    }
+    for (let i = 1; i <= total; i++) pages.push(i);
   } else {
     if (current <= 4) {
-      for (let i = 1; i <= 5; i++) {
-        pages.push(i);
-      }
-      pages.push("...", total);
+      pages.push(1, 2, 3, 4, 5, "...", total);
     } else if (current >= total - 3) {
-      pages.push(1, "...");
-      for (let i = total - 4; i <= total; i++) {
-        pages.push(i);
-      }
+      pages.push(1, "...", total - 4, total - 3, total - 2, total - 1, total);
     } else {
-      pages.push(1, "...");
-      for (let i = current - 1; i <= current + 1; i++) {
-        pages.push(i);
-      }
-      pages.push("...", total);
+      pages.push(1, "...", current - 1, current, current + 1, "...", total);
     }
   }
-
   return pages;
 });
 
-// Methods
-const filterArticles = () => {
+// --- Methods ---
+const resetToFirstPage = () => {
   currentPage.value = 1;
+};
+
+const filterArticles = () => {
+  resetToFirstPage();
 };
 
 const filterByCategory = (categorySlug) => {
   selectedCategory.value = categorySlug;
-  currentPage.value = 1;
+  resetToFirstPage();
 };
 
 const sortArticles = (sortType) => {
   sortBy.value = sortType;
-  currentPage.value = 1;
+  resetToFirstPage();
 };
 
 const changePage = (page) => {
-  if (page >= 1 && page <= totalPages.value) {
+  if (page !== '...' && page >= 1 && page <= totalPages.value) {
     currentPage.value = page;
-    // Scroll to top
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (process.client) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   }
 };
 
 const navigateToArticle = (slug) => {
-  // Navigate to article detail page using slug
   navigateTo(`/bai-viet/${slug}`);
 };
 
+// --- Helper Functions ---
 const formatDate = (dateString) => {
   if (!dateString) return "Chưa cập nhật";
-
   const date = new Date(dateString);
   const now = new Date();
   const diffTime = Math.abs(now - date);
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
   if (diffDays === 1) return "Hôm qua";
-  if (diffDays < 7) return `${diffDays} ngày trước`;
-  if (diffDays < 30) return `${Math.ceil(diffDays / 7)} tuần trước`;
+  if (diffDays <= 7) return `${diffDays} ngày trước`;
+  if (diffDays <= 30) return `${Math.floor(diffDays / 7)} tuần trước`;
 
   return date.toLocaleDateString("vi-VN", {
     year: "numeric",
@@ -518,83 +517,59 @@ const formatViewCount = (count) => {
 };
 
 const getSortLabel = () => {
-  switch (sortBy.value) {
-    case "newest":
-      return "Mới nhất";
-    case "oldest":
-      return "Cũ nhất";
-    case "popular":
-      return "Phổ biến";
-    case "title":
-      return "Tên A-Z";
-    default:
-      return "Sắp xếp";
-  }
+  const labels = {
+    newest: "Mới nhất",
+    oldest: "Cũ nhất",
+    popular: "Phổ biến",
+    title: "Tên A-Z",
+  };
+  return labels[sortBy.value] || "Sắp xếp";
 };
 
 const getCategoryLabel = (article) => {
   if (!article) return "Khác";
-
-  // Try to get category name from relationship first
-  if (article.category && article.category.name) {
-    return article.category.name;
-  }
-
-  // Fallback to finding category by ID from fetched categories
-  if (article.article_category_id) {
+  if (article.category?.name) return article.category.name;
+  if (article.article_category_id && categories.value.length > 1) {
     const category = categories.value.find(
       (cat) => cat.category_id === article.article_category_id
     );
-    if (category) {
-      return category.name;
-    }
+    if (category) return category.name;
   }
-
-  // Map type to Vietnamese
   const typeMap = {
     news: "Tin tức",
     event: "Sự kiện",
     blog: "Blog",
     promotion: "Khuyến mãi",
   };
-
   return typeMap[article.type] || "Khác";
 };
 
 const getAuthorName = (article) => {
-  if (article?.user?.full_name) {
-    return article.user.full_name;
-  }
-  return "AlphaGym Team"; // Default author
+  return article?.user?.full_name || "GymTech Team";
 };
 
 const getImageUrl = (imageUrl) => {
   if (!imageUrl) {
-    return "/placeholder.svg?height=300&width=500"; // Placeholder for landscape images
+    return "/images/placeholder.svg";
   }
-  // Ensure the image URL is absolute for the fetched data
   if (!imageUrl.startsWith("http")) {
-    return `http://127.0.0.1:8000${imageUrl}`; // Adjust base URL as needed
+    const config = useRuntimeConfig();
+    return `${config.public.apiBase}${imageUrl}`;
   }
   return imageUrl;
 };
 
 const handleImageError = (event) => {
-  event.target.src = "/placeholder.svg?height=300&width=500";
+  event.target.src = "/images/placeholder.svg";
 };
 
-// Lifecycle
-onMounted(() => {
-  fetchArticles();
-  fetchCategories(); // Fetch categories when the component mounts
-});
-
+// --- SEO ---
 useCustomSeoMeta({
   title: "Blog - Chia Sẻ Kinh Nghiệm Tập Luyện",
   description:
-    "Tổng hợp bài viết, mẹo tập luyện, dinh dưỡng, và kiến thức thể hình từ chuyên gia AlphaGym.",
-  image: "https://alphagym.vn/images/blog.jpg",
-  url: "https://alphagym.vn/bai-viet",
+    "Tổng hợp bài viết, mẹo tập luyện, dinh dưỡng, và kiến thức thể hình từ chuyên gia GymTech.",
+  image: "https://gymtech.vn/images/blog.jpg",
+  url: "https://gymtech.vn/bai-viet",
   keywords: "blog gym, kiến thức thể hình, mẹo tập luyện, dinh dưỡng gym",
 });
 </script>

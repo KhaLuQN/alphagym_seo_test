@@ -13,13 +13,16 @@ export default defineNuxtConfig({
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE || "http://127.0.0.1:8000/api/",
       storageBase:
-        process.env.NUXT_PUBLIC_STORAGE_BASE || "http://127.0.0.1:8000/storage",
+        process.env.NUXT_PUBLIC_STORAGE_BASE || "http://127.0.0.1:8000",
     },
   },
   app: {
     head: {
       title: "FitPhysique - Gym & Fitness",
       charset: "utf-8",
+      htmlAttrs: {
+        lang: "vi",
+      },
       viewport: "width=device-width, initial-scale=1",
 
       link: [

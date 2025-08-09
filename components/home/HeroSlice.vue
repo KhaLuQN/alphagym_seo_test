@@ -1,7 +1,7 @@
 <template>
   <section id="home" class="hero min-h-screen relative overflow-hidden">
     <div
-      class="absolute inset-0 from-gray-900 via-black to-gray-800 opacity-80 z-10"
+      class="absolute inset-0 from-gray-900 via-black to-gray-800 opacity-80"
     ></div>
 
     <!-- Video nền (tùy chọn, làm tăng tính chuyên nghiệp) -->
@@ -106,7 +106,7 @@ import "swiper/css/navigation";
 // Dữ liệu giả cho các slide
 const slides = ref([
   {
-    title: "AlphaGym",
+    title: "GymTech",
     subtitle: "NÂNG TẦM SỨC MẠNH - VƯỢT QUA GIỚI HẠN",
     description:
       "Phòng tập gym hàng đầu với thiết bị hiện đại, huấn luyện viên chuyên nghiệp và chương trình tập luyện cá nhân hóa.",

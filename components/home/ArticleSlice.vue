@@ -12,7 +12,7 @@
         </h2>
         <p class="text-xl text-gray-300 max-w-2xl mx-auto">
           Cập nhật thông tin mới nhất về fitness, dinh dưỡng và sức khỏe từ
-          AlphaGym
+          GymTech
         </p>
       </div>
 
@@ -21,6 +21,7 @@
         class="tabs tabs-boxed bg-gray-800 rounded-lg p-1 shadow-md w-fit mx-auto mb-12"
       >
         <button
+          style="color: white"
           v-for="cat in categories"
           :key="cat"
           @click="
@@ -30,10 +31,10 @@
             }
           "
           :class="[
-            'tab text-base font-medium px-4 py-2 rounded-md transition-all duration-300',
+            'tab font-medium px-4 py-2 rounded-md transition-all duration-300',
             activeCategory === cat
-              ? 'tab-active bg-red-600 text-white shadow-inner shadow-red-900/50'
-              : 'text-gray-300 hover:text-red-400 hover:bg-gray-700/50',
+              ? 'bg-red-600 text-white shadow-inner shadow-red-900/50'
+              : 'text-gray-200 bg-gray-800 hover:text-white hover:bg-gray-700',
           ]"
         >
           {{ cat }}
@@ -94,10 +95,11 @@
             <div
               class="flex justify-between items-center mt-auto pt-4 border-t border-gray-700/50"
             >
-              <span class="text-gray-500 text-xs flex items-center">
-                <i class="fas fa-calendar-alt mr-1 text-red-400"></i>
+              <span class="text-white-700 text-xs flex items-center">
+                <i class="fas fa-calendar-alt mr-1 text-red-600"></i>
                 {{ timeAgo(article.publishedDate) }}
               </span>
+
               <NuxtLink
                 :to="`/bai-viet/${article.slug}`"
                 class="text-red-400 hover:text-red-300 font-semibold text-sm transition-colors duration-200 hover:bg-red-900/20 px-2 py-1 rounded"

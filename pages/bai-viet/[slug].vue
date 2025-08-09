@@ -176,8 +176,8 @@
     <RelatedArticles
       :articles="relatedArticles"
       :formatDate="(date) => new Date(date).toLocaleDateString('vi-VN')"
-      :getImageUrl="(url) => url || '/images/default.jpg'"
-      :handleImageError="(e) => (e.target.src = '/images/default.jpg')"
+      :getImageUrl="(url) => url || '/images/default.png'"
+      :handleImageError="(e) => (e.target.src = '/images/default.png')"
     />
   </div>
 </template>
@@ -279,7 +279,7 @@ const getAuthorName = (article) => {
   if (article?.user?.full_name) {
     return article.user.full_name;
   }
-  return "AlphaGym Team"; // Default author
+  return "GymTech Team"; // Default author
 };
 
 const getCategoryLabel = (article) => {
@@ -321,14 +321,14 @@ const getKeywords = (metaKeywords) => {
 
 const getImageUrl = (imageUrl) => {
   if (!imageUrl) {
-    return "/placeholder.svg?height=800&width=1200"; // Placeholder for landscape images
+    return "/placeholder.svg"; // Placeholder for landscape images
   }
   // For mock data, directly return the URL as they are full URLs
   return imageUrl;
 };
 
 const handleImageError = (event) => {
-  event.target.src = "/placeholder.svg?height=800&width=1200";
+  event.target.src = "/placeholder.svg";
 };
 
 const submitComment = async () => {
@@ -408,8 +408,8 @@ const shareOnTwitter = () => {
 useHead({
   title: computed(() =>
     article.value
-      ? `${article.value.title} | AlphaGym`
-      : "Chi tiết bài viết | AlphaGym"
+      ? `${article.value.title} | GymTech`
+      : "Chi tiết bài viết | GymTech"
   ),
   meta: [
     {
@@ -418,7 +418,7 @@ useHead({
         () =>
           article.value?.meta_description ||
           article.value?.excerpt ||
-          "AlphaGym - Phòng tập gym hàng đầu Việt Nam"
+          "GymTech - Phòng tập gym hàng đầu Việt Nam"
       ),
     },
     {
@@ -431,14 +431,14 @@ useHead({
     {
       property: "og:title",
       content: computed(
-        () => article.value?.title || "Chi tiết bài viết | AlphaGym"
+        () => article.value?.title || "Chi tiết bài viết | GymTech"
       ),
     },
     {
       property: "og:description",
       content: computed(
         () =>
-          article.value?.excerpt || "AlphaGym - Phòng tập gym hàng đầu Việt Nam"
+          article.value?.excerpt || "GymTech - Phòng tập gym hàng đầu Việt Nam"
       ),
     },
     {
