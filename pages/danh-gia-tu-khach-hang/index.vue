@@ -79,14 +79,14 @@
               </div>
 
               <!-- Rating Stars -->
-              <div class="flex justify-center mb-4">
-                <div class="rating rating-sm">
+              <div class="flex justify-center mb-4 relative z-[50]">
+                <div class="rating rating-sm relative z-[50]">
                   <template v-for="star in 5" :key="star">
                     <i
                       :class="[
-                        'fas fa-star text-lg mx-1',
+                        'fas fa-star text-lg mx-1 relative z-[50]',
                         star <= testimonial.rating
-                          ? 'text-red-500'
+                          ? 'text-yellow-500'
                           : 'text-gray-600',
                       ]"
                     ></i>
@@ -132,12 +132,13 @@
             <p class="text-red-100 mb-6">
               Hãy để lại đánh giá của bạn và giúp chúng tôi phục vụ tốt hơn
             </p>
-            <button
+            <nuxt-link
+              to="/danh-gia"
               class="btn btn-outline btn-white hover:bg-white hover:text-red-600 border-2"
             >
               <i class="fas fa-pen mr-2"></i>
               Viết đánh giá
-            </button>
+            </nuxt-link>
           </div>
         </div>
 
@@ -184,16 +185,26 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed } from "vue";
 
-// Reactive data
-const testimonials = ref([]);
-const loading = ref(true);
-const error = ref(null);
+const {
+  data: testimonials,
+  pending: loading,
+  error,
+} = await useAsyncData(
+  "testimonials",
+  async () => {
+    const response = await useApiFetch("/testimonials");
+    return response.data.value?.data || [];
+  },
+  {
+    default: () => [],
+  }
+);
 
 // Computed properties
 const averageRating = computed(() => {
-  if (testimonials.value.length === 0) return 0;
+  if (!testimonials.value || testimonials.value.length === 0) return 0;
   const sum = testimonials.value.reduce(
     (acc, testimonial) => acc + testimonial.rating,
     0
@@ -202,41 +213,17 @@ const averageRating = computed(() => {
 });
 
 const satisfiedCustomers = computed(() => {
-  if (testimonials.value.length === 0) return 0;
+  if (!testimonials.value || testimonials.value.length === 0) return 0;
   const satisfied = testimonials.value.filter(
     (testimonial) => testimonial.rating >= 4
   ).length;
   return Math.round((satisfied / testimonials.value.length) * 100);
 });
 
-// Methods
-const fetchTestimonials = async () => {
-  try {
-    loading.value = true;
-    const { data, error: fetchError } = await useApiFetch("/testimonials");
-
-    if (fetchError.value) {
-      error.value = fetchError.value;
-    } else {
-      // Nếu response trả về { data: [...] }
-      testimonials.value = data.value?.data || [];
-    }
-  } catch (err) {
-    error.value = err;
-  } finally {
-    loading.value = false;
-  }
-};
-
 const handleImageError = (event) => {
   event.target.src =
     "https://static.vecteezy.com/system/resources/previews/024/983/914/non_2x/simple-user-default-icon-free-png.png"; // Fallback image
 };
-
-// Lifecycle
-onMounted(() => {
-  fetchTestimonials();
-});
 </script>
 
 <style scoped>

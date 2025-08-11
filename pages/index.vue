@@ -4,8 +4,9 @@
     <UiStats />
     <HomeArticleSlice />
     <HomePackageSlice :plans="plans" />
-
     <HomeTrainerSlice :trainers="trainers" />
+    <HomeTestimonialSlice :testimonials="testimonials" />
+
     <ContactFrom />
   </div>
 </template>
@@ -13,9 +14,9 @@
 import { ref } from "vue";
 import { useCustomSeoMeta } from "~/composables/useCustomSeoMeta";
 
-const { data: plansResponse } = await useApiFetch("/membership-plans");
-const { data: testimonialsResponse } = await useApiFetch("/testimonials");
-const { data: trainersResponse } = await useApiFetch("/trainers?limit=4");
+const { data: plansResponse } = await useApiFetch("membership-plans");
+const { data: testimonialsResponse } = await useApiFetch("testimonials");
+const { data: trainersResponse } = await useApiFetch("trainers?limit=4");
 
 const plans = ref(plansResponse.value?.data || []);
 const testimonials = ref(testimonialsResponse.value?.data || []);

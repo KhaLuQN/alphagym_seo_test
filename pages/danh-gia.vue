@@ -288,7 +288,7 @@ const submit = async () => {
       formData.append("image", form.image_file);
     }
 
-    const { data, error: err } = await useApiFetch("/testimonials", {
+    const { data, error: err } = await useApiFetch("testimonials", {
       method: "POST",
       body: formData,
     });

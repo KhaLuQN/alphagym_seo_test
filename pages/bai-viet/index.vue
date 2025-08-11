@@ -346,26 +346,31 @@ const errorMessage = ref("");
 
 // --- Data Fetching ---
 // Fetch articles and categories in parallel using useAsyncData
-const { data, pending: isLoading, error } = await useAsyncData(
-  'articles-page-data',
-  async () => {
-    const config = useRuntimeConfig();
-    try {
-      const [articlesRes, categoriesRes] = await Promise.all([
-        $fetch(`${config.public.apiBase}/articles`),
-        $fetch(`${config.public.apiBase}/article-categories`)
-      ]);
-      return {
-        articles: articlesRes?.data || [],
-        categories: categoriesRes?.data || []
-      };
-    } catch (e) {
-      console.error("Lỗi khi tải dữ liệu API:", e);
-      // This will be caught by the `error` ref from useAsyncData
-      throw createError({ statusCode: 500, statusMessage: 'Không thể tải dữ liệu từ máy chủ. Vui lòng thử lại sau.', fatal: true });
-    }
+const {
+  data,
+  pending: isLoading,
+  error,
+} = await useAsyncData("articles-page-data", async () => {
+  const config = useRuntimeConfig();
+  try {
+    const [articlesRes, categoriesRes] = await Promise.all([
+      $fetch(`${config.public.apiBase}articles`),
+      $fetch(`${config.public.apiBase}article-categories`),
+    ]);
+    return {
+      articles: articlesRes?.data || [],
+      categories: categoriesRes?.data || [],
+    };
+  } catch (e) {
+    console.error("Lỗi khi tải dữ liệu API:", e);
+    // This will be caught by the `error` ref from useAsyncData
+    throw createError({
+      statusCode: 500,
+      statusMessage: "Không thể tải dữ liệu từ máy chủ. Vui lòng thử lại sau.",
+      fatal: true,
+    });
   }
-);
+});
 
 // Handle error state
 if (error.value) {
@@ -377,9 +382,8 @@ if (error.value) {
 const articles = ref(data.value?.articles || []);
 const categories = ref([
   { category_id: "all", name: "Tất cả", slug: "all" },
-  ...(data.value?.categories || [])
+  ...(data.value?.categories || []),
 ]);
-
 
 // --- Computed Properties ---
 const filteredArticles = computed(() => {
@@ -395,7 +399,8 @@ const filteredArticles = computed(() => {
     filtered = filtered.filter(
       (article) =>
         article.title.toLowerCase().includes(lowerCaseSearch) ||
-        (article.excerpt && article.excerpt.toLowerCase().includes(lowerCaseSearch))
+        (article.excerpt &&
+          article.excerpt.toLowerCase().includes(lowerCaseSearch))
     );
   }
 
@@ -413,10 +418,14 @@ const filteredArticles = computed(() => {
   // Sort articles
   switch (sortBy.value) {
     case "newest":
-      sorted.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+      sorted.sort(
+        (a, b) => new Date(b.published_at) - new Date(a.published_at)
+      );
       break;
     case "oldest":
-      sorted.sort((a, b) => new Date(a.published_at) - new Date(b.published_at));
+      sorted.sort(
+        (a, b) => new Date(a.published_at) - new Date(b.published_at)
+      );
       break;
     case "popular":
       sorted.sort((a, b) => b.view_count - a.view_count);
@@ -478,7 +487,7 @@ const sortArticles = (sortType) => {
 };
 
 const changePage = (page) => {
-  if (page !== '...' && page >= 1 && page <= totalPages.value) {
+  if (page !== "..." && page >= 1 && page <= totalPages.value) {
     currentPage.value = page;
     if (process.client) {
       window.scrollTo({ top: 0, behavior: "smooth" });
