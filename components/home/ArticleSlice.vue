@@ -89,9 +89,11 @@
             >
               {{ article.title }}
             </h3>
-            <p class="text-gray-400 text-sm line-clamp-3 mb-4">
-              {{ article.excerpt }}
-            </p>
+            <div
+              class="text-gray-400 text-sm line-clamp-3 mb-4"
+              v-html="article.excerpt"
+            ></div>
+
             <div
               class="flex justify-between items-center mt-auto pt-4 border-t border-gray-700/50"
             >
