@@ -185,9 +185,10 @@
                 >
                   {{ article.title }}
                 </h2>
-                <p class="text-gray-400 text-sm line-clamp-3 mb-4">
-                  {{ article.excerpt }}
-                </p>
+                <div
+                  class="text-gray-400 line-clamp-3 mb-4"
+                  v-html="article.excerpt"
+                ></div>
 
                 <div
                   class="flex items-center justify-between text-gray-500 text-sm mb-4"
@@ -196,10 +197,6 @@
                     <div class="flex items-center">
                       <i class="fas fa-user mr-1"></i>
                       <span>{{ getAuthorName(article) }}</span>
-                    </div>
-                    <div class="flex items-center">
-                      <i class="fas fa-eye mr-1"></i>
-                      <span>{{ formatViewCount(article.view_count) }}</span>
                     </div>
                   </div>
                   <div class="flex items-center">
@@ -254,9 +251,10 @@
                   {{ article.title }}
                 </h2>
 
-                <p class="text-gray-400 line-clamp-3 mb-4">
-                  {{ article.excerpt }}
-                </p>
+                <div
+                  class="text-gray-400 line-clamp-3 mb-4"
+                  v-html="article.excerpt"
+                ></div>
 
                 <div
                   class="flex items-center justify-between text-gray-500 text-sm mb-4"
@@ -266,10 +264,7 @@
                       <i class="fas fa-user mr-2"></i>
                       <span>{{ getAuthorName(article) }}</span>
                     </div>
-                    <div class="flex items-center">
-                      <i class="fas fa-eye mr-2"></i>
-                      <span>{{ formatViewCount(article.view_count) }}</span>
-                    </div>
+
                     <div class="flex items-center">
                       <i class="fas fa-calendar mr-2"></i>
                       <span>{{ formatDate(article.published_at) }}</span>

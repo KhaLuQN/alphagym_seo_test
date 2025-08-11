@@ -49,9 +49,10 @@
           class="bg-red-900/30 border-l-4 border-red-500 p-6 rounded-r-lg mb-12 shadow-md"
           v-if="article?.excerpt"
         >
-          <p class="text-xl italic text-gray-300 leading-relaxed">
-            {{ article?.excerpt }}
-          </p>
+          <p
+            class="text-xl italic text-gray-300 leading-relaxed"
+            v-html="article.excerpt"
+          ></p>
         </div>
 
         <!-- Article Content -->
