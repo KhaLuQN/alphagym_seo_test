@@ -389,7 +389,7 @@ onMounted(async () => {
   }
 
   try {
-    const data = await $fetch(`${apiBase}/magic-login`, {
+    const data = await $fetch(`${apiBase}magic-login`, {
       method: "POST",
       body: { token: token.value },
     });

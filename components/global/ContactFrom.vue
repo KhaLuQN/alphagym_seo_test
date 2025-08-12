@@ -106,10 +106,10 @@
                   <option value="" disabled selected>
                     Chọn mục đích liên hệ
                   </option>
-                  <option value="z">Liên hệ chung</option>
+                  <option value="contact">Liên hệ chung</option>
                   <option value="support">Hỗ trợ</option>
                   <option value="complain">Khiếu nại</option>
-                  <option value="advice">Tư vấn</option>
+                  <option value="advice">Góp ý</option>
                 </select>
               </div>
               <div class="form-control">

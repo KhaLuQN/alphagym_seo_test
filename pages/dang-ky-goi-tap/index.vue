@@ -47,7 +47,7 @@
               @click="activeTab = 'new'"
             >
               <i class="fas fa-user-plus mr-2"></i>
-              <span class="font-semibold">Khách Hàng Mới</span>
+              <span class="text-white font-semibold">Khách Hàng Mới</span>
             </button>
             <button
               class="tab tab-lg flex-1 text-white hover:bg-red-600 transition-all duration-300"
@@ -58,7 +58,7 @@
               @click="activeTab = 'renew'"
             >
               <i class="fas fa-redo-alt mr-2"></i>
-              <span class="font-semibold">Gia Hạn Gói Tập</span>
+              <span class="text-white ont-semibold">Gia Hạn Gói Tập</span>
             </button>
           </div>
 

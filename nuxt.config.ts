@@ -26,6 +26,11 @@ export default defineNuxtConfig({
       viewport: "width=device-width, initial-scale=1",
 
       link: [
+        {
+          href: "/images/logo.png",
+          rel: "icon",
+          type: "image/png",
+        },
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
         {
           rel: "preconnect",

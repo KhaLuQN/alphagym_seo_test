@@ -82,9 +82,9 @@ function handleImageError(event) {
                     <template v-for="star in 5" :key="star">
                       <i
                         :class="[
-                          'fas fa-star text-lg mx-1 relative z-[50]',
+                          'fas fa-star text-lg mx-1 opacity-100',
                           star <= testimonial.rating
-                            ? 'text-yellow-500'
+                            ? 'text-yellow-400'
                             : 'text-gray-600',
                         ]"
                       ></i>

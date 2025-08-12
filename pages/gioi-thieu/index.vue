@@ -38,9 +38,9 @@
             </p>
             <p class="text-lg text-gray-300 leading-relaxed mb-4">
               Với trang thiết bị hiện đại, không gian tập luyện truyền cảm hứng
-              và đội ngũ huấn luyện viên chuyên nghiệp, tận tâm, GymTech cam
-              kết mang đến trải nghiệm tập luyện tốt nhất cho mọi thành viên,
-              bất kể mục tiêu hay trình độ.
+              và đội ngũ huấn luyện viên chuyên nghiệp, tận tâm, GymTech cam kết
+              mang đến trải nghiệm tập luyện tốt nhất cho mọi thành viên, bất kể
+              mục tiêu hay trình độ.
             </p>
             <p class="text-lg text-gray-300 leading-relaxed">
               Chúng tôi tự hào là đối tác tin cậy trên hành trình chinh phục sức
@@ -53,7 +53,7 @@
             class="relative rounded-xl overflow-hidden shadow-2xl border border-red-800/30"
           >
             <img
-              src="https://placehold.co/800x600/333333/EFEFEF?text=About+Us+Image"
+              src="https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg"
               alt="About GymTech"
               class="w-full h-auto object-cover transform transition-transform duration-500 hover:scale-105"
             />
@@ -145,10 +145,10 @@
               Đa dạng các lớp học
             </h3>
             <p class="text-lg text-gray-300 leading-relaxed">
-              Từ Yoga, Zumba, đến HIIT và Boxing, GymTech cung cấp hàng loạt
-              các lớp học nhóm sôi động, phù hợp với mọi sở thích và mục tiêu,
-              được hướng dẫn bởi các huấn luyện viên giàu kinh nghiệm. Lịch học
-              linh hoạt, phù hợp với mọi lịch trình bận rộn.
+              Từ Yoga, Zumba, đến HIIT và Boxing, GymTech cung cấp hàng loạt các
+              lớp học nhóm sôi động, phù hợp với mọi sở thích và mục tiêu, được
+              hướng dẫn bởi các huấn luyện viên giàu kinh nghiệm. Lịch học linh
+              hoạt, phù hợp với mọi lịch trình bận rộn.
             </p>
           </div>
         </div>

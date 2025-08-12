@@ -9,7 +9,7 @@
         class="dropdown-content z-[1] menu p-2 shadow bg-black/95 rounded-box w-52 border border-red-600/30"
       >
         <li>
-          <a href="tel:0123456789" class="text-white hover:text-red-400">
+          <a href="tel:0386550651" class="text-white hover:text-red-400">
             <i class="fas fa-phone"></i> Gọi ngay
           </a>
         </li>

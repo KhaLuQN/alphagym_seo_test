@@ -130,7 +130,7 @@
               <i
                 class="fas fa-search mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
               ></i>
-              Tra cúu Hội Viên
+              Tra cứu Hội Viên
             </NuxtLink>
           </li>
           <li>
